@@ -3,9 +3,9 @@
     <h2 style="text-align: center;">提交审核</h2>
 
     <el-steps :active="3" process-status="wait" align-center style="margin-bottom: 40px;">
-      <el-step title="填写软件基本信息"/>
-      <el-step title="上传被测软件"/>
-      <el-step title="提交审核"/>
+      <el-step title="填写软件基本信息" />
+      <el-step title="上传被测软件" />
+      <el-step title="提交审核" />
     </el-steps>
     <el-form label-width="120px">
       <el-form-item>
