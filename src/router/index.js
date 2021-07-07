@@ -115,6 +115,13 @@ export const constantRoutes = [
         component: () => import('@/views/soft/publish'),
         meta: { title: '发布软件', noCache: true },
         hidden: true
+      },
+      {
+        path: 'detail/:id',
+        name: 'SoftDetail',
+        component: () => import('@/views/soft/detail'),
+        meta: { title: '软件详情', noCache: true },
+        hidden: true
       }
     ]
   },
