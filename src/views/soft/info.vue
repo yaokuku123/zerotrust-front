@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <h2 style="text-align: center;">填写软件信息</h2>
+    <h2 style="text-align: center;">填写软件基本信息</h2>
 
     <el-steps :active="1" process-status="wait" align-center style="margin-bottom: 40px;">
       <el-step title="填写软件基本信息"/>
@@ -19,24 +19,7 @@
 export default {
   data() {
     return {
-      saveBtnDisabled: false,// 保存按钮是否禁用
-      tableData: [{
-            date: '2016-05-02',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-            date: '2016-05-04',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1517 弄'
-        }, {
-            date: '2016-05-01',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1519 弄'
-        }, {
-            date: '2016-05-03',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄'
-        }]
+      saveBtnDisabled: false// 保存按钮是否禁用
     }
   },
   created() {
@@ -45,7 +28,7 @@ export default {
   methods: {
     next() {
       console.log('next')
-      this.$router.push({ path: '/edu/course/chapter/1' })
+      this.$router.push({ path: '/soft/upload/1' })
     }
   }
 }

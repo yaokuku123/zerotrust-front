@@ -1,5 +1,40 @@
 <template>
   <div class="app-container">
-    软件上传
+    <h2 style="text-align: center;">上传被测软件</h2>
+
+    <el-steps :active="2" process-status="wait" align-center style="margin-bottom: 40px;">
+      <el-step title="填写软件基本信息"/>
+      <el-step title="上传被测软件"/>
+      <el-step title="提交审核"/>
+    </el-steps>
+
+    <el-form label-width="120px">
+      <el-form-item>
+        <el-button @click="previous">上一步</el-button>
+        <el-button :disabled="saveBtnDisabled" type="primary" @click="next">保存并下一步</el-button>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      saveBtnDisabled: false// 保存按钮是否禁用
+    }
+  },
+  created() {
+    console.log('info created')
+  },
+  methods: {
+    previous() {
+      console.log('previous')
+      this.$router.push({ path: '/soft/info/1' })
+    },
+    next() {
+      console.log('next')
+      this.$router.push({ path: '/soft/publish/1' })
+    }
+  }
+}
+</script>

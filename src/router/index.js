@@ -103,6 +103,13 @@ export const constantRoutes = [
         meta: { title: '注册软件' }
       },
       {
+        path: 'info/:id',
+        name: 'SoftInfoEdit',
+        component: () => import('@/views/soft/info'),
+        meta: { title: '编辑软件', noCache: true },
+        hidden: true
+      },
+      {
         path: 'upload/:id',
         name: 'SoftUpload',
         component: () => import('@/views/soft/upload'),
