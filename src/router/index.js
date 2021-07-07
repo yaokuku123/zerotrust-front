@@ -7,10 +7,6 @@ Vue.use(Router)
 import Layout from '@/layout'
 
 /* Router Modules */
-import componentsRouter from './modules/components'
-import chartsRouter from './modules/charts'
-import tableRouter from './modules/table'
-import nestedRouter from './modules/nested'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -128,6 +124,20 @@ export const constantRoutes = [
         name: 'SoftDetail',
         component: () => import('@/views/soft/detail'),
         meta: { title: '软件详情', noCache: true },
+        hidden: true
+      },
+      {
+        path: 'verify',
+        name: 'VerifyPge',
+        component: () => import('@/views/soft/verify'),
+        meta: { title: '审核软件', noCache: true },
+        hidden: false
+      },
+      {
+        path: 'verifyList/:status',
+        name: 'SpecificAppPage',
+        component: () => import('@/views/soft/verifyList'),
+        meta: { title: '软件审核界面', noCache: true },
         hidden: true
       }
     ]

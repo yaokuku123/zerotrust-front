@@ -24,44 +24,50 @@ export default {
     })
   },
 
-  featchPendingNums() {
+  fetchPendingNums() {
     return request({
       url: '/soft/PendingNums',
       method: 'get'
     })
   },
-  featchHandledNums() {
+  fetchRejectNums() {
+    return request(({
+      url: '/soft/RejectNums',
+      method: 'get'
+    }))
+  },
+  fetchHandledNums() {
     return request({
       url: '/soft/HandledNums',
       method: 'get'
     })
   },
-  featchGetAllPending() {
+  fetchGetAllPending() {
     return request({
       url: '/soft/getAllPending',
       method: 'get'
     })
   },
-  featchGetAllReject() {
+  fetchGetAllReject() {
     return request({
       url: '/soft/getAllReject',
       method: 'get'
     })
   },
-  featchGetAllHandled() {
+  fetchGetAllHandled() {
     return request({
       url: '/soft/getAllHandled',
       method: 'get'
     })
   },
-  featchExamineSoftSuccess(id) {
+  fetchExamineSoftSuccess(id) {
     return request({
       url: '/soft/examineSoftSuccess',
       method: 'get',
       param: id
     })
   },
-  featchExamineSoftFail(id) {
+  fetchExamineSoftFail(id) {
     return request({
       url: '/soft/examineSoftFail',
       method: 'get',
