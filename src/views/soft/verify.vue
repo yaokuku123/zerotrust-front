@@ -8,7 +8,7 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            已驳回软件
+            待处理软件
           </div>
           <count-to :start-val="0" :end-val="this.PendingAPP.Nums" :duration="2600" class="card-panel-num" />
         </div>
@@ -21,7 +21,7 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            待处理软件
+            已驳回软件
           </div>
           <count-to :start-val="0" :end-val="this.RejectAPP.Nums" :duration="3000" class="card-panel-num" />
         </div>

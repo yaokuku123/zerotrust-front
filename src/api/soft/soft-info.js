@@ -64,14 +64,18 @@ export default {
     return request({
       url: '/soft/examineSoftSuccess',
       method: 'get',
-      param: id
+      params: {
+        id: id
+      }
     })
   },
   fetchExamineSoftFail(id) {
     return request({
       url: '/soft/examineSoftFail',
       method: 'get',
-      param: id
+      params: {
+        id: id
+      }
     })
   }
 }
