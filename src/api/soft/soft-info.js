@@ -17,9 +17,9 @@ export default {
     })
   },
   // 修改被测软件的相关信息资料
-  updateSoft(softId,softInfo) {
+  updateSoft(softId, softInfo) {
     return request({
-      url: '/soft/update/'+softId,
+      url: '/soft/update/' + softId,
       method: 'post',
       data: softInfo
     })
@@ -27,7 +27,7 @@ export default {
   // 获取被测软件的相关信息资料
   getSoft(softId) {
     return request({
-      url: '/soft/get/'+softId,
+      url: '/soft/get/' + softId,
       method: 'get'
     })
   },
@@ -38,8 +38,8 @@ export default {
       method: 'post'
     })
   },
-  //删除文件路径字段
-  deleteFile(id){
+  // 删除文件路径字段
+  deleteFile(id) {
     return request({
       url: '/soft/deleteFile/' + id,
       method: 'post'
