@@ -16,10 +16,32 @@ export default {
       data: softInfo
     })
   },
+  // 修改被测软件的相关信息资料
+  updateSoft(softId,softInfo) {
+    return request({
+      url: '/soft/update/'+softId,
+      method: 'post',
+      data: softInfo
+    })
+  },
+  // 获取被测软件的相关信息资料
+  getSoft(softId) {
+    return request({
+      url: '/soft/get/'+softId,
+      method: 'get'
+    })
+  },
   // 审核当前被测软件
   softVerify(id) {
     return request({
       url: '/soft/verity/' + id,
+      method: 'post'
+    })
+  },
+  //删除文件路径字段
+  deleteFile(id){
+    return request({
+      url: '/soft/deleteFile/' + id,
       method: 'post'
     })
   },
