@@ -54,7 +54,7 @@ export default {
   },
   created() {
     console.log('info created')
-    // this.getSoft()
+    this.getSoft()
   },
   methods: {
     handleClick(row) {
@@ -63,7 +63,7 @@ export default {
     getSoft() {
       soft.getSoftList().then(response => { // 请求成功
         // response接口返回的数据
-        this.softList = response.data.softList
+        this.softList = response.data.softInfo
       })
     }
   }
