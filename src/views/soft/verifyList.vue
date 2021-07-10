@@ -2,16 +2,31 @@
   <div class="app-container">
     <h2 style="text-align: center;">信息列表</h2>
     <!-- 表格 -->
-    <el-table v-loadong="loading" :data="AppList" stripe style="width: 100%">
-      <el-table-column prop="softName" label="编号" width="180" />
-      <el-table-column prop="softDesc" label="软件描述" width="180" />
-      <el-table-column prop="userName" label="用户名" />
-      <el-table-column prop="phoneNum" label="电话" width="180" />
-      <el-table-column fixed="right" label="操作" width="100">
-        <template slot-scope="scope">
-          <el-button v-if="status=='Pending' || status=='Reject'" type="text" size="small" @click="passApp(scope.row.id)">pass</el-button>
-          <el-button v-if="status=='Pending' || status=='Handled'" type="text" size="small" @click="rejectApp(scope.row.id)">reject</el-button>
+    <el-table
+      v-loading="loading"
+      :data="AppList"
+      stripe
+      style="width: 100%"
+    >
+      <el-table-column prop="softName" label="编号" width="120" />
+      <el-table-column prop="softDesc" label="软件描述" width="120" />
+      <el-table-column prop="softFileStoreId" label="软件存储ID" width="120" />
+      <el-table-column prop="userName" label="用户名" width="120" />
+      <el-table-column prop="phoneNum" label="电话" width="140" />
+      <el-table-column prop="createTime" label="创建时间" width="180" />
+      <el-table-column prop="txId" label="交易ID" width="180" />
+      <el-table-column prop="status" label="状态" width="120">
+        <template slot-scope="{row}">
+          <el-tag :type="row.status | statusFilter">
+            {{ row.status }}
+          </el-tag>
         </template>
+      </el-table-column>
+      <el-table-column label="操作" width="180">
+        <el-col slot-scope="scope">
+          <el-button v-if="status=='Pending' || status=='Reject'" type="sucess" size="small" @click="passApp(scope.row.id)">pass</el-button>
+          <el-button v-if="status=='Pending' || status=='Handled'" type="danger" size="small" @click="rejectApp(scope.row.id)">reject</el-button>
+        </el-col>
       </el-table-column>
     </el-table>
   </div>
@@ -23,6 +38,16 @@ import soft from '@/api/soft/soft-info'
 export default {
   name: 'MyApp',
   inject: ['reload'],
+  filters: {
+    statusFilter(status) {
+      const statusMap = {
+        available: 'success',
+        offline: 'info',
+        checking: ''
+      }
+      return statusMap[status]
+    }
+  },
   data() {
     return {
       status: '',
@@ -46,13 +71,12 @@ export default {
     }
   },
   beforeMount() {
-    this.loading = true
     this.status = this.$route.query.status
     this.fetchAppsInfo()
-    this.loading = false
   },
   methods: {
     fetchAppsInfo() {
+      this.loading = true
       if (this.status === 'Pending') {
         soft.fetchGetAllPending().then(res => {
           this.AppList = res.data.PendingSoft
@@ -66,6 +90,7 @@ export default {
           this.AppList = res.data.HandledSoft
         })
       }
+      this.loading = false
     },
     passApp(id) {
       this.loading = true
@@ -75,9 +100,8 @@ export default {
           message: this.checkResult,
           type: 'success'
         })
+        this.fetchAppsInfo()
       })
-      this.fetchAppsInfo()
-      this.reload()
       this.loading = false
     },
     rejectApp(id) {
@@ -88,9 +112,8 @@ export default {
           message: this.checkResult,
           type: 'success'
         })
+        this.fetchAppsInfo()
       })
-      this.fetchAppsInfo()
-      this.reload()
       this.loading = false
     }
   }
