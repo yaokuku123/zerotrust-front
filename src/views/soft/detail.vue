@@ -21,7 +21,7 @@ export default {
     getSoftInfoById() {
       soft.fetchSoftInfoById(this.id).then(response => { // 请求成功
         // response接口返回的数据
-        this.softList = response.data.softInfo
+        this.softList = response.data
       })
     }
   }
