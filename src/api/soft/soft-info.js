@@ -82,6 +82,15 @@ export default {
       method: 'get'
     })
   },
+  fetchSoftInfoById(id) {
+    return request({
+      url: '/soft/getSoftInfo',
+      method: 'get',
+      params: {
+        id: id
+      }
+    })
+  },
   fetchExamineSoftSuccess(id) {
     return request({
       url: '/soft/examineSoftSuccess',

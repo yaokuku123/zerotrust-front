@@ -11,7 +11,7 @@
       <el-table-column prop="txId" label="软件交易号" />
       <el-table-column fixed="right" label="操作" width="100">
         <template slot-scope="scope">
-          <el-button type="text" size="small" @click="handleClick(scope.row)">查看</el-button>
+          <el-button type="text" size="small" @click="handleClick(scope.row.id)">查看</el-button>
           <el-button type="text" size="small">编辑</el-button>
         </template>
       </el-table-column>
@@ -57,8 +57,9 @@ export default {
     this.getSoft()
   },
   methods: {
-    handleClick(row) {
-      console.log(row)
+    handleClick(id) {
+      console.log(id)
+      this.$router.push({ path: '/soft/detail/' + id, query: { id: id }})
     },
     getSoft() {
       soft.getSoftList().then(response => { // 请求成功
