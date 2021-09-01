@@ -12,7 +12,7 @@
       <el-form-item label="被测软件">
         <el-upload
           class="upload-demo"
-          :action="BASE_API+'/soft/upload/'+softId"
+          :action="BASE_API+'/soft-test-center/soft/upload/'+softId"
           :on-preview="handlePreview"
           :before-remove="beforeRemove"
           :on-remove="handleRemove"
