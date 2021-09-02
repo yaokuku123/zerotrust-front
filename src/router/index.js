@@ -142,6 +142,33 @@ export const constantRoutes = [
       }
     ]
   },
+  {
+    path: '/data-clean',
+    component: Layout,
+    redirect: '/data-clean/view',
+    name: 'Soft',
+    meta: { title: '数据清理模块', icon: 'form' },
+    children: [
+      {
+        path: 'view',
+        component: () => import('@/views/soft/data-clean/view'),
+        name: 'View',
+        meta: { title: 'View视图', affix: true }
+      },
+      {
+        path: 'review',
+        component: () => import('@/views/soft/data-clean/review'),
+        name: 'Review',
+        meta: { title: 'ReView', noCache: true }
+      },
+      {
+        path: 'data-extract',
+        component: () => import('@/views/soft/data-clean/extractData'),
+        name: 'extractData',
+        meta: { title: '额外数据', noCache: true }
+      }
+    ]
+  },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
