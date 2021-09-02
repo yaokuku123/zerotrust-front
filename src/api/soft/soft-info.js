@@ -1,6 +1,43 @@
 import request from '@/utils/request'
 
 export default {
+  // 传回审核结果
+  sendVerifyResult(verifyResult) {
+    return request({
+      url: '/data-clean/review/verifyResult',
+      method: 'post',
+      data: verifyResult
+    })
+  },
+  // 获取字段信息来审核
+  getFiledMessage(softName) {
+    return request({
+      url: '/data-clean/review/getCleanFields',
+      method: 'get',
+      params: {
+        softName: softName
+      }
+    })
+  },
+  // 传回字段以及数据清理等级
+  transferField(fieldInfo, fileName, tableName) {
+    return request({
+      url: '/data-clean/fieldRecord?fileName=' + fileName + "&tableName=" + tableName,
+      method: 'post',
+      data: fieldInfo
+    })
+  },
+  //获取字段
+  getSoftField(tableName) {
+    return request({
+      url: '/data-clean/dataFiled',
+      method: 'get',
+      params: {
+        tableName: tableName
+      }
+    }
+    )
+  },
   // 获取当前系统中存在的软件交易信息
   getSoftList() {
     return request({

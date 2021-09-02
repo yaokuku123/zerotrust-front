@@ -3,8 +3,9 @@
   <div>
 
     <div>
-      安全等级
-      <el-input v-model="userSafeLevel" @change="getSoftResource" />
+      
+      软件名称<el-input v-model="softName" @change="getSoftResource" />
+      安全等级<el-input v-model="userSafeLevel" @change="getSoftResource" />
     </div>
     <div>
       <el-checkbox-group v-model="verifyResult.fieldInfoWithCleanMethodList" @change="handleCheckedCitiesChange">
@@ -38,7 +39,7 @@ export default {
   name: 'View',
   data() {
     return {
-      softName: 'testfile117',
+      softName: '',
       radio: 1,
       softResource: {},
       userSafeLevel: 9,
@@ -53,16 +54,16 @@ export default {
       sendResult: ''
     }
   },
-  created() {
-    this.getSoftResource()
+  mounted() {
+    // this.getSoftResource()
   },
   methods: {
     getSoftResource() {
       dataClean.getSoftResource(this.softName).then(res => {
         this.softResource = res.data.fieldInfos
-        // console.log(this.softResource)
+        console.log(this.softResource)
         this.verifyResult.fieldInfoWithCleanMethodList = this.search(this.softResource, this.userSafeLevel)
-        this.verifyResult.softName = 'testfile117'
+        this.verifyResult.softName = this.softName
         this.verifyResult.tableName = res.data.tableName
         this.verifyResult.userSafeLevel = this.userSafeLevel
       })
@@ -80,9 +81,14 @@ export default {
         if (item.safeLevel <= keywords) { return item }
       })
     },
-    async createData() {
+    createData() {
       dataClean.sendVerifyResult(this.verifyResult)
-      alert(JSON.stringify(this.verifyResult))
+      this.$message({
+            type: "success",
+            message: "数据等级发送成功",
+          });
+      // 跳转到第二步，response接口返回的数据
+      this.$router.push({ path: '/data-clean/review'})
     },
     handleCheckedCitiesChange(value) {
       // console.log(value.fieldName)

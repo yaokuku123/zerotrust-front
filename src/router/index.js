@@ -150,6 +150,12 @@ export const constantRoutes = [
     meta: { title: '数据清理模块', icon: 'form' },
     children: [
       {
+        path: 'softClear',
+        component: () => import('@/views/soft/data-clean/clear'),
+        name: 'softClear',
+        meta: { title: '数据定级', affix: true }
+      },
+      {
         path: 'view',
         component: () => import('@/views/soft/data-clean/view'),
         name: 'View',
@@ -157,9 +163,9 @@ export const constantRoutes = [
       },
       {
         path: 'review',
-        component: () => import('@/views/soft/data-clean/review'),
+        component: () => import('@/views/soft/data-clean/cleanfields'),
         name: 'Review',
-        meta: { title: 'ReView', noCache: true }
+        meta: { title: 'ReView审核', noCache: true }
       },
       {
         path: 'data-extract',
