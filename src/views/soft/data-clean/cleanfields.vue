@@ -82,6 +82,7 @@ export default {
     },
     sendVerifyResult2() {
       this.verifyResult.softName = this.softName;
+      this.verifyResult.result = false;
       soft.sendVerifyResult(this.verifyResult).then((response) => {
         this.$message({
           type: "error",
