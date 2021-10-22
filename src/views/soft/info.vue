@@ -107,7 +107,7 @@
           <span>上传文件信息</span>
         </div>
 
-        <el-form-item label="清单文件" :rules="rules" :required="true">
+        <el-form-item label="核心文件清单" :rules="rules" :required="true" label-width="135px">
           <el-input v-show="false" v-model="ruleForm.uploadFile" />
           (待填信息）
         </el-form-item>
@@ -124,7 +124,6 @@
               :limit="1"
               :file-list="fileList"
             >
-              <div slot="tip" class="el-upload__tip">暂无文件</div>
               <el-button size="small" type="primary">点击上传</el-button>
             </el-upload>
           </el-row>
@@ -132,138 +131,158 @@
 
         <!-- 核心文件。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。-->
         <el-card shadow="never">
-          <el-form-item label="核心文件" :rules="rules" :required="true">
+          <el-form-item label="上传核心文件" :rules="rules" :required="true" label-width="135px">
             <el-input v-show="false" v-model="ruleForm.uploadFile" />
             (待填信息）
           </el-form-item>
 
           <div>
-            <el-divider></el-divider>
+            <el-divider />
             <el-form-item label="文件1" :rules="rules" :required="true">
-              <el-row>
-          
-              <el-col :span="10">
-              <el-table
-                  ref="multipleTable"
-                  v-loading="loading"
-                  element-loading-text="拼命加载中"
-                  :show-header="false"
-                  :data="tableData3"
-                  border
-                  class="table"
-                  header-cell-class-name="table-header"
-                  @selection-change="handleSelectionChange"
-                >
-
-                  <el-table-column prop="orgName" label="文件名" />
-
-                  <el-table-column label="操作" width="180" align="center" fixed="right">
-                    <template slot-scope="scope">
-                      <el-button
-                        type="text"
-                        icon="el-icon-edit"
-                        @click="seeFile(scope.$index, scope.row)"
-                      >查看</el-button>
-                      <el-button
-                        type="text"
-                        icon="el-icon-delete"
-                        class="red"
-                        @click="handleDelete(scope.$index, scope.row)"
-                      >删除</el-button>
-                    </template>
-                  </el-table-column>
-                </el-table>
-              </el-col>
-              <el-col :span="3"><div class="grid-content" >
+              <el-row :gutter="20">
+                <el-col :span="5">
+                  <el-input v-model="ruleForm.uploadFile" />
+                </el-col>
+                <el-col
+                  :span="1.2"
+                ><div class="grid-content">
                   <el-upload
-                      class="upload-demo"
-                      :action="BASE_API + '/soft/upload/' + softId"
-                      :on-preview="handlePreview"
-                      :before-remove="beforeRemove"
-                      :on-remove="handleRemove"
-                      :on-success="handSuccess"
-                      :limit="1"
-                      :file-list="fileList"
-                    >
-                      <el-button size="small" type="primary"
-                        >点击上传</el-button
-                      >
-                    </el-upload>
+                    class="upload-demo"
+                    :action="BASE_API + '/soft/upload/' + softId"
+                    :on-preview="handlePreview"
+                    :before-remove="beforeRemove"
+                    :on-remove="handleRemove"
+                    :on-success="handSuccess"
+                    :limit="1"
+                    :file-list="fileList"
+                  >
+                    <el-button
+                      class="filter-item"
+                      style="margin-left: 10px"
+                      type="primary"
+                      icon="el-icon-upload"
+                      @click="handleCreate"
+                    >上传</el-button>
+                  </el-upload>
                 </div></el-col>
-              <el-col :span="11">
-              <el-button-group>
-                <el-button>按钮1</el-button>
-                <el-button>按钮2</el-button>
-                <el-button>按钮3</el-button>
-                <el-button>按钮4</el-button>
-              </el-button-group>
-              </el-col>
-              
+                <el-col :span="11">
+                  <div class="right-items" style="float: left">
+                    <el-button
+                      class="filter-item"
+                      style="margin-left: -3px"
+                      type="primary"
+                      icon="el-icon-edit"
+                      @click="handleCreate"
+                    >下 载</el-button>
+                    <el-button
+                      class="filter-item"
+                      style="margin-left: 17px"
+                      type="primary"
+                      icon="el-icon-delete"
+                    >删 除</el-button>
+                  </div>
+                </el-col>
               </el-row>
             </el-form-item>
-            <el-divider></el-divider>
-            <el-form-item label="文件2" >
-              <el-row>
-                <el-col :span="2">
-                  <el-form-item>
-                    <el-upload
-                      class="upload-demo"
-                      :action="BASE_API + '/soft/upload/' + softId"
-                      :on-preview="handlePreview"
-                      :before-remove="beforeRemove"
-                      :on-remove="handleRemove"
-                      :on-success="handSuccess"
-                      :limit="1"
-                      :file-list="fileList"
-                    >
-                      <el-button size="small" type="primary"
-                        >点击上传</el-button
-                      >
-                    </el-upload>
-                  </el-form-item>
-              </el-col>
-                  <el-button-group>
-                    <el-button>按钮1</el-button>
-                    <el-button>按钮2</el-button>
-                    <el-button>按钮3</el-button>
-                    <el-button>按钮4</el-button>
-                  </el-button-group>
+            <el-divider />
+            <el-form-item label="文件2" :rules="rules">
+              <el-row :gutter="20">
+                <el-col :span="5">
+                  <el-input v-model="ruleForm.uploadFile" />
+                </el-col>
+                <el-col
+                  :span="1.2"
+                ><div class="grid-content">
+                  <el-upload
+                    class="upload-demo"
+                    :action="BASE_API + '/soft/upload/' + softId"
+                    :on-preview="handlePreview"
+                    :before-remove="beforeRemove"
+                    :on-remove="handleRemove"
+                    :on-success="handSuccess"
+                    :limit="1"
+                    :file-list="fileList"
+                  >
+                    <el-button
+                      class="filter-item"
+                      style="margin-left: 10px"
+                      type="primary"
+                      icon="el-icon-upload"
+                      @click="handleCreate"
+                    >上传</el-button>
+                  </el-upload>
+                </div></el-col>
+                <el-col :span="11">
+                  <div class="right-items" style="float: left">
+                    <el-button
+                      class="filter-item"
+                      style="margin-left: -3px"
+                      type="primary"
+                      icon="el-icon-edit"
+                      @click="handleCreate"
+                    >下 载</el-button>
+                    <el-button
+                      class="filter-item"
+                      style="margin-left: 17px"
+                      type="primary"
+                      icon="el-icon-delete"
+                    >删 除</el-button>
+                  </div>
+                </el-col>
               </el-row>
             </el-form-item>
-            <el-divider></el-divider>
-            <el-form-item label="文件3">
-              <el-row>
-                <el-col :span="2">
-                  <el-form-item>
-                    <el-upload
-                      class="upload-demo"
-                      :action="BASE_API + '/soft/upload/' + softId"
-                      :on-preview="handlePreview"
-                      :before-remove="beforeRemove"
-                      :on-remove="handleRemove"
-                      :on-success="handSuccess"
-                      :limit="1"
-                      :file-list="fileList"
-                    >
-                      <el-button size="small" type="primary"
-                        >点击上传</el-button
-                      >
-                    </el-upload>
-                  </el-form-item>
-              </el-col>
-                  <el-button-group>
-                    <el-button>按钮1</el-button>
-                    <el-button>按钮2</el-button>
-                    <el-button>按钮3</el-button>
-                    <el-button>按钮4</el-button>
-                  </el-button-group>
+            <el-divider />
+            <el-form-item label="文件3" :rules="rules">
+              <el-row :gutter="20">
+                <el-col :span="5">
+                  <el-input v-model="ruleForm.uploadFile" />
+                </el-col>
+                <el-col
+                  :span="1.2"
+                ><div class="grid-content">
+                  <el-upload
+                    class="upload-demo"
+                    :action="BASE_API + '/soft/upload/' + softId"
+                    :on-preview="handlePreview"
+                    :before-remove="beforeRemove"
+                    :on-remove="handleRemove"
+                    :on-success="handSuccess"
+                    :limit="1"
+                    :file-list="fileList"
+                  >
+                    <el-button
+                      class="filter-item"
+                      style="margin-left: 10px"
+                      type="primary"
+                      icon="el-icon-upload"
+                      @click="handleCreate"
+                    >上传</el-button>
+                  </el-upload>
+                </div></el-col>
+                <el-col :span="11">
+                  <div class="right-items" style="float: left">
+                    <el-button
+                      class="filter-item"
+                      style="margin-left: -3px"
+                      type="primary"
+                      icon="el-icon-edit"
+                      @click="handleCreate"
+                    >下 载</el-button>
+                    <el-button
+                      class="filter-item"
+                      style="margin-left: 17px"
+                      type="primary"
+                      icon="el-icon-delete"
+                    >删 除</el-button>
+                  </div>
+                </el-col>
               </el-row>
             </el-form-item>
           </div>
         </el-card>
         <!-- 核心文件。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。-->
 
-        <el-form-item label="配置文件">
+        <el-form-item label="系统配置文件" label-width="135px">
           <el-form-item> (待填信息） </el-form-item>
 
           <el-row>
@@ -299,95 +318,94 @@
           :disabled="saveBtnDisabled"
           type="primary"
           @click="next('softInfo')"
-          >保存并下一步</el-button
-        >
+        >保存并下一步</el-button>
       </el-form-item>
     </el-form>
   </div>
 </template>
 <script>
-import soft from "@/api/soft/soft-info";
-import PasswordStrength from "@/views/soft/password/PasswordStrength";
+import soft from '@/api/soft/soft-info'
+import PasswordStrength from '@/views/soft/password/PasswordStrength'
 
 export default {
   components: {
-    PasswordStrength,
+    PasswordStrength
   },
   data() {
     var validatePass = (rule, value, callback) => {
-      if (value === "") {
-        callback(new Error("请输入密码"));
+      if (value === '') {
+        callback(new Error('请输入密码'))
       } else {
-        if (this.ruleForm.checkPass !== "") {
-          this.$refs.ruleForm.validateField("checkPass");
+        if (this.ruleForm.checkPass !== '') {
+          this.$refs.ruleForm.validateField('checkPass')
         }
-        callback();
+        callback()
       }
-    };
+    }
     var validatePass2 = (rule, value, callback) => {
-      if (value === "") {
-        callback(new Error("请再次输入密码"));
+      if (value === '') {
+        callback(new Error('请再次输入密码'))
       } else if (value !== this.ruleForm.pass) {
-        callback(new Error("两次输入密码不一致!"));
+        callback(new Error('两次输入密码不一致!'))
       } else {
-        callback();
+        callback()
       }
-    };
+    }
     return {
       tableData: [{}],
       saveBtnDisabled: false, // 保存按钮是否禁用
       softInfo: {
-        softName: "",
-        softDesc: "",
-        userName: "",
-        phoneNum: "",
+        softName: '',
+        softDesc: '',
+        userName: '',
+        phoneNum: ''
       },
       ruleForm: {
-        pass: "",
-        checkPass: "",
-        age: "",
-        uploadFile: "",
+        pass: '',
+        checkPass: '',
+        age: '',
+        uploadFile: ''
       },
       rules: {
         softName: [
-          { required: true, message: "请输入软件名称", trigger: "blur" },
+          { required: true, message: '请输入软件名称', trigger: 'blur' }
         ],
         softDesc: [
-          { required: true, message: "请输入软件描述", trigger: "blur" },
+          { required: true, message: '请输入软件描述', trigger: 'blur' }
         ],
         userName: [
-          { required: true, message: "请输入软件拥有者", trigger: "blur" },
+          { required: true, message: '请输入软件拥有者', trigger: 'blur' }
         ],
         phoneNum: [
-          { required: true, message: "请输入手机号", trigger: "blur" },
+          { required: true, message: '请输入手机号', trigger: 'blur' }
         ],
         pass: [
-          { validator: validatePass, trigger: "blur" },
-          { required: true, message: "请输入密码", trigger: "blur" },
+          { validator: validatePass, trigger: 'blur' },
+          { required: true, message: '请输入密码', trigger: 'blur' }
         ],
         checkPass: [
-          { validator: validatePass2, trigger: "blur" },
-          { required: true, trigger: "blur" },
+          { validator: validatePass2, trigger: 'blur' },
+          { required: true, trigger: 'blur' }
         ],
-        uploadFile: [{ require: true, trigger: "blur" }],
-      },
-    };
+        uploadFile: [{ require: true, trigger: 'blur' }]
+      }
+    }
   },
   created() {
-    console.log("info created");
+    console.log('info created')
     // 获取路由id值
     if (this.$route.params && this.$route.params.id) {
-      this.softId = this.$route.params.id;
+      this.softId = this.$route.params.id
       // 调用根据id查询课程的方法
-      this.getSoftInfo();
+      this.getSoftInfo()
     }
   },
   methods: {
     // 根据软件信息id查询
     getSoftInfo() {
       soft.getSoft(this.softId).then((response) => {
-        this.softInfo = response.data.softInfo;
-      });
+        this.softInfo = response.data.softInfo
+      })
     },
     // 添加软件信息
     addSoftInfo() {
@@ -395,46 +413,46 @@ export default {
         // 请求成功
         // 提示
         this.$message({
-          type: "success",
-          message: "添加软件信息成功!",
-        });
+          type: 'success',
+          message: '添加软件信息成功!'
+        })
         // 跳转到第二步，response接口返回的数据
-        this.$router.push({ path: "/soft/upload/" + response.data.id });
-      });
+        this.$router.push({ path: '/soft/upload/' + response.data.id })
+      })
     },
     // 修改软件信息
     updateSoftInfo() {
       soft.updateSoft(this.softId, this.softInfo).then((response) => {
         // 提示
         this.$message({
-          type: "success",
-          message: "修改软件信息成功!",
-        });
+          type: 'success',
+          message: '修改软件信息成功!'
+        })
         // 跳转到第二步
-        this.$router.push({ path: "/soft/upload/" + this.softId });
-      });
+        this.$router.push({ path: '/soft/upload/' + this.softId })
+      })
     },
     // 跳转
     next(formName) {
-      console.log("next");
+      console.log('next')
       this.$refs[formName].validate((valid) => {
         if (valid) {
           // 判断添加还是修改
           if (!this.softId) {
             // 添加
-            this.addSoftInfo();
+            this.addSoftInfo()
           } else {
             // 修改
-            this.updateSoftInfo();
+            this.updateSoftInfo()
           }
         } else {
-          console.log("error submit!!");
-          return false;
+          console.log('error submit!!')
+          return false
         }
-      });
-    },
-  },
-};
+      })
+    }
+  }
+}
 </script>
 
 <style>
@@ -464,11 +482,14 @@ export default {
   background: #e5e9f2;
 }
 .grid-content {
-  border-radius: 4px;
+  border-radius: 5px;
   min-height: 36px;
 }
 .row-bg {
   padding: 10px 0;
   background-color: #f9fafc;
+}
+.el-form-item__label {
+    width: 120px;
 }
 </style>
