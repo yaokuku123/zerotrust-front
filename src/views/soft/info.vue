@@ -1,30 +1,181 @@
 <template>
   <div class="app-container">
-    <h2 style="text-align: center;">填写软件基本信息</h2>
+    <h2 style="text-align: center;">用户文件上传</h2>
 
     <el-steps :active="1" process-status="wait" align-center style="margin-bottom: 40px;">
-      <el-step title="填写软件基本信息" />
-      <el-step title="上传被测软件" />
-      <el-step title="提交审核" />
+      <el-step title="用户文件上传" />
+      <el-step title="用户文件上传确认" />
+      <el-step title="用户归档信息浏览" />
     </el-steps>
 
+    
+    
     <el-form ref="softInfo" :model="softInfo" :rules="rules" label-width="100px" class="demo-ruleForm">
-      <el-form-item label="软件名称" prop="softName">
-        <el-input v-model="softInfo.softName" />
-      </el-form-item>
-      <el-form-item label="软件描述" prop="softDesc">
-        <el-input v-model="softInfo.softDesc" />
-      </el-form-item>
-      <el-form-item label="软件拥有者" prop="userName">
-        <el-input v-model="softInfo.userName" />
-      </el-form-item>
-      <el-form-item label="手机号" prop="phoneNum">
-        <el-input v-model="softInfo.phoneNum" />
-      </el-form-item>
+      <el-divider></el-divider>
+      <el-card>
+        <div slot="header" class="clearfix">
+          <span>基本信息</span>
+        </div>
+        <el-row>
+          <el-col :span="12">
+            <div class="grid-content ">
+              <el-form-item label="单位名称" prop="softName">
+                <el-input v-model="softInfo.softName" />
+              </el-form-item>
+            </div>
+          </el-col>
+          <el-col :span="12"><div class="grid-content"></div></el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="12">
+            <div class="grid-content ">
+              <el-form-item label="项目名称" prop="softName">
+                <el-input v-model="softInfo.softName" />
+              </el-form-item>
+            </div>
+          </el-col>
+          <el-col :span="12"><div class="grid-content"></div></el-col>
+        </el-row>
+      </el-card>
+      <el-divider></el-divider>
+
+       <el-card>
+        <div slot="header">
+          <span>填写密码</span>
+        </div>
+        <div>
+          <el-row>
+            <el-col :span="12">
+              <div class="grid-content">
+                <el-form-item label="密码" prop="pass" >
+                  <el-input v-model="ruleForm.pass" placeholder="请输入密码" show-password />
+                </el-form-item>
+              </div>
+            </el-col>
+            <el-col :span="12">
+              <div class="grid-content">
+                <el-form-item label="密码强度" style="display: inline-block;width: 300px">
+                  <password-strength
+                    v-model="ruleForm.pass"
+                    style="padding-top: 10px;width: 200px"
+                  />
+                </el-form-item>
+              </div>
+            </el-col>
+          </el-row>
+
+          <el-row>
+            <el-col :span="12">
+              <div class="grid-content">
+                <el-form-item label="确认密码" prop="checkPass" >
+                  <el-input v-model="ruleForm.checkPass" placeholder="请输入密码" show-password />
+                </el-form-item>
+              </div>
+            </el-col>
+            <el-col :span="12">
+              <div class="grid-content">
+                  <el-alert
+                    title="密码需要包含数字、小写字母、大写字母以及特殊字符"
+                    type="warning"
+                    :closable="false"
+                  />
+              </div>
+            </el-col>
+          </el-row>
+      
+        </div>
+      </el-card>
+      <el-divider></el-divider>
+
+      <el-card>
+        <div slot="header" class="clearfix">
+          <span>上传文件信息</span>
+        </div>
+        <el-form-item label="清单文件(txt)">
+            <el-upload
+              class="upload-demo"
+              :action="BASE_API+'/soft/upload/'+softId"
+              :on-preview="handlePreview"
+              :before-remove="beforeRemove"
+              :on-remove="handleRemove"
+              :on-success="handSuccess"
+              :limit="1"
+              :file-list="fileList"
+            >
+              <el-button size="small" type="primary">点击上传</el-button>
+              <div slot="tip" class="el-upload__tip">暂无文件</div>
+            </el-upload>
+          </el-form-item>
+           <el-form-item label="文件1">
+            <el-upload
+              class="upload-demo"
+              :action="BASE_API+'/soft/upload/'+softId"
+              :on-preview="handlePreview"
+              :before-remove="beforeRemove"
+              :on-remove="handleRemove"
+              :on-success="handSuccess"
+              :limit="1"
+              :file-list="fileList"
+            >
+              <el-button size="small" type="primary">点击上传</el-button>
+              <div slot="tip" class="el-upload__tip">暂无文件</div>
+            </el-upload>
+          </el-form-item>
+          <el-form-item label="文件2">
+            <el-upload
+              class="upload-demo"
+              :action="BASE_API+'/soft/upload/'+softId"
+              :on-preview="handlePreview"
+              :before-remove="beforeRemove"
+              :on-remove="handleRemove"
+              :on-success="handSuccess"
+              :limit="1"
+              :file-list="fileList"
+            >
+              <el-button size="small" type="primary">点击上传</el-button>
+              <div slot="tip" class="el-upload__tip">暂无文件</div>
+            </el-upload>
+          </el-form-item>
+          <el-form-item label="文件3">
+            <el-upload
+              class="upload-demo"
+              :action="BASE_API+'/soft/upload/'+softId"
+              :on-preview="handlePreview"
+              :before-remove="beforeRemove"
+              :on-remove="handleRemove"
+              :on-success="handSuccess"
+              :limit="1"
+              :file-list="fileList"
+            >
+              <el-button size="small" type="primary">点击上传</el-button>
+              <div slot="tip" class="el-upload__tip">暂无文件</div>
+            </el-upload>
+          </el-form-item>
+            <el-form-item label="配置文件">
+            <el-upload
+              class="upload-demo"
+              :action="BASE_API+'/soft/upload/'+softId"
+              :on-preview="handlePreview"
+              :before-remove="beforeRemove"
+              :on-remove="handleRemove"
+              :on-success="handSuccess"
+              :limit="1"
+              :file-list="fileList"
+            >
+              <el-button size="small" type="primary">点击上传</el-button>
+              <div slot="tip" class="el-upload__tip">暂无文件</div>
+            </el-upload>
+          </el-form-item>
+      </el-card>
+      
+       <el-divider></el-divider>
       <el-form-item>
         <el-button :disabled="saveBtnDisabled" type="primary" @click="next('softInfo')">保存并下一步</el-button>
       </el-form-item>
     </el-form>
+
+    
+
   </div>
 </template>
 <script>
@@ -32,6 +183,25 @@ import soft from '@/api/soft/soft-info'
 
 export default {
   data() {
+    var validatePass = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请输入密码'))
+      } else {
+        if (this.ruleForm.checkPass !== '') {
+          this.$refs.ruleForm.validateField('checkPass')
+        }
+        callback()
+      }
+    }
+    var validatePass2 = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请再次输入密码'))
+      } else if (value !== this.ruleForm.pass) {
+        callback(new Error('两次输入密码不一致!'))
+      } else {
+        callback()
+      }
+    }
     return {
       saveBtnDisabled: false, // 保存按钮是否禁用
       softInfo: {
@@ -39,6 +209,11 @@ export default {
         softDesc: '',
         userName: '',
         phoneNum: ''
+      },
+      ruleForm: {
+        pass: '',
+        checkPass: '',
+        age: ''
       },
       rules: {
         softName: [
@@ -118,3 +293,32 @@ export default {
   }
 }
 </script>
+
+<style>
+  .el-row {
+    margin-bottom: 20px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .el-col {
+    border-radius: 4px;
+  }
+  .bg-purple-dark {
+    background: #99a9bf;
+  }
+  .bg-purple {
+    background: #d3dce6;
+  }
+  .bg-purple-light {
+    background: #e5e9f2;
+  }
+  .grid-content {
+    border-radius: 4px;
+    min-height: 36px;
+  }
+  .row-bg {
+    padding: 10px 0;
+    background-color: #f9fafc;
+  }
+</style>
