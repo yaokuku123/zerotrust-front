@@ -8,10 +8,8 @@
       <el-step title="用户归档信息浏览" />
     </el-steps>
 
-    
-    
     <el-form ref="softInfo" :model="softInfo" :rules="rules" label-width="100px" class="demo-ruleForm">
-      <el-divider></el-divider>
+      <el-divider />
       <el-card>
         <div slot="header" class="clearfix">
           <span>基本信息</span>
@@ -24,7 +22,7 @@
               </el-form-item>
             </div>
           </el-col>
-          <el-col :span="12"><div class="grid-content"></div></el-col>
+          <el-col :span="12"><div class="grid-content" /></el-col>
         </el-row>
         <el-row>
           <el-col :span="12">
@@ -34,154 +32,244 @@
               </el-form-item>
             </div>
           </el-col>
-          <el-col :span="12"><div class="grid-content"></div></el-col>
+          <el-col :span="12"><div class="grid-content" /></el-col>
         </el-row>
       </el-card>
-      <el-divider></el-divider>
+      <el-divider />
 
-       <el-card>
+      <el-card>
         <div slot="header">
           <span>填写密码</span>
         </div>
-        <div>
+
+        <el-form
+          ref="ruleForm"
+          :model="ruleForm"
+          :rules="rules"
+          :inline="true"
+        >
           <el-row>
-            <el-col :span="12">
-              <div class="grid-content">
-                <el-form-item label="密码" prop="pass" >
-                  <el-input v-model="ruleForm.pass" placeholder="请输入密码" show-password />
-                </el-form-item>
-              </div>
+            <el-col :span="5">
+              <el-form-item label="密码" label-width="80px" prop="pass">
+                <el-input
+                  v-model="ruleForm.pass"
+                  placeholder="请输入密码"
+                  show-password
+                />
+              </el-form-item>
             </el-col>
-            <el-col :span="12">
-              <div class="grid-content">
-                <el-form-item label="密码强度" style="display: inline-block;width: 300px">
-                  <password-strength
-                    v-model="ruleForm.pass"
-                    style="padding-top: 10px;width: 200px"
-                  />
-                </el-form-item>
-              </div>
-            </el-col>
+
+            <el-form-item label="密码强度" style="display: inline-block;width: 300px">
+              <password-strength
+                v-model="ruleForm.pass"
+                style="padding-top: 10px;width: 200px"
+              />
+            </el-form-item>
           </el-row>
 
           <el-row>
-            <el-col :span="12">
-              <div class="grid-content">
-                <el-form-item label="确认密码" prop="checkPass" >
-                  <el-input v-model="ruleForm.checkPass" placeholder="请输入密码" show-password />
-                </el-form-item>
-              </div>
+            <el-col :span="4">
+              <el-form-item label="确认密码" label-width="80px" prop="checkPass">
+                <el-input v-model="ruleForm.checkPass" placeholder="请输入密码" show-password />
+              </el-form-item>
             </el-col>
-            <el-col :span="12">
-              <div class="grid-content">
-                  <el-alert
-                    title="密码需要包含数字、小写字母、大写字母以及特殊字符"
-                    type="warning"
-                    :closable="false"
-                  />
-              </div>
-            </el-col>
+            <el-form-item>
+              <el-alert
+                title="密码需要包含数字、小写字母、大写字母以及特殊字符"
+                type="warning"
+                :closable="false"
+              />
+            </el-form-item>
+
           </el-row>
-      
-        </div>
+
+        </el-form>
+
       </el-card>
-      <el-divider></el-divider>
+      <el-divider />
 
       <el-card>
         <div slot="header" class="clearfix">
           <span>上传文件信息</span>
         </div>
-        <el-form-item label="清单文件(txt)">
-            <el-upload
-              class="upload-demo"
-              :action="BASE_API+'/soft/upload/'+softId"
-              :on-preview="handlePreview"
-              :before-remove="beforeRemove"
-              :on-remove="handleRemove"
-              :on-success="handSuccess"
-              :limit="1"
-              :file-list="fileList"
-            >
-              <el-button size="small" type="primary">点击上传</el-button>
-              <div slot="tip" class="el-upload__tip">暂无文件</div>
-            </el-upload>
+
+        <el-form-item label="清单文件(txt)" :rules="rules" :required="true">
+          <el-input v-show="false" v-model="ruleForm.uploadFile" />
+          (待填信息）
+        </el-form-item>
+
+        <el-form-item span="4">
+
+          <el-form-item span="4">
+            (待填信息）
           </el-form-item>
-           <el-form-item label="文件1">
-            <el-upload
-              class="upload-demo"
-              :action="BASE_API+'/soft/upload/'+softId"
-              :on-preview="handlePreview"
-              :before-remove="beforeRemove"
-              :on-remove="handleRemove"
-              :on-success="handSuccess"
-              :limit="1"
-              :file-list="fileList"
-            >
-              <el-button size="small" type="primary">点击上传</el-button>
-              <div slot="tip" class="el-upload__tip">暂无文件</div>
-            </el-upload>
+
+          <el-form-item span="4">
+            <el-row>
+
+              <el-upload
+                class="upload-demo"
+                :action="BASE_API+'/soft/upload/'+softId"
+                :on-preview="handlePreview"
+                :before-remove="beforeRemove"
+                :on-remove="handleRemove"
+                :on-success="handSuccess"
+                :limit="1"
+                :file-list="fileList"
+              >
+                <div slot="tip" class="el-upload__tip">暂无文件</div>
+                <el-button size="small" type="primary">点击上传</el-button>
+              </el-upload>
+            </el-row>
+          </el-form-item>
+        </el-form-item>
+
+        <el-form-item label="核心文件" :rules="rules" :required="true">
+          <el-input v-show="false" v-model="ruleForm.uploadFile" />
+          (待填信息）
+        </el-form-item>
+
+        <div>
+          <el-form-item label="文件1" :rules="rules" :required="true">
+            <el-input v-show="false" v-model="ruleForm.uploadFile" />
+
+            <el-row>
+              <el-col :span="2">
+                <el-form-item>
+                  <el-upload
+                    class="upload-demo"
+                    :action="BASE_API+'/soft/upload/'+softId"
+                    :on-preview="handlePreview"
+                    :before-remove="beforeRemove"
+                    :on-remove="handleRemove"
+                    :on-success="handSuccess"
+                    :limit="1"
+                    :file-list="fileList"
+                  >
+                    <el-button size="small" type="primary">点击上传</el-button>
+                    <div slot="tip" class="el-upload__tip">暂无文件</div>
+                  </el-upload>
+                </el-form-item>
+              </el-col>
+              <el-form-item>
+                <el-button>按钮1</el-button>
+                <el-button>按钮2</el-button>
+                <el-button>按钮3</el-button>
+                <el-button>按钮4</el-button>
+              </el-form-item>
+            </el-row>
+
           </el-form-item>
           <el-form-item label="文件2">
-            <el-upload
-              class="upload-demo"
-              :action="BASE_API+'/soft/upload/'+softId"
-              :on-preview="handlePreview"
-              :before-remove="beforeRemove"
-              :on-remove="handleRemove"
-              :on-success="handSuccess"
-              :limit="1"
-              :file-list="fileList"
-            >
-              <el-button size="small" type="primary">点击上传</el-button>
-              <div slot="tip" class="el-upload__tip">暂无文件</div>
-            </el-upload>
+
+            <el-row>
+              <el-col :span="2">
+                <el-form-item>
+                  <el-upload
+                    class="upload-demo"
+                    :action="BASE_API+'/soft/upload/'+softId"
+                    :on-preview="handlePreview"
+                    :before-remove="beforeRemove"
+                    :on-remove="handleRemove"
+                    :on-success="handSuccess"
+                    :limit="1"
+                    :file-list="fileList"
+                  >
+                    <el-button size="small" type="primary">点击上传</el-button>
+                    <div slot="tip" class="el-upload__tip">暂无文件</div>
+                  </el-upload>
+                </el-form-item>
+              </el-col>
+              <el-form-item>
+                <el-button>按钮1</el-button>
+                <el-button>按钮2</el-button>
+                <el-button>按钮3</el-button>
+                <el-button>按钮4</el-button>
+              </el-form-item>
+            </el-row>
           </el-form-item>
+
           <el-form-item label="文件3">
-            <el-upload
-              class="upload-demo"
-              :action="BASE_API+'/soft/upload/'+softId"
-              :on-preview="handlePreview"
-              :before-remove="beforeRemove"
-              :on-remove="handleRemove"
-              :on-success="handSuccess"
-              :limit="1"
-              :file-list="fileList"
-            >
-              <el-button size="small" type="primary">点击上传</el-button>
-              <div slot="tip" class="el-upload__tip">暂无文件</div>
-            </el-upload>
+
+            <el-row>
+              <el-col :span="2">
+                <el-form-item>
+                  <el-upload
+                    class="upload-demo"
+                    :action="BASE_API+'/soft/upload/'+softId"
+                    :on-preview="handlePreview"
+                    :before-remove="beforeRemove"
+                    :on-remove="handleRemove"
+                    :on-success="handSuccess"
+                    :limit="1"
+                    :file-list="fileList"
+                  >
+                    <el-button size="small" type="primary">点击上传</el-button>
+                    <div slot="tip" class="el-upload__tip">暂无文件</div>
+                  </el-upload>
+                </el-form-item>
+              </el-col>
+              <el-form-item>
+                <el-button>按钮1</el-button>
+                <el-button>按钮2</el-button>
+                <el-button>按钮3</el-button>
+                <el-button>按钮4</el-button>
+              </el-form-item>
+            </el-row>
           </el-form-item>
-            <el-form-item label="配置文件">
-            <el-upload
-              class="upload-demo"
-              :action="BASE_API+'/soft/upload/'+softId"
-              :on-preview="handlePreview"
-              :before-remove="beforeRemove"
-              :on-remove="handleRemove"
-              :on-success="handSuccess"
-              :limit="1"
-              :file-list="fileList"
-            >
-              <el-button size="small" type="primary">点击上传</el-button>
-              <div slot="tip" class="el-upload__tip">暂无文件</div>
-            </el-upload>
+
+        </div>
+
+        <el-form-item label="配置文件">
+
+          <el-form-item>
+            (待填信息）
           </el-form-item>
+
+          <el-row>
+            <el-col :span="2">
+              <el-form-item>
+                <el-upload
+                  class="upload-demo"
+                  :action="BASE_API+'/soft/upload/'+softId"
+                  :on-preview="handlePreview"
+                  :before-remove="beforeRemove"
+                  :on-remove="handleRemove"
+                  :on-success="handSuccess"
+                  :limit="1"
+                  :file-list="fileList"
+                >
+                  <el-button size="small" type="primary">点击上传</el-button>
+                  <div slot="tip" class="el-upload__tip">暂无文件</div>
+                </el-upload>
+              </el-form-item>
+            </el-col>
+            <el-form-item>
+              <el-button>按钮1</el-button>
+              <el-button>按钮2</el-button>
+              <el-button>按钮3</el-button>
+              <el-button>按钮4</el-button>
+            </el-form-item>
+          </el-row>
+        </el-form-item>
       </el-card>
-      
-       <el-divider></el-divider>
+
+      <el-divider />
       <el-form-item>
         <el-button :disabled="saveBtnDisabled" type="primary" @click="next('softInfo')">保存并下一步</el-button>
       </el-form-item>
     </el-form>
 
-    
-
   </div>
 </template>
 <script>
 import soft from '@/api/soft/soft-info'
+import PasswordStrength from '@/views/soft/password/PasswordStrength'
 
 export default {
+  components: {
+    PasswordStrength
+  },
   data() {
     var validatePass = (rule, value, callback) => {
       if (value === '') {
@@ -213,7 +301,8 @@ export default {
       ruleForm: {
         pass: '',
         checkPass: '',
-        age: ''
+        age: '',
+        uploadFile: ''
       },
       rules: {
         softName: [
@@ -227,6 +316,17 @@ export default {
         ],
         phoneNum: [
           { required: true, message: '请输入手机号', trigger: 'blur' }
+        ],
+        pass: [
+          { validator: validatePass, trigger: 'blur' },
+          { required: true, message: '请输入密码', trigger: 'blur' }
+        ],
+        checkPass: [
+          { validator: validatePass2, trigger: 'blur' },
+          { required: true, trigger: 'blur' }
+        ],
+        uploadFile: [
+          { require: true, trigger: 'blur' }
         ]
       }
     }
