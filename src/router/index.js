@@ -102,8 +102,16 @@ export const constantRoutes = [
         path: 'info/:id',
         name: 'SoftInfoEdit',
         component: () => import('@/views/soft/info'),
-        meta: { title: '编辑软件', noCache: true },
+        meta: { title: '编辑软件' },
+        hidden: true // 不在侧边栏显示
+      },
+      {
+        path: 'back/:id',
+        name: 'SoftInfoBack',
+        component: () => import('@/views/soft/back'),
+        meta: { title: '归档' },
         hidden: true
+
       },
       {
         path: 'upload/:id',
@@ -131,7 +139,7 @@ export const constantRoutes = [
         name: 'VerifyPge',
         component: () => import('@/views/soft/verify'),
         meta: { title: '审核软件', noCache: true },
-        hidden: false
+        hidden: true
       },
       {
         path: 'verifyList/:status',
