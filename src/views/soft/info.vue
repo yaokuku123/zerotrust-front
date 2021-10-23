@@ -156,6 +156,7 @@
                     style="margin-left: 17px"
                     type="primary"
                     icon="el-icon-delete"
+                    @click="softname1=''"
                   >删 除</el-button>
                 </div>
               </el-col>
@@ -216,6 +217,7 @@
                       style="margin-left: 17px"
                       type="primary"
                       icon="el-icon-delete"
+                      @click="softname2=''"
                     >删 除</el-button>
                   </div>
                 </el-col>
@@ -262,6 +264,7 @@
                       style="margin-left: 17px"
                       type="primary"
                       icon="el-icon-delete"
+                      @click="softname3=''"
                     >删 除</el-button>
                   </div>
                 </el-col>
@@ -308,6 +311,7 @@
                       style="margin-left: 17px"
                       type="primary"
                       icon="el-icon-delete"
+                      @click="softname4=''"
                     >删 除</el-button>
                   </div>
                 </el-col>
@@ -369,6 +373,7 @@
                     style="margin-left: 17px"
                     type="primary"
                     icon="el-icon-delete"
+                    @click="softname5=''"
                   >删 除</el-button>
                 </div>
               </el-col>
