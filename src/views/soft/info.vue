@@ -1,6 +1,5 @@
 <template>
   <div class="app-container">
-    <h2 style="text-align: center">上传</h2>
 
     <el-steps
       :active="1"
@@ -39,7 +38,7 @@
           <el-col :span="12">
             <div class="grid-content">
               <el-form-item label="项目名称" prop="softName">
-                <el-input v-model="softInfo.softName" />
+                <el-input v-model="softInfo.proName" />
               </el-form-item>
             </div>
           </el-col>
@@ -53,12 +52,12 @@
           <span>填写密码</span>
         </div>
 
-        <el-form ref="ruleForm" :model="ruleForm" :rules="rules" :inline="true">
+        <el-form ref="ruleForm" :model="softInfo" :rules="rules" :inline="true">
           <el-row>
             <el-col :span="5">
-              <el-form-item label="输入密码" label-width="80px" prop="pass">
+              <el-form-item label="输入密码" label-width="80px" prop="uploadPassword">
                 <el-input
-                  v-model="ruleForm.pass"
+                  v-model="softInfo.uploadPassword"
                   placeholder="请输入密码"
                   show-password
                 />
@@ -66,11 +65,10 @@
             </el-col>
 
             <el-form-item
-              label="密码强度"
-              style="display: inline-block; width: 300px"
+              style="display: inline-block; width: 300px; margin-bottom: -200px"
             >
               <password-strength
-                v-model="ruleForm.pass"
+                v-model="softInfo.uploadPassword"
                 style="padding-top: 10px; width: 200px"
               />
             </el-form-item>
@@ -84,13 +82,15 @@
                 prop="checkPass"
               >
                 <el-input
-                  v-model="ruleForm.checkPass"
+                  v-model="softInfo.checkPass"
                   placeholder="请输入密码"
                   show-password
                 />
               </el-form-item>
             </el-col>
-            <el-form-item>
+            <el-form-item
+              style="padding-top: -20px;"
+            >
               <el-alert
                 title="密码需要包含数字、小写字母、大写字母以及特殊字符"
                 type="warning"
@@ -394,10 +394,9 @@
 </template>
 <script>
 import soft from '@/api/soft/soft-info'
+import softVerify from '@/api/soft/soft-verify'
 import PasswordStrength from '@/views/soft/password/PasswordStrength'
 import uuidv1 from 'uuid/v1'
-import { get } from 'js-cookie'
-import { date } from 'jszip/lib/defaults'
 
 export default {
   components: {
@@ -408,8 +407,8 @@ export default {
       if (value === '') {
         callback(new Error('请输入密码'))
       } else {
-        if (this.ruleForm.checkPass !== '') {
-          this.$refs.ruleForm.validateField('checkPass')
+        if (this.softInfo.checkPass !== '') {
+          this.$refs.softInfo.validateField('checkPass')
         }
         callback()
       }
@@ -417,7 +416,7 @@ export default {
     var validatePass2 = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请再次输入密码'))
-      } else if (value !== this.ruleForm.pass) {
+      } else if (value !== this.softInfo.uploadPassword) {
         callback(new Error('两次输入密码不一致!'))
       } else {
         callback()
@@ -430,15 +429,23 @@ export default {
       softname3: '',
       softname4: '',
       softname5: '',
+      softFile: [
+        { soft: '' },
+        { soft: '' },
+        { soft: '' },
+        { soft: '' },
+        { soft: '' }
+      ],
       saveBtnDisabled: true, // 保存按钮是否禁用
       BASE_API: process.env.VUE_APP_BASE_API, // 接口API地址
       tableData: [{}],
       saveBtnDisabled: false, // 保存按钮是否禁用
       softInfo: {
-        softName: '',
-        softDesc: '',
-        userName: '',
-        phoneNum: ''
+        comName: '',
+        pid: '',
+        proName: '',
+        uploadPassword: '',
+        checkPass: ''
       },
       ruleForm: {
         pass: '',
@@ -459,7 +466,7 @@ export default {
         phoneNum: [
           { required: true, message: '请输入手机号', trigger: 'blur' }
         ],
-        pass: [
+        uploadPassword: [
           { validator: validatePass, trigger: 'blur' },
           { required: true, message: '请输入密码', trigger: 'blur' }
         ],
@@ -475,33 +482,78 @@ export default {
   },
   created() {
     console.log('info created')
+    console.log(this.$route.params.id == null)
     // 获取路由id值
     if (this.$route.params && this.$route.params.id) {
-      this.pid = this.$route.params.id
-      console.log('这是路由后面的id' + this.pid)
+      this.softInfo.pid = this.$route.params.id
+      console.log('这是路由后面的id' + this.softInfo.pid)
     } else {
       this.getRandomCode()
     }
+
+    // console.log(this.softInfo.pid)
   },
   methods: {
     handleCreate() {
-      this.softname1 = this.softname
+      this.softFile[0].soft = file.name
+      console.log('error0')
+      if (this.fileCompare()) {
+        this.softname1 = file.name
+      } else {
+        this.softFile[0].soft = null
+      }
     },
     handleCreate1() {
-      this.softname2 = file.name
+      this.softFile[1].soft = file.name
+      if (this.fileCompare()) {
+        this.softname2 = file.name
+      } else {
+        this.softFile[1].soft = null
+      }
     },
     handleCreate2() {
-      this.softname3 = file.name
+      this.softFile[2].soft = file.name
+      if (this.fileCompare()) {
+        this.softname3 = file.name
+      } else {
+        this.softFile[2].soft = null
+      }
     },
     handleCreate3() {
-      this.softname4 = file.name
+      this.softFile[3].soft = file.name
+      if (this.fileCompare()) {
+        this.softname4 = file.name
+      } else {
+        this.softFile[3].soft = null
+      }
     },
     handleCreate4() {
-      this.softname5 = file.name
+      this.softFile[4].soft = file.name
+      if (this.fileCompare()) {
+        this.softname5 = file.name
+      } else {
+        this.softFile[4].soft = null
+      }
     },
     getRandomCode() {
-      this.pid = uuidv1() // 获取随机id
-      console.log(this.pid, ' this.Id 11111')
+      this.softInfo.pid = uuidv1() // 获取随机id
+      console.log(this.softInfo.pid, ' this.Id 11111')
+    },
+    fileCompare() {
+      var i = 0
+      var j = 0
+      while (i < 5) {
+        if (this.softFile[i] == null) break
+        j = i
+        for (j; j < 5; j++) {
+          if (this.softFile[j].soft == this.softFile[i].soft) {
+            alert('文件重名！')
+            console.log('error1')
+            return false
+          }
+        }
+      }
+      return true
     },
 
     handleExceed(files, fileList) {
@@ -512,7 +564,36 @@ export default {
       )
     },
     // 上传之前调用的方法
-    handlePreview(file) {
+    handlePreview0(file) {
+      const flag = file.size / 1024 / 1024 < 200 && file.size / 1024 / 1024 > 2
+      if (!flag) {
+        this.$message.error('上传软件大小范围 2MB～200MB!')
+      }
+
+      return flag
+    },
+    handlePreview1(file) {
+      const flag = file.size / 1024 / 1024 < 200 && file.size / 1024 / 1024 > 2
+      if (!flag) {
+        this.$message.error('上传软件大小范围 2MB～200MB!')
+      }
+      return flag
+    },
+    handlePreview2(file) {
+      const flag = file.size / 1024 / 1024 < 200 && file.size / 1024 / 1024 > 2
+      if (!flag) {
+        this.$message.error('上传软件大小范围 2MB～200MB!')
+      }
+      return flag
+    },
+    handlePreview3(file) {
+      const flag = file.size / 1024 / 1024 < 200 && file.size / 1024 / 1024 > 2
+      if (!flag) {
+        this.$message.error('上传软件大小范围 2MB～200MB!')
+      }
+      return flag
+    },
+    handlePreview4(file) {
       const flag = file.size / 1024 / 1024 < 200 && file.size / 1024 / 1024 > 2
       if (!flag) {
         this.$message.error('上传软件大小范围 2MB～200MB!')
@@ -540,7 +621,6 @@ export default {
       console.log(res)
       this.saveBtnDisabled = false
       this.softname1 = file.name
-      console.log(this.softname)
     },
     handSucess2(res, file) {
       alert('上传成功')
@@ -604,12 +684,21 @@ export default {
     },
     // 跳转
     storeInfo() {
-      this.$router.replace({ name: 'SoftInfoEdit', params: { id: this.pid }})
+      this.actionMethod(this.softInfo)
+      this.$router.replace({ name: 'SoftInfoEdit', params: { id: this.softInfo.pid }})
     },
     next() {
-      console.log(this.Id)
-
-      this.$router.push({ name: 'SoftInfoBack', params: { id: this.pid }})
+      this.actionMethod(this.softInfo)
+      this.$router.push({ name: 'SoftInfoBack', params: { id: this.softInfo.pid }})
+    },
+    actionMethod(data) {
+      if (this.$route.params.id == null) {
+        softVerify.insert(data).then(res => {
+        })
+      } else {
+        softVerify.update(data).then(res => {
+        })
+      }
     }
   }
 }

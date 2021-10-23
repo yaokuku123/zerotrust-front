@@ -1,12 +1,11 @@
 <template>
   <div class="app-container">
-    <h2 style="text-align: center">归档</h2>
 
     <el-steps
       :active="2"
       process-status="wait"
       align-center
-      style="margin-bottom: 40px"
+      style="margin-bottom: 20px"
     >
       <el-step title="上传" />
       <el-step title="归档" />
@@ -27,9 +26,9 @@
         </div>
         <el-row>
           <el-col :span="12">
-            <div class="grid-content">
+            <div class="grid-content" style="margin-bottom: -20px">
               <el-form-item label="单位名称" prop="softName">
-                <el-input v-model="softInfo.softName" disabled />
+                <el-input v-model="softInfo.comName" disabled />
               </el-form-item>
             </div>
           </el-col>
@@ -37,9 +36,9 @@
         </el-row>
         <el-row>
           <el-col :span="12">
-            <div class="grid-content">
+            <div class="grid-content" style="margin-bottom: -60px">
               <el-form-item label="项目名称" prop="softName">
-                <el-input v-model="softInfo.softName" disabled />
+                <el-input v-model="softInfo.proName" disabled />
               </el-form-item>
             </div>
           </el-col>
@@ -61,10 +60,14 @@
             <a href="static/核心文件目录生成方法.pdf" style="color:#1890ff" download="核心文件目录生成方法.pdf">下载说明书</a>
           </el-form-item>
 
-          <el-form-item label="文件清单" :rules="rules">
+          <el-form-item
+            label="文件清单"
+            :rules="rules"
+            style="margin-bottom: 10px"
+          >
             <el-row :gutter="20">
               <el-col :span="5">
-                <el-input v-model="ruleForm.uploadFile" disabled />
+                <el-input v-model="fileUploadVoList.file0" style="width: 500px" disabled />
               </el-col>
             </el-row>
           </el-form-item>
@@ -77,7 +80,7 @@
             :required="true"
             label-width="135px"
           >
-            <el-input v-show="false" v-model="ruleForm.uploadFile" disabled />
+            <el-input v-show="false" v-model="ruleForm.uploadFile.fileName" disabled />
             (核心文件是指在已部署的可执行系统中实现系统主要功能的文件。）
           </el-form-item>
 
@@ -86,7 +89,7 @@
             <el-form-item label="文件1" :rules="rules" :required="true">
               <el-row :gutter="20">
                 <el-col :span="5">
-                  <el-input v-model="ruleForm.uploadFile" disabled />
+                  <el-input v-model="fileUploadVoList.file1" style="width: 500px" disabled />
                 </el-col>
               </el-row>
             </el-form-item>
@@ -94,7 +97,7 @@
             <el-form-item label="文件2" :rules="rules">
               <el-row :gutter="20">
                 <el-col :span="5">
-                  <el-input v-model="ruleForm.uploadFile" disabled />
+                  <el-input v-model="fileUploadVoList.file2" style="width: 500px" disabled />
                 </el-col>
               </el-row>
             </el-form-item>
@@ -102,7 +105,7 @@
             <el-form-item label="文件3" :rules="rules">
               <el-row :gutter="20">
                 <el-col :span="5">
-                  <el-input v-model="ruleForm.uploadFile" disabled />
+                  <el-input v-model="fileUploadVoList.file3" style="width: 500px" disabled />
                 </el-col>
               </el-row>
             </el-form-item>
@@ -125,7 +128,7 @@
           <el-form-item label="配置文件" :rules="rules">
             <el-row :gutter="20">
               <el-col :span="5">
-                <el-input v-model="ruleForm.uploadFile" disabled />
+                <el-input v-model="fileUploadVoList.file4" disabled />
               </el-col>
             </el-row>
           </el-form-item>
@@ -162,13 +165,10 @@
 </template>
 <script>
 import soft from '@/api/soft/soft-info'
-import PasswordStrength from '@/views/soft/password/PasswordStrength'
 import uuidv1 from 'uuid/v1'
+import softVerify from '@/api/soft/soft-verify'
 
 export default {
-  components: {
-    PasswordStrength
-  },
   data() {
     var validatePass = (rule, value, callback) => {
       if (value === '') {
@@ -203,10 +203,19 @@ export default {
       tableData: [{}],
       saveBtnDisabled: false, // 保存按钮是否禁用
       softInfo: {
-        softName: '',
-        softDesc: '',
-        userName: '',
-        phoneNum: ''
+        comName: '',
+        pid: '',
+        proName: '',
+        uploadPassword: '',
+        checkPass: '',
+        fileUploadVoList: ''
+      },
+      fileUploadVoList: {
+        file0: '',
+        file1: '',
+        file2: '',
+        file3: '',
+        file4: ''
       },
       ruleForm: {
         pass: '',
@@ -241,9 +250,27 @@ export default {
   },
   created() {
     console.log('info created')
+    this.pid = this.$route.params.id
+    console.log(this.softInfo.pid)
     // 获取路由id值
+    this.getData(this.pid)
   },
   methods: {
+    getData() {
+      console.log('hello')
+      softVerify.getSoftInfo(this.pid).then(res => {
+        this.softInfo = res.data.softInfo
+        this.tableData = this.softInfo.fileUploadVoList
+        console.log(res)
+        this.fileUploadVoList.file0 = this.tableData[0].fileName
+        this.fileUploadVoList.file1 = this.tableData[1].fileName
+        this.fileUploadVoList.file2 = this.tableData[2].fileName
+        this.fileUploadVoList.file3 = this.tableData[3].fileName
+        this.fileUploadVoList.file4 = this.tableData[4].fileName
+
+        console.log(this.fileUploadVoList)
+      })
+    },
     getRandomCode() {
       this.Id = uuidv1() // 获取随机id
       console.log(this.Id, ' this.Id 11111')
@@ -269,6 +296,7 @@ export default {
     getSoftInfo() {
       soft.getSoft(this.softId).then((response) => {
         this.softInfo = response.data.softInfo
+        this.fileUploadVoList = this.softInfo.fileUploadVoList
       })
     },
     // 添加软件信息
