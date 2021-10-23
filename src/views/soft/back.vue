@@ -326,6 +326,7 @@ export default {
     },
     // 跳转
     next() {
+        this.$router.push({ path: '/soft/list/' })
       console.log('next')
     }
   }
