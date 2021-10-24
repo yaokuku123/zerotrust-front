@@ -811,7 +811,9 @@ export default {
       console.log('storeInfo ' + this.softInfo.proName)
       this.actionMethod(this.softInfo)
       // this.$router.push({ path: '/soft/info/' + this.pid })
-
+      softVerify.getcheck(this.pid).then((res) => {
+        console.log("这是flag"+res)
+      })
       this.$router.replace({
         name: 'SoftInfoEdit',
         params: { id: this.pid }

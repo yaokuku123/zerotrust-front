@@ -72,8 +72,8 @@
                 style="margin-bottom: 10px"
               >
                 <el-row :gutter="20">
-                  <el-col :span="5">
-                    <el-input v-model="fileUploadVoList.file0" style="width: 500px" disabled />
+                  <el-col :span="8">
+                    <el-input v-model="fileUploadVoList.file0"  disabled />
                   </el-col>
                 </el-row>
               </el-form-item>
@@ -92,22 +92,22 @@
               <div>
                 <el-form-item label="文件1" :rules="rules" :required="true">
                   <el-row :gutter="20">
-                    <el-col :span="5">
-                      <el-input v-model="fileUploadVoList.file1" style="width: 500px;height: 20px" disabled />
+                    <el-col :span="8">
+                      <el-input v-model="fileUploadVoList.file1"  disabled />
                     </el-col>
                   </el-row>
                 </el-form-item>
                 <el-form-item label="文件2" :rules="rules">
                   <el-row :gutter="20">
-                    <el-col :span="5">
-                      <el-input v-model="fileUploadVoList.file2" style="width: 500px" disabled />
+                    <el-col :span="8">
+                      <el-input v-model="fileUploadVoList.file2"  disabled />
                     </el-col>
                   </el-row>
                 </el-form-item>
                 <el-form-item label="文件3" :rules="rules">
                   <el-row :gutter="20">
-                    <el-col :span="5">
-                      <el-input v-model="fileUploadVoList.file3" style="width: 500px" disabled />
+                    <el-col :span="8">
+                      <el-input v-model="fileUploadVoList.file3"  disabled />
                     </el-col>
                   </el-row>
                 </el-form-item>
@@ -127,8 +127,8 @@
 
               <el-form-item label="配置文件" :rules="rules">
                 <el-row :gutter="20">
-                  <el-col :span="5">
-                    <el-input v-model="fileUploadVoList.file4" style="width: 500px" disabled />
+                  <el-col :span="8">
+                    <el-input v-model="fileUploadVoList.file4"  disabled />
                   </el-col>
                 </el-row>
               </el-form-item>
@@ -153,43 +153,11 @@
 
               <el-form-item label="核验码" :rules="rules">
                 <el-row :gutter="20">
-                  <el-col :span="5">
-                    <el-input v-model="ruleForm.uploadFile" style="width: 500px" disabled />
+                  <el-col :span="8">
+                    <el-input v-model="ruleForm.uploadFile"  disabled />
                   </el-col>
-                  <el-col
-                    :span="1.2"
-                  ><div class="grid-content">
-                    <el-upload
-                      class="upload-demo"
-                      :action="
-                      BASE_API +
-                        '/soft/upload?pid=' +
-                        this.pid +
-                        '&fileType=4'
-                    "
-                      :before-upload="onBeforeUpload5"
-                      :show-file-list="false"
-                      :on-preview="handlePreview4"
-                      :on-success="handSucess5"
-                      :file-list="fileList"
-                    >
-                      <el-button
-                        class="filter-item"
-                        style="margin-left: 10px"
-                        type="primary"
-                        icon="el-icon-upload"
-                      >上传</el-button>
-                    </el-upload>
-                  </div></el-col>
                   <el-col :span="11">
                     <div class="right-items" style="float: left">
-                      <el-button
-                        class="filter-item"
-                        style="margin-left: -3px"
-                        type="primary"
-                        icon="el-icon-edit"
-                        @click="downloadInfo(4)"
-                      >下 载</el-button>
                       <el-button style="" type="primary" @click="downloadCert">下载软件证书</el-button>
                     </div>
                   </el-col>
@@ -237,6 +205,7 @@ import softVerify from '@/api/soft/soft-verify'
 export default {
   data() {
     return {
+      pid:'',
       fileList: [],
       tableData: [{}],
       baseCertDownloadUrl: process.env.VUE_APP_BASE_API,

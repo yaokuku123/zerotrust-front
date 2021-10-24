@@ -65,6 +65,15 @@ export default {
         fileType:fileType
       }
     })
+  },
+  getcheck(pid){
+    return request({
+      url: '/filed',
+      method: 'get',
+      params: {
+        pid: pid,
+      }
+    })
   }
 
 }
