@@ -173,7 +173,7 @@
       :before-close="handleClose"
     >
       <span>
-        请输入注册软件时输入的密码<el-input v-model="downloadPassWord" type="text" />
+        请输入注册软件时输入的密码<el-input v-model="downloadPassWord" type="password" />
       </span>
 
       <span slot="footer" class="dialog-footer">
@@ -287,7 +287,7 @@ export default {
       this.check.password = this.downloadPassWord
       softVerify.fetchCheckPass(this.check).then(res => {
         // this.dialogValue.innerVisible = res.data.result
-        if (res.data.result == true) window.open(this.baseCertDownloadUrl + this.pid)
+        if (res.data.result == true) window.open(this.baseCertDownloadUrl + '/zipSoftDownload?pid=' + this.pid)
       })
     }
   }
