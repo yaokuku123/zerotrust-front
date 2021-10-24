@@ -135,23 +135,21 @@
                         '/soft/upload?pid=' +
                         this.pid +
                         '&fileType=0'
-                      "
-                      :show-file-list="false"
-                      :on-preview="handlePreview0"
-                      :before-upload="onBeforeUpload1"
-                      :on-success="handSuccess"
-                      :file-list="fileList"
-                    >
-                      <el-button
-                        class="filter-item"
-                        style="margin-left: 10px"
-                        type="primary"
-                        icon="el-icon-upload"
-                        >上传</el-button
-                      >
-                    </el-upload>
-                  </div></el-col
-                >
+                    "
+                    :show-file-list="false"
+                    :on-preview="handlePreview0"
+                    :before-upload="onBeforeUpload1"
+                    :on-success="handSuccess"
+                    :file-list="fileList"
+                  >
+                    <el-button
+                      class="filter-item"
+                      style="margin-left: 10px"
+                      type="primary"
+                      icon="el-icon-upload"
+                    >上传</el-button>
+                  </el-upload>
+                </div></el-col>
                 <el-col :span="11">
                   <div class="right-items" style="float: left">
                     <el-button
@@ -160,16 +158,14 @@
                       type="primary"
                       icon="el-icon-edit"
                       @click="downloadInfo(0)"
-                      >下 载</el-button
-                    >
+                    >下 载</el-button>
                     <el-button
                       class="filter-item"
                       style="margin-left: 17px"
                       type="primary"
                       icon="el-icon-delete"
                       @click="deleteInfo(0)"
-                      >删 除</el-button
-                    >
+                    >删 除</el-button>
                   </div>
                 </el-col>
               </el-row>
@@ -203,23 +199,21 @@
                           '/soft/upload?pid=' +
                           this.pid +
                           '&fileType=1'
-                        "
-                        :show-file-list="false"
-                        :on-preview="handlePreview1"
-                        :before-upload="onBeforeUpload2"
-                        :on-success="handSucess2"
-                        :file-list="fileList"
-                      >
-                        <el-button
-                          class="filter-item"
-                          style="margin-left: 10px"
-                          type="primary"
-                          icon="el-icon-upload"
-                          >上传</el-button
-                        >
-                      </el-upload>
-                    </div></el-col
-                  >
+                      "
+                      :show-file-list="false"
+                      :on-preview="handlePreview1"
+                      :before-upload="onBeforeUpload2"
+                      :on-success="handSucess2"
+                      :file-list="fileList"
+                    >
+                      <el-button
+                        class="filter-item"
+                        style="margin-left: 10px"
+                        type="primary"
+                        icon="el-icon-upload"
+                      >上传</el-button>
+                    </el-upload>
+                  </div></el-col>
                   <el-col :span="11">
                     <div class="right-items" style="float: left">
                       <el-button
@@ -228,16 +222,14 @@
                         type="primary"
                         icon="el-icon-edit"
                         @click="downloadInfo(1)"
-                        >下 载</el-button
-                      >
+                      >下 载</el-button>
                       <el-button
                         class="filter-item"
                         style="margin-left: 17px"
                         type="primary"
                         icon="el-icon-delete"
                         @click="deleteInfo(1)"
-                        >删 除</el-button
-                      >
+                      >删 除</el-button>
                     </div>
                   </el-col>
                 </el-row>
@@ -258,23 +250,21 @@
                           '/soft/upload?pid=' +
                           this.pid +
                           '&fileType=2'
-                        "
-                        :show-file-list="false"
-                        :before-upload="onBeforeUpload3"
-                        :on-preview="handlePreview2"
-                        :on-success="handSucess3"
-                        :file-list="fileList"
-                      >
-                        <el-button
-                          class="filter-item"
-                          style="margin-left: 10px"
-                          type="primary"
-                          icon="el-icon-upload"
-                          >上传</el-button
-                        >
-                      </el-upload>
-                    </div></el-col
-                  >
+                      "
+                      :show-file-list="false"
+                      :before-upload="onBeforeUpload3"
+                      :on-preview="handlePreview2"
+                      :on-success="handSucess3"
+                      :file-list="fileList"
+                    >
+                      <el-button
+                        class="filter-item"
+                        style="margin-left: 10px"
+                        type="primary"
+                        icon="el-icon-upload"
+                      >上传</el-button>
+                    </el-upload>
+                  </div></el-col>
                   <el-col :span="11">
                     <div class="right-items" style="float: left">
                       <el-button
@@ -283,16 +273,14 @@
                         type="primary"
                         icon="el-icon-edit"
                         @click="downloadInfo(2)"
-                        >下 载</el-button
-                      >
+                      >下 载</el-button>
                       <el-button
                         class="filter-item"
                         style="margin-left: 17px"
                         type="primary"
                         icon="el-icon-delete"
                         @click="deleteInfo(2)"
-                        >删 除</el-button
-                      >
+                      >删 除</el-button>
                     </div>
                   </el-col>
                 </el-row>
@@ -313,23 +301,21 @@
                           '/soft/upload?pid=' +
                           this.pid +
                           '&fileType=3'
-                        "
-                        :before-upload="onBeforeUpload4"
-                        :show-file-list="false"
-                        :on-preview="handlePreview3"
-                        :on-success="handSucess4"
-                        :file-list="fileList"
-                      >
-                        <el-button
-                          class="filter-item"
-                          style="margin-left: 10px"
-                          type="primary"
-                          icon="el-icon-upload"
-                          >上传</el-button
-                        >
-                      </el-upload>
-                    </div></el-col
-                  >
+                      "
+                      :before-upload="onBeforeUpload4"
+                      :show-file-list="false"
+                      :on-preview="handlePreview3"
+                      :on-success="handSucess4"
+                      :file-list="fileList"
+                    >
+                      <el-button
+                        class="filter-item"
+                        style="margin-left: 10px"
+                        type="primary"
+                        icon="el-icon-upload"
+                      >上传</el-button>
+                    </el-upload>
+                  </div></el-col>
                   <el-col :span="11">
                     <div class="right-items" style="float: left">
                       <el-button
@@ -338,16 +324,14 @@
                         type="primary"
                         icon="el-icon-edit"
                         @click="downloadInfo(3)"
-                        >下 载</el-button
-                      >
+                      >下 载</el-button>
                       <el-button
                         class="filter-item"
                         style="margin-left: 17px"
                         type="primary"
                         icon="el-icon-delete"
                         @click="deleteInfo(3)"
-                        >删 除</el-button
-                      >
+                      >删 除</el-button>
                     </div>
                   </el-col>
                 </el-row>
@@ -383,23 +367,21 @@
                         '/soft/upload?pid=' +
                         this.pid +
                         '&fileType=4'
-                      "
-                      :before-upload="onBeforeUpload5"
-                      :show-file-list="false"
-                      :on-preview="handlePreview4"
-                      :on-success="handSucess5"
-                      :file-list="fileList"
-                    >
-                      <el-button
-                        class="filter-item"
-                        style="margin-left: 10px"
-                        type="primary"
-                        icon="el-icon-upload"
-                        >上传</el-button
-                      >
-                    </el-upload>
-                  </div></el-col
-                >
+                    "
+                    :before-upload="onBeforeUpload5"
+                    :show-file-list="false"
+                    :on-preview="handlePreview4"
+                    :on-success="handSucess5"
+                    :file-list="fileList"
+                  >
+                    <el-button
+                      class="filter-item"
+                      style="margin-left: 10px"
+                      type="primary"
+                      icon="el-icon-upload"
+                    >上传</el-button>
+                  </el-upload>
+                </div></el-col>
                 <el-col :span="11">
                   <div class="right-items" style="float: left">
                     <el-button
@@ -408,16 +390,14 @@
                       type="primary"
                       icon="el-icon-edit"
                       @click="downloadInfo(4)"
-                      >下 载</el-button
-                    >
+                    >下 载</el-button>
                     <el-button
                       class="filter-item"
                       style="margin-left: 17px"
                       type="primary"
                       icon="el-icon-delete"
                       @click="deleteInfo(4)"
-                      >删 除</el-button
-                    >
+                    >删 除</el-button>
                   </div>
                 </el-col>
               </el-row>
@@ -728,13 +708,13 @@ export default {
     },
     getData() {
       softVerify.getSoftInfo(this.pid).then((res) => {
-        console.log("这是传回来的数据" + res);
-        this.softInfo = res.data.softInfo;
+        console.log('这是传回来的数据' + res)
+        this.softInfo = res.data.softInfo
         if (JSON.stringify(this.softInfo.status) == JSON.stringify(2)) {
           this.$router.push({
-            name: "SoftInfoBack",
-            params: { id: this.pid },
-          });
+            name: 'SoftInfoBack',
+            params: { id: this.pid }
+          })
         }
         for (var i = 0; i < this.softInfo.fileUploadVoList.length; i++) {
           if (
@@ -815,45 +795,45 @@ export default {
         console.log(res.data.flag)
         if (res.data.flag) {
           this.$router.push({
-            name: "SoftInfoBack",
-            params: { id: this.pid },
-          });
+            name: 'SoftInfoBack',
+            params: { id: this.pid }
+          })
         } else {
-          alert("文件不匹配");
+          alert('文件不匹配')
         }
-      });
+      })
     },
     downloadInfo(id) {
-      softVerify.downloadSoftInfo(this.pid,id).then((res) => {
-        console.log(res.data);
-      });
+      softVerify.downloadSoftInfo(this.pid, id).then((res) => {
+        console.log(res.data)
+      })
     },
     deleteInfo(id) {
       softVerify.deleteSoftInfo(this.pid, id).then((res) => {
-        console.log("删除成功了吗" + res.data);
+        console.log('删除成功了吗' + res.data)
         switch (id) {
           case 0:
-            this.softname1 = ""; // 当表达式的结果等于 value1 时，则执行该代码
-            this.softFile[0].soft = "";
-            break;
+            this.softname1 = '' // 当表达式的结果等于 value1 时，则执行该代码
+            this.softFile[0].soft = ''
+            break
           case 1:
-            this.softname2 = ""; // 当表达式的结果等于 value2 时，则执行该代码
-            this.softFile[1].soft = "";
-            break;
+            this.softname2 = '' // 当表达式的结果等于 value2 时，则执行该代码
+            this.softFile[1].soft = ''
+            break
           case 2:
-            this.softname3 = ""; // 当表达式的结果等于 valueN 时，则执行该代码
-            this.softFile[2].soft = "";
-            break;
+            this.softname3 = '' // 当表达式的结果等于 valueN 时，则执行该代码
+            this.softFile[2].soft = ''
+            break
           case 3:
-            this.softname4 = ""; // 当表达式的结果等于 valueN 时，则执行该代码
-            this.softFile[3].soft = "";
-            break;
+            this.softname4 = '' // 当表达式的结果等于 valueN 时，则执行该代码
+            this.softFile[3].soft = ''
+            break
           case 4:
-            this.softname5 = ""; // 当表达式的结果等于 valueN 时，则执行该代码
-            this.softFile[4].soft = "";
-            break;
+            this.softname5 = '' // 当表达式的结果等于 valueN 时，则执行该代码
+            this.softFile[4].soft = ''
+            break
           default:
-            break; // 如果没有与表达式相同的值，则执行该代码
+            break // 如果没有与表达式相同的值，则执行该代码
         }
       })
     },
