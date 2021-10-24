@@ -74,6 +74,12 @@ export default {
         pid: pid,
       }
     })
+  },
+  getfileList(){
+    return request({
+      url: '/fileInfos',
+      method: 'get',
+    })
   }
 
 }
