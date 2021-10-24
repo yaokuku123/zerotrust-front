@@ -46,116 +46,162 @@
         </el-row>
       </el-card>
       <el-divider />
-      <el-card>
-        <div slot="header" class="clearfix">
+      <div class="inputcss">
+        <div class="cardcss">
+          <el-card>
+            <div slot="header" class="clearfix">
 
-          <el-form-item label="上传文件信息">
-            <el-button type="text" @click="dialogVisible = true">下载软件压缩包</el-button>
-          </el-form-item>
+              <el-form-item label="上传文件信息">
+                <el-button type="text" @click="dialogVisible = true">下载软件压缩包</el-button>
+              </el-form-item>
 
+            </div>
+            <el-card shadow="never">
+              <el-form-item
+                label="核心文件清单"
+                :rules="rules"
+                :required="true"
+                label-width="135px"
+              >
+                <a href="static/核心文件目录生成方法.pdf" style="color:#1890ff" download="核心文件目录生成方法.pdf">下载说明书</a>
+              </el-form-item>
+
+              <el-form-item
+                label="文件清单"
+                :rules="rules"
+                style="margin-bottom: 10px"
+              >
+                <el-row :gutter="20">
+                  <el-col :span="5">
+                    <el-input v-model="fileUploadVoList.file0" style="width: 500px" disabled />
+                  </el-col>
+                </el-row>
+              </el-form-item>
+            </el-card>
+            <!-- 核心文件。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。-->
+            <el-card shadow="never">
+              <el-form-item
+                label="上传核心文件"
+                :rules="rules"
+                :required="true"
+                label-width="135px"
+              >
+                <el-input v-show="false" v-model="ruleForm.uploadFile.fileName" disabled />
+              </el-form-item>
+
+              <div>
+                <el-form-item label="文件1" :rules="rules" :required="true">
+                  <el-row :gutter="20">
+                    <el-col :span="5">
+                      <el-input v-model="fileUploadVoList.file1" style="width: 500px;height: 20px" disabled />
+                    </el-col>
+                  </el-row>
+                </el-form-item>
+                <el-form-item label="文件2" :rules="rules">
+                  <el-row :gutter="20">
+                    <el-col :span="5">
+                      <el-input v-model="fileUploadVoList.file2" style="width: 500px" disabled />
+                    </el-col>
+                  </el-row>
+                </el-form-item>
+                <el-form-item label="文件3" :rules="rules">
+                  <el-row :gutter="20">
+                    <el-col :span="5">
+                      <el-input v-model="fileUploadVoList.file3" style="width: 500px" disabled />
+                    </el-col>
+                  </el-row>
+                </el-form-item>
+              </div>
+            </el-card>
+            <!-- 核心文件。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。-->
+
+            <el-card shadow="never">
+              <el-form-item
+                label="系统配置文件"
+                :rules="rules"
+                :required="true"
+                label-width="135px"
+              >
+                <el-input v-show="false" v-model="ruleForm.uploadFile" disabled />
+              </el-form-item>
+
+              <el-form-item label="配置文件" :rules="rules">
+                <el-row :gutter="20">
+                  <el-col :span="5">
+                    <el-input v-model="fileUploadVoList.file4" style="width: 500px" disabled />
+                  </el-col>
+                </el-row>
+              </el-form-item>
+            </el-card>
+            <el-card shadow="never">
+              <el-form-item
+                label="查看软件指纹"
+                :rules="rules"
+                label-width="135px"
+              />
+
+<!--              <el-row :gutter="20">
+                <el-col :span="5">
+                  <el-form-item label="核验码" :rules="rules">
+                    <el-input v-model="ruleForm.uploadFile" style="width: 500px" disabled />
+                  </el-form-item>
+                </el-col>
+                <el-col>
+                  <el-button style="" type="primary">下载软件证书</el-button>
+                </el-col>
+              </el-row>-->
+
+              <el-form-item label="核验码" :rules="rules">
+                <el-row :gutter="20">
+                  <el-col :span="5">
+                    <el-input v-model="ruleForm.uploadFile" style="width: 500px" disabled />
+                  </el-col>
+                  <el-col
+                    :span="1.2"
+                  ><div class="grid-content">
+                    <el-upload
+                      class="upload-demo"
+                      :action="
+                      BASE_API +
+                        '/soft/upload?pid=' +
+                        this.pid +
+                        '&fileType=4'
+                    "
+                      :before-upload="onBeforeUpload5"
+                      :show-file-list="false"
+                      :on-preview="handlePreview4"
+                      :on-success="handSucess5"
+                      :file-list="fileList"
+                    >
+                      <el-button
+                        class="filter-item"
+                        style="margin-left: 10px"
+                        type="primary"
+                        icon="el-icon-upload"
+                      >上传</el-button>
+                    </el-upload>
+                  </div></el-col>
+                  <el-col :span="11">
+                    <div class="right-items" style="float: left">
+                      <el-button
+                        class="filter-item"
+                        style="margin-left: -3px"
+                        type="primary"
+                        icon="el-icon-edit"
+                        @click="downloadInfo(4)"
+                      >下 载</el-button>
+                      <el-button style="" type="primary">下载软件证书</el-button>
+                    </div>
+                  </el-col>
+                </el-row>
+              </el-form-item>
+
+
+
+            </el-card>
+          </el-card>
         </div>
-        <el-card shadow="never">
-          <el-form-item
-            label="核心文件清单"
-            :rules="rules"
-            :required="true"
-            label-width="135px"
-          >
-            <a href="static/核心文件目录生成方法.pdf" style="color:#1890ff" download="核心文件目录生成方法.pdf">下载说明书</a>
-          </el-form-item>
-
-          <el-form-item
-            label="文件清单"
-            :rules="rules"
-            style="margin-bottom: 10px"
-          >
-            <el-row :gutter="20">
-              <el-col :span="5">
-                <el-input v-model="fileUploadVoList.file0" style="width: 500px" disabled />
-              </el-col>
-            </el-row>
-          </el-form-item>
-        </el-card>
-        <!-- 核心文件。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。-->
-        <el-card shadow="never">
-          <el-form-item
-            label="上传核心文件"
-            :rules="rules"
-            :required="true"
-            label-width="135px"
-          >
-            <el-input v-show="false" v-model="ruleForm.uploadFile.fileName" disabled />
-            (核心文件是指在已部署的可执行系统中实现系统主要功能的文件。）
-          </el-form-item>
-
-          <div>
-            <el-divider />
-            <el-form-item label="文件1" :rules="rules" :required="true">
-              <el-row :gutter="20">
-                <el-col :span="5">
-                  <el-input v-model="fileUploadVoList.file1" style="width: 500px" disabled />
-                </el-col>
-              </el-row>
-            </el-form-item>
-            <el-divider />
-            <el-form-item label="文件2" :rules="rules">
-              <el-row :gutter="20">
-                <el-col :span="5">
-                  <el-input v-model="fileUploadVoList.file2" style="width: 500px" disabled />
-                </el-col>
-              </el-row>
-            </el-form-item>
-            <el-divider />
-            <el-form-item label="文件3" :rules="rules">
-              <el-row :gutter="20">
-                <el-col :span="5">
-                  <el-input v-model="fileUploadVoList.file3" style="width: 500px" disabled />
-                </el-col>
-              </el-row>
-            </el-form-item>
-          </div>
-        </el-card>
-        <!-- 核心文件。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。-->
-
-        <el-card shadow="never">
-          <el-form-item
-            label="系统配置文件"
-            :rules="rules"
-            :required="true"
-            label-width="135px"
-          >
-            <el-input v-show="false" v-model="ruleForm.uploadFile" disabled />
-            （配置文件是指一种可为计算机程序配置参数和初始设置以及系统资源设定的格式化文档。)<br>
-            (常见配位文件具有.cnf、.conf、.cfg、.cg、.ini、.xml等文件扩展名，开发时使用的配置文件扩展名包括.project、.classpath、.make、.config等。）
-          </el-form-item>
-
-          <el-form-item label="配置文件" :rules="rules">
-            <el-row :gutter="20">
-              <el-col :span="5">
-                <el-input v-model="fileUploadVoList.file4" disabled />
-              </el-col>
-            </el-row>
-          </el-form-item>
-        </el-card>
-        <el-card shadow="never">
-          <el-form-item
-            label="查看软件指纹"
-            :rules="rules"
-            label-width="135px"
-          />
-
-          <el-form-item label="核验码" :rules="rules">
-            <el-row :gutter="20">
-              <el-col :span="5">
-                <el-input v-model="ruleForm.uploadFile" disabled />
-              </el-col>
-              <el-row>
-                <el-button type="primary">下载软件证书</el-button>
-              </el-row>
-            </el-row>
-          </el-form-item>
-        </el-card>
-      </el-card>
+      </div>
 
       <el-divider />
       <el-button
@@ -294,7 +340,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .inline-border {
   border-style: solid;
   border-width: 1px;
@@ -330,5 +376,18 @@ export default {
 }
 .el-form-item__label {
   width: 120px;
+}
+.cardcss .el-card /deep/.el-card__body {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+/deep/.el-row[data-v-41871d6e] {
+  margin-bottom: 0px;
+}
+
+.inputcss .el-form-item /deep/ .el-form-item__content{
+  height: 20px;
 }
 </style>

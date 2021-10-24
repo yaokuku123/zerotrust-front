@@ -108,10 +108,10 @@
           </div>
           <el-card shadow="never">
             <el-form-item
-              label="核心文件清单"
+              label="核心文件清单（仅限txt）"
               :rules="rules"
               :required="true"
-              label-width="135px"
+              label-width="160px"
             >
               <a
                 href="static/核心文件目录生成方法.pdf"
@@ -524,6 +524,17 @@ export default {
   methods: {
     onBeforeUpload1(file) {
       console.log(file)
+
+      const fileSuffix = file.name.substring(file.name.lastIndexOf('.') + 1)
+
+      const whiteList = ['txt']
+      console.log('BAKA')
+      if (whiteList.indexOf(fileSuffix) == -1) {
+        alert('上传文件只能是 txt 格式')
+        flag = false
+        return flag
+      }
+
       this.softFile[0].soft = file.name
       var flag = false
       flag = this.fileCompare()
@@ -533,6 +544,8 @@ export default {
       } else {
         this.softFile[0].soft = ''
       }
+
+
       return flag
     },
     onBeforeUpload2(file) {
@@ -576,6 +589,17 @@ export default {
     },
     onBeforeUpload5(file) {
       console.log(file)
+
+      const fileSuffix = file.name.substring(file.name.lastIndexOf('.') + 1)
+
+      const whiteList = ['cnf', 'conf', 'cfg', 'cg', 'ini', 'xml', 'project', 'classpath', 'make', 'config']
+      console.log('BAKA')
+      if (whiteList.indexOf(fileSuffix) == -1) {
+        console.log(fileSuffix)
+        alert('上传文件只能是 cnf、conf、cfg、cg、ini、xml、project、classpath、make、config格式')
+        flag = false
+      }
+
       this.softFile[4].soft = file.name
       console.log('error0')
       var flag = this.fileCompare()
@@ -585,6 +609,7 @@ export default {
       } else {
         this.softFile[4].soft = ''
       }
+
       return flag
     },
 
@@ -805,7 +830,7 @@ export default {
       })
     },
     downloadInfo(id) {
-      window.open(this.baseCertDownloadUrl + '/soft/download?pid=' + this.pid + "&fileType="+id)
+      window.open(this.baseCertDownloadUrl + '/soft/download?pid=' + this.pid + '&fileType=' + id)
       // softVerify.downloadSoftInfo(this.pid, id).then((res) => {
       //   console.log(res.data)
       // })

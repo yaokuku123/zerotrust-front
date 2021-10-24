@@ -24,7 +24,7 @@
           <el-button
             type="text"
             size="small"
-            @click="handleClick(scope.row.id)"
+            @click="handleClick(scope.row.pid)"
           >查看</el-button>
         </template>
       </el-table-column>
@@ -76,7 +76,7 @@ export default {
   methods: {
     handleClick(id) {
       console.log(id)
-      this.$router.push({ path: '/soft/detail/' + id, query: { id: id }})
+      this.$router.push({ path: '/soft/back/' + id, query: { id: id }})
     },
     getSoft() {
       soft.getSoftList().then((response) => {
