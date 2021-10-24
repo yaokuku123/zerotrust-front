@@ -10,12 +10,11 @@
       <el-step title="归档" />
       <el-step title="浏览" />
     </el-steps>
-
     <el-form
       ref="softInfo"
-      :model="softInfo"
       :rules="rules"
-      label-width="100px"
+      :model="softInfo"
+      label-width="80px"
       class="demo-ruleForm"
     >
       <!-- <el-divider /> -->
@@ -26,8 +25,8 @@
         <el-row>
           <el-col :span="12">
             <div class="grid-content">
-              <el-form-item label="单位名称" prop="softName">
-                <el-input v-model="softInfo.softName" />
+              <el-form-item label="单位名称" prop="comName">
+                <el-input v-model="softInfo.comName" />
               </el-form-item>
             </div>
           </el-col>
@@ -36,7 +35,7 @@
         <el-row>
           <el-col :span="12">
             <div class="grid-content">
-              <el-form-item label="项目名称" prop="softName">
+              <el-form-item label="项目名称" prop="proName">
                 <el-input v-model="softInfo.proName" />
               </el-form-item>
             </div>
@@ -102,311 +101,326 @@
         </el-form>
       </el-card>
       <!-- <el-divider />s -->
-<div class="cardcss">
-      <el-card>
-        <div slot="header" class="clearfix">
-          <span>上传文件信息</span>
-        </div>
-        <el-card shadow="never">
-          <el-form-item
-            label="核心文件清单"
-            :rules="rules"
-            :required="true"
-            label-width="135px"
-          >
-            <a
-              href="static/核心文件目录生成方法.pdf"
-              style="color: #1890ff"
-              download="核心文件目录生成方法.pdf"
-              >下载说明书</a
-            >
-          </el-form-item>
-
-          <el-form-item label="文件清单" :rules="rules">
-            <el-row :gutter="20">
-              <el-col :span="5">
-                <el-input v-model="softname1" disabled />
-              </el-col>
-              <el-col :span="1.2"
-                ><div class="grid-content">
-                  <el-upload
-                    class="upload-demo"
-                    :action="
-                      BASE_API + '/soft/upload?pid=' + pid + '&fileType=0'
-                    "
-                    :show-file-list="false"
-                    :on-preview="handlePreview0"
-                    :before-upload="onBeforeUpload1"
-                    :on-success="handSuccess"
-                    :limit="1"
-                    :file-list="fileList"
-                  >
-                    <el-button
-                      class="filter-item"
-                      style="margin-left: 10px"
-                      type="primary"
-                      icon="el-icon-upload"
-                      >上传</el-button
-                    >
-                  </el-upload>
-                </div></el-col
-              >
-              <el-col :span="11">
-                <div class="right-items" style="float: left">
-                  <el-button
-                    class="filter-item"
-                    style="margin-left: -3px"
-                    type="primary"
-                    icon="el-icon-edit"
-                    >下 载</el-button
-                  >
-                  <el-button
-                    class="filter-item"
-                    style="margin-left: 17px"
-                    type="primary"
-                    icon="el-icon-delete"
-                    @click="softname1 = ''"
-                    >删 除</el-button
-                  >
-                </div>
-              </el-col>
-            </el-row>
-          </el-form-item>
-        </el-card>
-        <!-- 核心文件。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。-->
-        <el-card shadow="never">
-          <el-form-item
-            label="上传核心文件"
-            :rules="rules"
-            :required="true"
-            label-width="135px"
-          >
-            <el-input v-show="false" v-model="ruleForm.uploadFile" />
-            (核心文件是指在已部署的可执行系统中实现系统主要功能的文件。）
-          </el-form-item>
-
-          <div>
-            <el-form-item label="文件1" :rules="rules" :required="true">
-              <el-row :gutter="20">
-                <el-col :span="5">
-                  <el-input v-model="this.softname2" disabled/>
-                </el-col>
-                <el-col :span="1.2"
-                  ><div class="grid-content">
-                    <el-upload
-                      class="upload-demo"
-                      :action="
-                        BASE_API + '/soft/upload?pid=' + pid + '&fileType=1'
-                      "
-                      :show-file-list="false"
-                      :on-preview="handlePreview1"
-                      :before-upload="onBeforeUpload2"
-                      :on-success="handSucess2"
-                      :limit="1"
-                      :file-list="fileList"
-                    >
-                      <el-button
-                        class="filter-item"
-                        style="margin-left: 10px"
-                        type="primary"
-                        icon="el-icon-upload"
-                        >上传</el-button
-                      >
-                    </el-upload>
-                  </div></el-col
-                >
-                <el-col :span="11">
-                  <div class="right-items" style="float: left">
-                    <el-button
-                      class="filter-item"
-                      style="margin-left: -3px"
-                      type="primary"
-                      icon="el-icon-edit"
-                      >下 载</el-button
-                    >
-                    <el-button
-                      class="filter-item"
-                      style="margin-left: 17px"
-                      type="primary"
-                      icon="el-icon-delete"
-                      @click="softname2 = ''"
-                      >删 除</el-button
-                    >
-                  </div>
-                </el-col>
-              </el-row>
-            </el-form-item>
-            <el-divider />
-            <el-form-item label="文件2" :rules="rules">
-              <el-row :gutter="20">
-                <el-col :span="5">
-                  <el-input v-model="this.softname3" disabled/>
-                </el-col>
-                <el-col :span="1.2"
-                  ><div class="grid-content">
-                    <el-upload
-                      class="upload-demo"
-                      :action="
-                        BASE_API + '/soft/upload?pid=' + pid + '&fileType=2'
-                      "
-                      :show-file-list="false"
-                      :before-upload="onBeforeUpload3"
-                      :on-preview="handlePreview2"
-                      :on-success="handSucess3"
-                      :limit="1"
-                      :file-list="fileList"
-                    >
-                      <el-button
-                        class="filter-item"
-                        style="margin-left: 10px"
-                        type="primary"
-                        icon="el-icon-upload"
-                        >上传</el-button
-                      >
-                    </el-upload>
-                  </div></el-col
-                >
-                <el-col :span="11">
-                  <div class="right-items" style="float: left">
-                    <el-button
-                      class="filter-item"
-                      style="margin-left: -3px"
-                      type="primary"
-                      icon="el-icon-edit"
-                      >下 载</el-button
-                    >
-                    <el-button
-                      class="filter-item"
-                      style="margin-left: 17px"
-                      type="primary"
-                      icon="el-icon-delete"
-                      @click="softname3 = ''"
-                      >删 除</el-button
-                    >
-                  </div>
-                </el-col>
-              </el-row>
-            </el-form-item>
-            <el-divider />
-            <el-form-item label="文件3" :rules="rules">
-              <el-row :gutter="20">
-                <el-col :span="5">
-                  <el-input v-model="softname4" disabled/>
-                </el-col>
-                <el-col :span="1.2"
-                  ><div class="grid-content">
-                    <el-upload
-                      class="upload-demo"
-                      :action="
-                        BASE_API + '/soft/upload?pid=' + pid + '&fileType=3'
-                      "
-                      :before-upload="onBeforeUpload4"
-                      :show-file-list="false"
-                      :on-preview="handlePreview3"
-                      :on-success="handSucess4"
-                      :limit="1"
-                      :file-list="fileList"
-                    >
-                      <el-button
-                        class="filter-item"
-                        style="margin-left: 10px"
-                        type="primary"
-                        icon="el-icon-upload"
-                        >上传</el-button
-                      >
-                    </el-upload>
-                  </div></el-col
-                >
-                <el-col :span="11">
-                  <div class="right-items" style="float: left">
-                    <el-button
-                      class="filter-item"
-                      style="margin-left: -3px"
-                      type="primary"
-                      icon="el-icon-edit"
-                      >下 载</el-button
-                    >
-                    <el-button
-                      class="filter-item"
-                      style="margin-left: 17px"
-                      type="primary"
-                      icon="el-icon-delete"
-                      @click="softname4 = ''"
-                      >删 除</el-button
-                    >
-                  </div>
-                </el-col>
-              </el-row>
-            </el-form-item>
+      <div class="cardcss">
+        <el-card>
+          <div slot="header" class="clearfix">
+            <span>上传文件信息</span>
           </div>
-        </el-card>
-        <!-- 核心文件。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。-->
+          <el-card shadow="never">
+            <el-form-item
+              label="核心文件清单"
+              :rules="rules"
+              :required="true"
+              label-width="135px"
+            >
+              <a
+                href="static/核心文件目录生成方法.pdf"
+                style="color: #1890ff"
+                download="核心文件目录生成方法.pdf"
+                >下载说明书</a
+              >
+            </el-form-item>
 
-        <el-card shadow="never">
-          <el-form-item
-            label="系统配置文件"
-            :rules="rules"
-            :required="true"
-            label-width="135px"
-          >
-            <el-input v-show="false" v-model="ruleForm.uploadFile" />
-            （配置文件是指一种可为计算机程序配置参数和初始设置以及系统资源设定的格式化文档。)<br />
-            (常见配位文件具有.cnf、.conf、.cfg、.cg、.ini、.xml等文件扩展名，开发时使用的配置文件扩展名包括.project、.classpath、.make、.config等。）
-          </el-form-item>
-
-          <el-form-item label="配置文件" :rules="rules">
-            <el-row :gutter="20">
-              <el-col :span="5">
-                <el-input v-model="this.softname5" disabled/>
-              </el-col>
-              <el-col :span="1.2"
-                ><div class="grid-content">
-                  <el-upload
-                    class="upload-demo"
-                    :action="
-                      BASE_API + '/soft/upload?pid=' + pid + '&fileType=4'
-                    "
-                    :before-upload="onBeforeUpload5"
-                    :show-file-list="false"
-                    :on-preview="handlePreview4"
-                    :on-success="handSucess5"
-                    :limit="1"
-                    :file-list="fileList"
-                  >
+            <el-form-item label="文件清单" :rules="rules">
+              <el-row :gutter="20">
+                <el-col :span="5">
+                  <el-input v-model="softname1" disabled />
+                </el-col>
+                <el-col :span="1.2"
+                  ><div class="grid-content">
+                    <el-upload
+                      class="upload-demo"
+                      :action="
+                        BASE_API +
+                        '/soft/upload?pid=' +
+                        this.pid +
+                        '&fileType=0'
+                      "
+                      :show-file-list="false"
+                      :on-preview="handlePreview0"
+                      :before-upload="onBeforeUpload1"
+                      :on-success="handSuccess"
+                      
+                      :file-list="fileList"
+                    >
+                      <el-button
+                        class="filter-item"
+                        style="margin-left: 10px"
+                        type="primary"
+                        icon="el-icon-upload"
+                        >上传</el-button
+                      >
+                    </el-upload>
+                  </div></el-col
+                >
+                <el-col :span="11">
+                  <div class="right-items" style="float: left">
                     <el-button
                       class="filter-item"
-                      style="margin-left: 10px"
+                      style="margin-left: -3px"
                       type="primary"
-                      icon="el-icon-upload"
-                      >上传</el-button
+                      icon="el-icon-edit"
+                      >下 载</el-button
                     >
-                  </el-upload>
-                </div></el-col
-              >
-              <el-col :span="11">
-                <div class="right-items" style="float: left">
-                  <el-button
-                    class="filter-item"
-                    style="margin-left: -3px"
-                    type="primary"
-                    icon="el-icon-edit"
-                    >下 载</el-button
+                    <el-button
+                      class="filter-item"
+                      style="margin-left: 17px"
+                      type="primary"
+                      icon="el-icon-delete"
+                      @click="softname1 = ''"
+                      >删 除</el-button
+                    >
+                  </div>
+                </el-col>
+              </el-row>
+            </el-form-item>
+          </el-card>
+          <!-- 核心文件。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。-->
+          <el-card shadow="never">
+            <el-form-item
+              label="上传核心文件"
+              :rules="rules"
+              :required="true"
+              label-width="135px"
+            >
+              <el-input v-show="false" v-model="ruleForm.uploadFile" />
+              (核心文件是指在已部署的可执行系统中实现系统主要功能的文件。）
+            </el-form-item>
+
+            <div>
+              <el-form-item label="文件1" :rules="rules" :required="true">
+                <el-row :gutter="20">
+                  <el-col :span="5">
+                    <el-input v-model="this.softname2" disabled />
+                  </el-col>
+                  <el-col :span="1.2"
+                    ><div class="grid-content">
+                      <el-upload
+                        class="upload-demo"
+                        :action="
+                          BASE_API +
+                          '/soft/upload?pid=' +
+                          this.pid +
+                          '&fileType=1'
+                        "
+                        :show-file-list="false"
+                        :on-preview="handlePreview1"
+                        :before-upload="onBeforeUpload2"
+                        :on-success="handSucess2"
+                        
+                        :file-list="fileList"
+                      >
+                        <el-button
+                          class="filter-item"
+                          style="margin-left: 10px"
+                          type="primary"
+                          icon="el-icon-upload"
+                          >上传</el-button
+                        >
+                      </el-upload>
+                    </div></el-col
                   >
-                  <el-button
-                    class="filter-item"
-                    style="margin-left: 17px"
-                    type="primary"
-                    icon="el-icon-delete"
-                    @click="softname5 = ''"
-                    >删 除</el-button
+                  <el-col :span="11">
+                    <div class="right-items" style="float: left">
+                      <el-button
+                        class="filter-item"
+                        style="margin-left: -3px"
+                        type="primary"
+                        icon="el-icon-edit"
+                        >下 载</el-button
+                      >
+                      <el-button
+                        class="filter-item"
+                        style="margin-left: 17px"
+                        type="primary"
+                        icon="el-icon-delete"
+                        @click="softname2 = ''"
+                        >删 除</el-button
+                      >
+                    </div>
+                  </el-col>
+                </el-row>
+              </el-form-item>
+              <el-divider />
+              <el-form-item label="文件2" :rules="rules">
+                <el-row :gutter="20">
+                  <el-col :span="5">
+                    <el-input v-model="this.softname3" disabled />
+                  </el-col>
+                  <el-col :span="1.2"
+                    ><div class="grid-content">
+                      <el-upload
+                        class="upload-demo"
+                        :action="
+                          BASE_API +
+                          '/soft/upload?pid=' +
+                          this.pid +
+                          '&fileType=2'
+                        "
+                        :show-file-list="false"
+                        :before-upload="onBeforeUpload3"
+                        :on-preview="handlePreview2"
+                        :on-success="handSucess3"
+                        
+                        :file-list="fileList"
+                      >
+                        <el-button
+                          class="filter-item"
+                          style="margin-left: 10px"
+                          type="primary"
+                          icon="el-icon-upload"
+                          >上传</el-button
+                        >
+                      </el-upload>
+                    </div></el-col
                   >
-                </div>
-              </el-col>
-            </el-row>
-          </el-form-item>
+                  <el-col :span="11">
+                    <div class="right-items" style="float: left">
+                      <el-button
+                        class="filter-item"
+                        style="margin-left: -3px"
+                        type="primary"
+                        icon="el-icon-edit"
+                        >下 载</el-button
+                      >
+                      <el-button
+                        class="filter-item"
+                        style="margin-left: 17px"
+                        type="primary"
+                        icon="el-icon-delete"
+                        @click="softname3 = ''"
+                        >删 除</el-button
+                      >
+                    </div>
+                  </el-col>
+                </el-row>
+              </el-form-item>
+              <el-divider />
+              <el-form-item label="文件3" :rules="rules">
+                <el-row :gutter="20">
+                  <el-col :span="5">
+                    <el-input v-model="softname4" disabled />
+                  </el-col>
+                  <el-col :span="1.2"
+                    ><div class="grid-content">
+                      <el-upload
+                        class="upload-demo"
+                        :action="
+                          BASE_API +
+                          '/soft/upload?pid=' +
+                          this.pid +
+                          '&fileType=3'
+                        "
+                        :before-upload="onBeforeUpload4"
+                        :show-file-list="false"
+                        :on-preview="handlePreview3"
+                        :on-success="handSucess4"
+                        
+                        :file-list="fileList"
+                      >
+                        <el-button
+                          class="filter-item"
+                          style="margin-left: 10px"
+                          type="primary"
+                          icon="el-icon-upload"
+                          >上传</el-button
+                        >
+                      </el-upload>
+                    </div></el-col
+                  >
+                  <el-col :span="11">
+                    <div class="right-items" style="float: left">
+                      <el-button
+                        class="filter-item"
+                        style="margin-left: -3px"
+                        type="primary"
+                        icon="el-icon-edit"
+                        >下 载</el-button
+                      >
+                      <el-button
+                        class="filter-item"
+                        style="margin-left: 17px"
+                        type="primary"
+                        icon="el-icon-delete"
+                        @click="softname4 = ''"
+                        >删 除</el-button
+                      >
+                    </div>
+                  </el-col>
+                </el-row>
+              </el-form-item>
+            </div>
+          </el-card>
+          <!-- 核心文件。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。-->
+
+          <el-card shadow="never">
+            <el-form-item
+              label="系统配置文件"
+              :rules="rules"
+              :required="true"
+              label-width="135px"
+            >
+              <el-input v-show="false" v-model="ruleForm.uploadFile" />
+              （配置文件是指一种可为计算机程序配置参数和初始设置以及系统资源设定的格式化文档。)<br />
+              (常见配位文件具有.cnf、.conf、.cfg、.cg、.ini、.xml等文件扩展名，开发时使用的配置文件扩展名包括.project、.classpath、.make、.config等。）
+            </el-form-item>
+
+            <el-form-item label="配置文件" :rules="rules">
+              <el-row :gutter="20">
+                <el-col :span="5">
+                  <el-input v-model="this.softname5" disabled />
+                </el-col>
+                <el-col :span="1.2"
+                  ><div class="grid-content">
+                    <el-upload
+                      class="upload-demo"
+                      :action="
+                        BASE_API +
+                        '/soft/upload?pid=' +
+                        this.pid +
+                        '&fileType=4'
+                      "
+                      :before-upload="onBeforeUpload5"
+                      :show-file-list="false"
+                      :on-preview="handlePreview4"
+                      :on-success="handSucess5"
+                      
+                      :file-list="fileList"
+                    >
+                      <el-button
+                        class="filter-item"
+                        style="margin-left: 10px"
+                        type="primary"
+                        icon="el-icon-upload"
+                        >上传</el-button
+                      >
+                    </el-upload>
+                  </div></el-col
+                >
+                <el-col :span="11">
+                  <div class="right-items" style="float: left">
+                    <el-button
+                      class="filter-item"
+                      style="margin-left: -3px"
+                      type="primary"
+                      icon="el-icon-edit"
+                      >下 载</el-button
+                    >
+                    <el-button
+                      class="filter-item"
+                      style="margin-left: 17px"
+                      type="primary"
+                      icon="el-icon-delete"
+                      @click="softname5 = ''"
+                      >删 除</el-button
+                    >
+                  </div>
+                </el-col>
+              </el-row>
+            </el-form-item>
+          </el-card>
         </el-card>
-      </el-card>
-</div>
+      </div>
       <el-divider />
       <el-button :disabled="saveBtnDisabled" type="primary" @click="storeInfo()"
         >保存</el-button
@@ -463,7 +477,6 @@ export default {
       ],
       saveBtnDisabled: true, // 保存按钮是否禁用
       BASE_API: process.env.VUE_APP_BASE_API, // 接口API地址
-      tableData: [{}],
       saveBtnDisabled: false, // 保存按钮是否禁用
       softInfo: {
         comName: "",
@@ -471,6 +484,7 @@ export default {
         proName: "",
         uploadPassword: "",
         checkPass: "",
+        fileUploadVoList: "",
       },
       ruleForm: {
         pass: "",
@@ -479,10 +493,10 @@ export default {
         uploadFile: "",
       },
       rules: {
-        softName: [
+        comName: [
           { required: true, message: "请输入软件名称", trigger: "blur" },
         ],
-        softDesc: [
+        proName: [
           { required: true, message: "请输入软件描述", trigger: "blur" },
         ],
         userName: [
@@ -506,17 +520,16 @@ export default {
     };
   },
   created() {
-    console.log("info created");
-    console.log(this.$route.params.id == null);
     // 获取路由id值
     if (this.$route.params && this.$route.params.id) {
-      this.softInfo.pid = this.$route.params.id;
-      console.log("这是路由后面的id" + this.softInfo.pid);
+      this.pid = this.$route.params.id;
+      console.log("redirect : " + this.pid);
+      this.getData();
+
+      console.log("这是路由后面的id" + this.pid);
     } else {
       this.getRandomCode();
     }
-
-    // console.log(this.softInfo.pid)
   },
   methods: {
     onBeforeUpload1(file) {
@@ -584,50 +597,11 @@ export default {
       }
       return flag;
     },
-    // handleCreate() {
-    //   this.softFile[0].soft = file.name
-    //   console.log('error0')
-    //   if (this.fileCompare()) {
-    //     this.softname1 = file.name
-    //   } else {
-    //     this.softFile[0].soft = null
-    //   }
-    // },
-    // handleCreate1() {
-    //   this.softFile[1].soft = file.name
-    //   if (this.fileCompare()) {
-    //     this.softname2 = file.name
-    //   } else {
-    //     this.softFile[1].soft = null
-    //   }
-    // },
-    // handleCreate2() {
-    //   this.softFile[2].soft = file.name
-    //   if (this.fileCompare()) {
-    //     this.softname3 = file.name
-    //   } else {
-    //     this.softFile[2].soft = null
-    //   }
-    // },
-    // handleCreate3() {
-    //   this.softFile[3].soft = file.name
-    //   if (this.fileCompare()) {
-    //     this.softname4 = file.name
-    //   } else {
-    //     this.softFile[3].soft = null
-    //   }
-    // },
-    // handleCreate4() {
-    //   this.softFile[4].soft = file.name
-    //   if (this.fileCompare()) {
-    //     this.softname5 = file.name
-    //   } else {
-    //     this.softFile[4].soft = null
-    //   }
-    // },
+
     getRandomCode() {
-      this.softInfo.pid = uuidv1(); // 获取随机id
-      console.log(this.softInfo.pid, " this.Id 11111");
+      this.pid = uuidv1(); // 获取随机id
+      this.softInfo.pid = this.pid;
+      console.log(this.pid, " this.Id 11111");
     },
     fileCompare() {
       var i = 0;
@@ -743,14 +717,53 @@ export default {
       this.softname5 = file.name;
       console.log(this.softname);
     },
-
-    // 根据软件信息id查询
-    getSoftInfo() {
-      soft.getSoft(this.softId).then((response) => {
-        this.softInfo = response.data.softInfo;
+    getData() {
+      softVerify.getSoftInfo(this.pid).then((res) => {
+        console.log("这是传回来的数据" + res);
+        this.softInfo = res.data.softInfo;
+        console.log(this.softInfo);
+        console.log(
+          "这是文件的类型：  " + this.softInfo.fileUploadVoList[0].fileName
+        );
+        for (var i = 0; i < this.softInfo.fileUploadVoList.length; i++) {
+          if (
+            JSON.stringify(this.softInfo.fileUploadVoList[i].fileType) ==
+            JSON.stringify(0)
+          ) {
+            this.softname1 = this.softInfo.fileUploadVoList[i].fileName;
+            this.softFile[0].soft = this.softname1;
+          }
+          if (
+            JSON.stringify(this.softInfo.fileUploadVoList[i].fileType) ==
+            JSON.stringify(1)
+          ) {
+            this.softname2 = this.softInfo.fileUploadVoList[i].fileName;
+            this.softFile[1].soft = this.softname2;
+          }
+          if (
+            JSON.stringify(this.softInfo.fileUploadVoList[i].fileType) ==
+            JSON.stringify(2)
+          ) {
+            this.softname3 = this.softInfo.fileUploadVoList[i].fileName;
+            this.softFile[2].soft = this.softname3;
+          }
+          if (
+            JSON.stringify(this.softInfo.fileUploadVoList[i].fileType) ==
+            JSON.stringify(3)
+          ) {
+            this.softname4 = this.softInfo.fileUploadVoList[i].fileName;
+            this.softFile[3].soft = this.softname4;
+          }
+          if (
+            JSON.stringify(this.softInfo.fileUploadVoList[i].fileType) ==
+            JSON.stringify(4)
+          ) {
+            this.softname5 = this.softInfo.fileUploadVoList[i].fileName;
+            this.softFile[4].soft = this.softname5;
+          }
+        }
       });
     },
-    // 添加软件信息
     addSoftInfo() {
       soft.addSoft(this.softInfo).then((response) => {
         // 请求成功
@@ -777,24 +790,45 @@ export default {
     },
     // 跳转
     storeInfo() {
+      console.log("storeInfo " + this.softInfo.proName);
       this.actionMethod(this.softInfo);
+      // this.$router.push({ path: '/soft/info/' + this.pid })
+
       this.$router.replace({
         name: "SoftInfoEdit",
-        params: { id: this.softInfo.pid },
+        params: { id: this.pid },
+      });
+    },
+    submitInfo(data) {
+      softVerify.submitSoftInfo(data).then((res) => {
+        console.log(res.data.flag);
+        if (res.data.flag) {
+          this.$router.push({
+            name: "SoftInfoBack",
+            params: { id: this.pid },
+          });
+        }else{
+          alert('文件不匹配')
+        }
       });
     },
     next() {
       this.actionMethod(this.softInfo);
-      this.$router.push({
-        name: "SoftInfoBack",
-        params: { id: this.softInfo.pid },
-      });
+      this.submitInfo(this.softInfo);
+      // this.$router.push({
+      //   name: "SoftInfoBack",
+      //   params: { id: this.pid },
+      // });
     },
     actionMethod(data) {
-      if (this.$route.params.id == null) {
-        softVerify.insert(data).then((res) => {});
+      if (this.$route.params && this.$route.params.id) {
+        softVerify.update(data).then((res) => {
+          console.log(res.data);
+        });
       } else {
-        softVerify.update(data).then((res) => {});
+        softVerify.insert(data).then((res) => {
+          console.log(res.data);
+        });
       }
     },
   },
@@ -838,13 +872,13 @@ export default {
 .el-form-item__label {
   width: 120px;
 }
-.cardcss .el-card /deep/.el-card__body{
-    padding-top: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
+.cardcss .el-card /deep/.el-card__body {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 /deep/.el-row[data-v-41871d6e] {
-    margin-bottom: 0px;
+  margin-bottom: 0px;
 }
 </style>
