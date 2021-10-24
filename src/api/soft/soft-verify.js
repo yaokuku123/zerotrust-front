@@ -25,7 +25,21 @@ export default {
       }
     })
   },
-  submitSoftInfo(softInfo){
+  fetchZipWithPass(data) {
+    return request({
+      url: '/soft/getInfo',
+      method: 'post',
+      data: data
+    })
+  },
+  fetchCheckPass(data) {
+    return request({
+      url: '/check',
+      method: 'post',
+      data: data
+    })
+  },
+  submitSoftInfo(softInfo) {
     return request({
       url: '/soft/submit',
       method: 'post',

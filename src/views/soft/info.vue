@@ -117,8 +117,7 @@
                 href="static/核心文件目录生成方法.pdf"
                 style="color: #1890ff"
                 download="核心文件目录生成方法.pdf"
-                >下载说明书</a
-              >
+              >下载说明书</a>
             </el-form-item>
 
             <el-form-item label="文件清单" :rules="rules">
@@ -126,15 +125,17 @@
                 <el-col :span="5">
                   <el-input v-model="softname1" disabled />
                 </el-col>
-                <el-col :span="1.2"
-                  ><div class="grid-content">
-                    <el-upload
-                      class="upload-demo"
-                      :action="
-                        BASE_API +
+                <el-col
+                  :span="1.2"
+                ><div class="grid-content">
+                  <el-upload
+                    class="upload-demo"
+                    :action="
+                      BASE_API +
                         '/soft/upload?pid=' +
                         this.pid +
                         '&fileType=0'
+<<<<<<< HEAD
                       "
                       :show-file-list="false"
                       :on-preview="handlePreview0"
@@ -152,6 +153,24 @@
                     </el-upload>
                   </div></el-col
                 >
+=======
+                    "
+                    :show-file-list="false"
+                    :on-preview="handlePreview0"
+                    :before-upload="onBeforeUpload1"
+                    :on-success="handSuccess"
+
+                    :file-list="fileList"
+                  >
+                    <el-button
+                      class="filter-item"
+                      style="margin-left: 10px"
+                      type="primary"
+                      icon="el-icon-upload"
+                    >上传</el-button>
+                  </el-upload>
+                </div></el-col>
+>>>>>>> 4ce1ab9cfb2cb6960cd34d1b7071fb20b2ee55f8
                 <el-col :span="11">
                   <div class="right-items" style="float: left">
                     <el-button
@@ -159,17 +178,26 @@
                       style="margin-left: -3px"
                       type="primary"
                       icon="el-icon-edit"
+<<<<<<< HEAD
                       @click="downloadInfo(0)"
                       >下 载</el-button
                     >
+=======
+                    >下 载</el-button>
+>>>>>>> 4ce1ab9cfb2cb6960cd34d1b7071fb20b2ee55f8
                     <el-button
                       class="filter-item"
                       style="margin-left: 17px"
                       type="primary"
                       icon="el-icon-delete"
+<<<<<<< HEAD
                       @click="deleteInfo(0)"
                       >删 除</el-button
                     >
+=======
+                      @click="softname1 = ''"
+                    >删 除</el-button>
+>>>>>>> 4ce1ab9cfb2cb6960cd34d1b7071fb20b2ee55f8
                   </div>
                 </el-col>
               </el-row>
@@ -193,15 +221,17 @@
                   <el-col :span="5">
                     <el-input v-model="this.softname2" disabled />
                   </el-col>
-                  <el-col :span="1.2"
-                    ><div class="grid-content">
-                      <el-upload
-                        class="upload-demo"
-                        :action="
-                          BASE_API +
+                  <el-col
+                    :span="1.2"
+                  ><div class="grid-content">
+                    <el-upload
+                      class="upload-demo"
+                      :action="
+                        BASE_API +
                           '/soft/upload?pid=' +
                           this.pid +
                           '&fileType=1'
+<<<<<<< HEAD
                         "
                         :show-file-list="false"
                         :on-preview="handlePreview1"
@@ -219,6 +249,24 @@
                       </el-upload>
                     </div></el-col
                   >
+=======
+                      "
+                      :show-file-list="false"
+                      :on-preview="handlePreview1"
+                      :before-upload="onBeforeUpload2"
+                      :on-success="handSucess2"
+
+                      :file-list="fileList"
+                    >
+                      <el-button
+                        class="filter-item"
+                        style="margin-left: 10px"
+                        type="primary"
+                        icon="el-icon-upload"
+                      >上传</el-button>
+                    </el-upload>
+                  </div></el-col>
+>>>>>>> 4ce1ab9cfb2cb6960cd34d1b7071fb20b2ee55f8
                   <el-col :span="11">
                     <div class="right-items" style="float: left">
                       <el-button
@@ -226,17 +274,26 @@
                         style="margin-left: -3px"
                         type="primary"
                         icon="el-icon-edit"
+<<<<<<< HEAD
                         @click="downloadInfo(1)"
                         >下 载</el-button
                       >
+=======
+                      >下 载</el-button>
+>>>>>>> 4ce1ab9cfb2cb6960cd34d1b7071fb20b2ee55f8
                       <el-button
                         class="filter-item"
                         style="margin-left: 17px"
                         type="primary"
                         icon="el-icon-delete"
+<<<<<<< HEAD
                         @click="deleteInfo(1)"
                         >删 除</el-button
                       >
+=======
+                        @click="softname2 = ''"
+                      >删 除</el-button>
+>>>>>>> 4ce1ab9cfb2cb6960cd34d1b7071fb20b2ee55f8
                     </div>
                   </el-col>
                 </el-row>
@@ -247,15 +304,17 @@
                   <el-col :span="5">
                     <el-input v-model="this.softname3" disabled />
                   </el-col>
-                  <el-col :span="1.2"
-                    ><div class="grid-content">
-                      <el-upload
-                        class="upload-demo"
-                        :action="
-                          BASE_API +
+                  <el-col
+                    :span="1.2"
+                  ><div class="grid-content">
+                    <el-upload
+                      class="upload-demo"
+                      :action="
+                        BASE_API +
                           '/soft/upload?pid=' +
                           this.pid +
                           '&fileType=2'
+<<<<<<< HEAD
                         "
                         :show-file-list="false"
                         :before-upload="onBeforeUpload3"
@@ -273,6 +332,24 @@
                       </el-upload>
                     </div></el-col
                   >
+=======
+                      "
+                      :show-file-list="false"
+                      :before-upload="onBeforeUpload3"
+                      :on-preview="handlePreview2"
+                      :on-success="handSucess3"
+
+                      :file-list="fileList"
+                    >
+                      <el-button
+                        class="filter-item"
+                        style="margin-left: 10px"
+                        type="primary"
+                        icon="el-icon-upload"
+                      >上传</el-button>
+                    </el-upload>
+                  </div></el-col>
+>>>>>>> 4ce1ab9cfb2cb6960cd34d1b7071fb20b2ee55f8
                   <el-col :span="11">
                     <div class="right-items" style="float: left">
                       <el-button
@@ -280,17 +357,26 @@
                         style="margin-left: -3px"
                         type="primary"
                         icon="el-icon-edit"
+<<<<<<< HEAD
                         @click="downloadInfo(2)"
                         >下 载</el-button
                       >
+=======
+                      >下 载</el-button>
+>>>>>>> 4ce1ab9cfb2cb6960cd34d1b7071fb20b2ee55f8
                       <el-button
                         class="filter-item"
                         style="margin-left: 17px"
                         type="primary"
                         icon="el-icon-delete"
+<<<<<<< HEAD
                         @click="deleteInfo(2)"
                         >删 除</el-button
                       >
+=======
+                        @click="softname3 = ''"
+                      >删 除</el-button>
+>>>>>>> 4ce1ab9cfb2cb6960cd34d1b7071fb20b2ee55f8
                     </div>
                   </el-col>
                 </el-row>
@@ -301,15 +387,17 @@
                   <el-col :span="5">
                     <el-input v-model="softname4" disabled />
                   </el-col>
-                  <el-col :span="1.2"
-                    ><div class="grid-content">
-                      <el-upload
-                        class="upload-demo"
-                        :action="
-                          BASE_API +
+                  <el-col
+                    :span="1.2"
+                  ><div class="grid-content">
+                    <el-upload
+                      class="upload-demo"
+                      :action="
+                        BASE_API +
                           '/soft/upload?pid=' +
                           this.pid +
                           '&fileType=3'
+<<<<<<< HEAD
                         "
                         :before-upload="onBeforeUpload4"
                         :show-file-list="false"
@@ -327,6 +415,24 @@
                       </el-upload>
                     </div></el-col
                   >
+=======
+                      "
+                      :before-upload="onBeforeUpload4"
+                      :show-file-list="false"
+                      :on-preview="handlePreview3"
+                      :on-success="handSucess4"
+
+                      :file-list="fileList"
+                    >
+                      <el-button
+                        class="filter-item"
+                        style="margin-left: 10px"
+                        type="primary"
+                        icon="el-icon-upload"
+                      >上传</el-button>
+                    </el-upload>
+                  </div></el-col>
+>>>>>>> 4ce1ab9cfb2cb6960cd34d1b7071fb20b2ee55f8
                   <el-col :span="11">
                     <div class="right-items" style="float: left">
                       <el-button
@@ -334,17 +440,26 @@
                         style="margin-left: -3px"
                         type="primary"
                         icon="el-icon-edit"
+<<<<<<< HEAD
                         @click="downloadInfo(3)"
                         >下 载</el-button
                       >
+=======
+                      >下 载</el-button>
+>>>>>>> 4ce1ab9cfb2cb6960cd34d1b7071fb20b2ee55f8
                       <el-button
                         class="filter-item"
                         style="margin-left: 17px"
                         type="primary"
                         icon="el-icon-delete"
+<<<<<<< HEAD
                         @click="deleteInfo(3)"
                         >删 除</el-button
                       >
+=======
+                        @click="softname4 = ''"
+                      >删 除</el-button>
+>>>>>>> 4ce1ab9cfb2cb6960cd34d1b7071fb20b2ee55f8
                     </div>
                   </el-col>
                 </el-row>
@@ -361,7 +476,7 @@
               label-width="135px"
             >
               <el-input v-show="false" v-model="ruleForm.uploadFile" />
-              （配置文件是指一种可为计算机程序配置参数和初始设置以及系统资源设定的格式化文档。)<br />
+              （配置文件是指一种可为计算机程序配置参数和初始设置以及系统资源设定的格式化文档。)<br>
               (常见配位文件具有.cnf、.conf、.cfg、.cg、.ini、.xml等文件扩展名，开发时使用的配置文件扩展名包括.project、.classpath、.make、.config等。）
             </el-form-item>
 
@@ -370,15 +485,17 @@
                 <el-col :span="5">
                   <el-input v-model="this.softname5" disabled />
                 </el-col>
-                <el-col :span="1.2"
-                  ><div class="grid-content">
-                    <el-upload
-                      class="upload-demo"
-                      :action="
-                        BASE_API +
+                <el-col
+                  :span="1.2"
+                ><div class="grid-content">
+                  <el-upload
+                    class="upload-demo"
+                    :action="
+                      BASE_API +
                         '/soft/upload?pid=' +
                         this.pid +
                         '&fileType=4'
+<<<<<<< HEAD
                       "
                       :before-upload="onBeforeUpload5"
                       :show-file-list="false"
@@ -396,6 +513,24 @@
                     </el-upload>
                   </div></el-col
                 >
+=======
+                    "
+                    :before-upload="onBeforeUpload5"
+                    :show-file-list="false"
+                    :on-preview="handlePreview4"
+                    :on-success="handSucess5"
+
+                    :file-list="fileList"
+                  >
+                    <el-button
+                      class="filter-item"
+                      style="margin-left: 10px"
+                      type="primary"
+                      icon="el-icon-upload"
+                    >上传</el-button>
+                  </el-upload>
+                </div></el-col>
+>>>>>>> 4ce1ab9cfb2cb6960cd34d1b7071fb20b2ee55f8
                 <el-col :span="11">
                   <div class="right-items" style="float: left">
                     <el-button
@@ -403,17 +538,26 @@
                       style="margin-left: -3px"
                       type="primary"
                       icon="el-icon-edit"
+<<<<<<< HEAD
                       @click="downloadInfo(4)"
                       >下 载</el-button
                     >
+=======
+                    >下 载</el-button>
+>>>>>>> 4ce1ab9cfb2cb6960cd34d1b7071fb20b2ee55f8
                     <el-button
                       class="filter-item"
                       style="margin-left: 17px"
                       type="primary"
                       icon="el-icon-delete"
+<<<<<<< HEAD
                       @click="deleteInfo(4)"
                       >删 除</el-button
                     >
+=======
+                      @click="softname5 = ''"
+                    >删 除</el-button>
+>>>>>>> 4ce1ab9cfb2cb6960cd34d1b7071fb20b2ee55f8
                   </div>
                 </el-col>
               </el-row>
@@ -422,205 +566,210 @@
         </el-card>
       </div>
       <el-divider />
-      <el-button :disabled="saveBtnDisabled" type="primary" @click="storeInfo()"
-        >保存</el-button
-      >
-      <el-button :disabled="saveBtnDisabled" type="primary" @click="next()"
-        >提交
+      <el-button
+        :disabled="saveBtnDisabled"
+        type="primary"
+        @click="storeInfo()"
+      >保存</el-button>
+      <el-button
+        :disabled="saveBtnDisabled"
+        type="primary"
+        @click="next()"
+      >提交
       </el-button>
     </el-form>
   </div>
 </template>
 <script>
-import soft from "@/api/soft/soft-info";
-import softVerify from "@/api/soft/soft-verify";
-import PasswordStrength from "@/views/soft/password/PasswordStrength";
-import uuidv1 from "uuid/v1";
+import soft from '@/api/soft/soft-info'
+import softVerify from '@/api/soft/soft-verify'
+import PasswordStrength from '@/views/soft/password/PasswordStrength'
+import uuidv1 from 'uuid/v1'
 
 export default {
   components: {
-    PasswordStrength,
+    PasswordStrength
   },
   data() {
     var validatePass = (rule, value, callback) => {
-      if (value === "") {
-        callback(new Error("请输入密码"));
+      if (value === '') {
+        callback(new Error('请输入密码'))
       } else {
-        if (this.softInfo.checkPass !== "") {
-          this.$refs.softInfo.validateField("checkPass");
+        if (this.softInfo.checkPass !== '') {
+          this.$refs.softInfo.validateField('checkPass')
         }
-        callback();
+        callback()
       }
-    };
+    }
     var validatePass2 = (rule, value, callback) => {
-      if (value === "") {
-        callback(new Error("请再次输入密码"));
+      if (value === '') {
+        callback(new Error('请再次输入密码'))
       } else if (value !== this.softInfo.uploadPassword) {
-        callback(new Error("两次输入密码不一致!"));
+        callback(new Error('两次输入密码不一致!'))
       } else {
-        callback();
+        callback()
       }
-    };
+    }
     return {
-      softname: "",
-      softname1: "",
-      softname2: "",
-      softname3: "",
-      softname4: "",
-      softname5: "",
+      softname: '',
+      softname1: '',
+      softname2: '',
+      softname3: '',
+      softname4: '',
+      softname5: '',
       softFile: [
-        { soft: "" },
-        { soft: "" },
-        { soft: "" },
-        { soft: "" },
-        { soft: "" },
+        { soft: '' },
+        { soft: '' },
+        { soft: '' },
+        { soft: '' },
+        { soft: '' }
       ],
       saveBtnDisabled: true, // 保存按钮是否禁用
       BASE_API: process.env.VUE_APP_BASE_API, // 接口API地址
       saveBtnDisabled: false, // 保存按钮是否禁用
       softInfo: {
-        comName: "",
-        pid: "",
-        proName: "",
-        uploadPassword: "",
-        checkPass: "",
-        fileUploadVoList: "",
+        comName: '',
+        pid: '',
+        proName: '',
+        uploadPassword: '',
+        checkPass: '',
+        fileUploadVoList: ''
       },
       ruleForm: {
-        pass: "",
-        checkPass: "",
-        age: "",
-        uploadFile: "",
+        pass: '',
+        checkPass: '',
+        age: '',
+        uploadFile: ''
       },
       rules: {
         comName: [
-          { required: true, message: "请输入软件名称", trigger: "blur" },
+          { required: true, message: '请输入软件名称', trigger: 'blur' }
         ],
         proName: [
-          { required: true, message: "请输入软件描述", trigger: "blur" },
+          { required: true, message: '请输入软件描述', trigger: 'blur' }
         ],
         userName: [
-          { required: true, message: "请输入软件拥有者", trigger: "blur" },
+          { required: true, message: '请输入软件拥有者', trigger: 'blur' }
         ],
         phoneNum: [
-          { required: true, message: "请输入手机号", trigger: "blur" },
+          { required: true, message: '请输入手机号', trigger: 'blur' }
         ],
         uploadPassword: [
-          { validator: validatePass, trigger: "blur" },
-          { required: true, message: "请输入密码", trigger: "blur" },
+          { validator: validatePass, trigger: 'blur' },
+          { required: true, message: '请输入密码', trigger: 'blur' }
         ],
         checkPass: [
-          { validator: validatePass2, trigger: "blur" },
-          { required: true, trigger: "blur" },
+          { validator: validatePass2, trigger: 'blur' },
+          { required: true, trigger: 'blur' }
         ],
-        uploadFile: [{ require: true, trigger: "blur" }],
+        uploadFile: [{ require: true, trigger: 'blur' }]
       },
-      pid: "",
-      fileList: [],
-    };
+      pid: '',
+      fileList: []
+    }
   },
   created() {
     // 获取路由id值
     if (this.$route.params && this.$route.params.id) {
-      this.pid = this.$route.params.id;
-      console.log("redirect : " + this.pid);
-      this.getData();
+      this.pid = this.$route.params.id
+      console.log('redirect : ' + this.pid)
+      this.getData()
 
-      console.log("这是路由后面的id" + this.pid);
+      console.log('这是路由后面的id' + this.pid)
     } else {
-      this.getRandomCode();
+      this.getRandomCode()
     }
   },
   methods: {
     onBeforeUpload1(file) {
-      console.log(file);
-      this.softFile[0].soft = file.name;
-      var flag = false;
-      flag = this.fileCompare();
-      console.log("this.compare" + flag);
+      console.log(file)
+      this.softFile[0].soft = file.name
+      var flag = false
+      flag = this.fileCompare()
+      console.log('this.compare' + flag)
       if (flag) {
-        this.softname1 = file.name;
+        this.softname1 = file.name
       } else {
-        this.softFile[0].soft = "";
+        this.softFile[0].soft = ''
       }
-      return flag;
+      return flag
     },
     onBeforeUpload2(file) {
-      console.log(file);
-      this.softFile[1].soft = file.name;
-      console.log("error0");
-      var flag = this.fileCompare();
-      console.log(flag);
+      console.log(file)
+      this.softFile[1].soft = file.name
+      console.log('error0')
+      var flag = this.fileCompare()
+      console.log(flag)
       if (flag) {
-        this.softname2 = file.name;
+        this.softname2 = file.name
       } else {
-        this.softFile[1].soft = "";
+        this.softFile[1].soft = ''
       }
-      return flag;
+      return flag
     },
     onBeforeUpload3(file) {
-      console.log(file);
-      this.softFile[2].soft = file.name;
-      console.log("error0");
-      var flag = this.fileCompare();
-      console.log(flag);
+      console.log(file)
+      this.softFile[2].soft = file.name
+      console.log('error0')
+      var flag = this.fileCompare()
+      console.log(flag)
       if (flag) {
-        this.softname3 = file.name;
+        this.softname3 = file.name
       } else {
-        this.softFile[2].soft = "";
+        this.softFile[2].soft = ''
       }
-      return flag;
+      return flag
     },
     onBeforeUpload4(file) {
-      console.log(file);
-      this.softFile[3].soft = file.name;
-      console.log("error0");
-      var flag = this.fileCompare();
-      console.log(flag);
+      console.log(file)
+      this.softFile[3].soft = file.name
+      console.log('error0')
+      var flag = this.fileCompare()
+      console.log(flag)
       if (flag) {
-        this.softname4 = file.name;
+        this.softname4 = file.name
       } else {
-        this.softFile[3].soft = "";
+        this.softFile[3].soft = ''
       }
-      return flag;
+      return flag
     },
     onBeforeUpload5(file) {
-      console.log(file);
-      this.softFile[4].soft = file.name;
-      console.log("error0");
-      var flag = this.fileCompare();
-      console.log(flag);
+      console.log(file)
+      this.softFile[4].soft = file.name
+      console.log('error0')
+      var flag = this.fileCompare()
+      console.log(flag)
       if (flag) {
-        this.softname5 = file.name;
+        this.softname5 = file.name
       } else {
-        this.softFile[4].soft = "";
+        this.softFile[4].soft = ''
       }
-      return flag;
+      return flag
     },
 
     getRandomCode() {
-      this.pid = uuidv1(); // 获取随机id
-      this.softInfo.pid = this.pid;
-      console.log(this.pid, " this.Id 11111");
+      this.pid = uuidv1() // 获取随机id
+      this.softInfo.pid = this.pid
+      console.log(this.pid, ' this.Id 11111')
     },
     fileCompare() {
-      var i = 0;
-      var j = 0;
+      var i = 0
+      var j = 0
       for (i; i < 5; i++) {
-        if (this.softFile[i].soft == "") continue;
-        console.log("文件名i" + this.softFile[i].soft);
-        j = i + 1;
+        if (this.softFile[i].soft == '') continue
+        console.log('文件名i' + this.softFile[i].soft)
+        j = i + 1
         for (j; j < 5; j++) {
           if (this.softFile[j].soft == this.softFile[i].soft) {
-            console.log("文件名j" + this.softFile[j].soft);
-            alert("文件重名！");
-            console.log("error1");
-            return false;
+            console.log('文件名j' + this.softFile[j].soft)
+            alert('文件重名！')
+            console.log('error1')
+            return false
           }
         }
       }
-      console.log("函数执行到这边了吗");
-      return true;
+      console.log('函数执行到这边了吗')
+      return true
     },
 
     handleExceed(files, fileList) {
@@ -628,48 +777,48 @@ export default {
         `当前限制选择 1 个文件，本次选择了 ${files.length} 个文件，共选择了 ${
           files.length + fileList.length
         } 个文件`
-      );
+      )
     },
     // 上传之前调用的方法
     handlePreview0(file) {
-      const flag = file.size / 1024 / 1024 < 200 && file.size / 1024 / 1024 > 2;
+      const flag = file.size / 1024 / 1024 < 200 && file.size / 1024 / 1024 > 2
       if (!flag) {
-        this.$message.error("上传软件大小范围 2MB～200MB!");
+        this.$message.error('上传软件大小范围 2MB～200MB!')
       }
 
-      return flag;
+      return flag
     },
     handlePreview1(file) {
-      const flag = file.size / 1024 / 1024 < 200 && file.size / 1024 / 1024 > 2;
+      const flag = file.size / 1024 / 1024 < 200 && file.size / 1024 / 1024 > 2
       if (!flag) {
-        this.$message.error("上传软件大小范围 2MB～200MB!");
+        this.$message.error('上传软件大小范围 2MB～200MB!')
       }
-      return flag;
+      return flag
     },
     handlePreview2(file) {
-      const flag = file.size / 1024 / 1024 < 200 && file.size / 1024 / 1024 > 2;
+      const flag = file.size / 1024 / 1024 < 200 && file.size / 1024 / 1024 > 2
       if (!flag) {
-        this.$message.error("上传软件大小范围 2MB～200MB!");
+        this.$message.error('上传软件大小范围 2MB～200MB!')
       }
-      return flag;
+      return flag
     },
     handlePreview3(file) {
-      const flag = file.size / 1024 / 1024 < 200 && file.size / 1024 / 1024 > 2;
+      const flag = file.size / 1024 / 1024 < 200 && file.size / 1024 / 1024 > 2
       if (!flag) {
-        this.$message.error("上传软件大小范围 2MB～200MB!");
+        this.$message.error('上传软件大小范围 2MB～200MB!')
       }
-      return flag;
+      return flag
     },
     handlePreview4(file) {
-      const flag = file.size / 1024 / 1024 < 200 && file.size / 1024 / 1024 > 2;
+      const flag = file.size / 1024 / 1024 < 200 && file.size / 1024 / 1024 > 2
       if (!flag) {
-        this.$message.error("上传软件大小范围 2MB～200MB!");
+        this.$message.error('上传软件大小范围 2MB～200MB!')
       }
-      return flag;
+      return flag
     },
     // 移除文件之前
     beforeRemove(file, fileList) {
-      return this.$confirm(`确定移除 ${file.name}？`);
+      return this.$confirm(`确定移除 ${file.name}？`)
     },
     // 移除文件后
     handleRemove(file, fileList) {
@@ -677,48 +826,49 @@ export default {
         // 请求成功
         // 提示
         this.$message({
-          type: "success",
-          message: "移除软件成功!",
-        });
-      });
+          type: 'success',
+          message: '移除软件成功!'
+        })
+      })
     },
     // 提交文件成功
     handSuccess(res, file) {
-      alert("上传成功");
-      console.log(res);
-      this.saveBtnDisabled = false;
-      this.softname1 = file.name;
+      alert('上传成功')
+      console.log(res)
+      this.saveBtnDisabled = false
+      this.softname1 = file.name
     },
     handSucess2(res, file) {
-      alert("上传成功");
-      console.log(res);
-      this.saveBtnDisabled = false;
-      this.softname2 = file.name;
-      console.log(this.softname);
+      alert('上传成功')
+      console.log(res)
+      this.saveBtnDisabled = false
+      this.softname2 = file.name
+      console.log(this.softname)
     },
     handSucess3(res, file) {
-      alert("上传成功");
-      console.log(res);
-      this.saveBtnDisabled = false;
-      this.softname3 = file.name;
-      console.log(this.softname);
+      alert('上传成功')
+      console.log(res)
+      this.saveBtnDisabled = false
+      this.softname3 = file.name
+      console.log(this.softname)
     },
     handSucess4(res, file) {
-      alert("上传成功");
-      console.log(res);
-      this.saveBtnDisabled = false;
-      this.softname4 = file.name;
-      console.log(this.softname);
+      alert('上传成功')
+      console.log(res)
+      this.saveBtnDisabled = false
+      this.softname4 = file.name
+      console.log(this.softname)
     },
     handSucess5(res, file) {
-      alert("上传成功");
-      console.log(res);
-      this.saveBtnDisabled = false;
-      this.softname5 = file.name;
-      console.log(this.softname);
+      alert('上传成功')
+      console.log(res)
+      this.saveBtnDisabled = false
+      this.softname5 = file.name
+      console.log(this.softname)
     },
     getData() {
       softVerify.getSoftInfo(this.pid).then((res) => {
+<<<<<<< HEAD
         console.log("这是传回来的数据" + res);
         this.softInfo = res.data.softInfo;
         if (JSON.stringify(this.softInfo.status) == JSON.stringify(2)) {
@@ -727,85 +877,94 @@ export default {
             params: { id: this.pid },
           });
         }
+=======
+        console.log('这是传回来的数据' + res)
+        this.softInfo = res.data.softInfo
+        console.log(this.softInfo)
+        console.log(
+          '这是文件的类型：  ' + this.softInfo.fileUploadVoList[0].fileName
+        )
+>>>>>>> 4ce1ab9cfb2cb6960cd34d1b7071fb20b2ee55f8
         for (var i = 0; i < this.softInfo.fileUploadVoList.length; i++) {
           if (
             JSON.stringify(this.softInfo.fileUploadVoList[i].fileType) ==
             JSON.stringify(0)
           ) {
-            this.softname1 = this.softInfo.fileUploadVoList[i].fileName;
-            this.softFile[0].soft = this.softname1;
+            this.softname1 = this.softInfo.fileUploadVoList[i].fileName
+            this.softFile[0].soft = this.softname1
           }
           if (
             JSON.stringify(this.softInfo.fileUploadVoList[i].fileType) ==
             JSON.stringify(1)
           ) {
-            this.softname2 = this.softInfo.fileUploadVoList[i].fileName;
-            this.softFile[1].soft = this.softname2;
+            this.softname2 = this.softInfo.fileUploadVoList[i].fileName
+            this.softFile[1].soft = this.softname2
           }
           if (
             JSON.stringify(this.softInfo.fileUploadVoList[i].fileType) ==
             JSON.stringify(2)
           ) {
-            this.softname3 = this.softInfo.fileUploadVoList[i].fileName;
-            this.softFile[2].soft = this.softname3;
+            this.softname3 = this.softInfo.fileUploadVoList[i].fileName
+            this.softFile[2].soft = this.softname3
           }
           if (
             JSON.stringify(this.softInfo.fileUploadVoList[i].fileType) ==
             JSON.stringify(3)
           ) {
-            this.softname4 = this.softInfo.fileUploadVoList[i].fileName;
-            this.softFile[3].soft = this.softname4;
+            this.softname4 = this.softInfo.fileUploadVoList[i].fileName
+            this.softFile[3].soft = this.softname4
           }
           if (
             JSON.stringify(this.softInfo.fileUploadVoList[i].fileType) ==
             JSON.stringify(4)
           ) {
-            this.softname5 = this.softInfo.fileUploadVoList[i].fileName;
-            this.softFile[4].soft = this.softname5;
+            this.softname5 = this.softInfo.fileUploadVoList[i].fileName
+            this.softFile[4].soft = this.softname5
           }
         }
-      });
+      })
     },
     addSoftInfo() {
       soft.addSoft(this.softInfo).then((response) => {
         // 请求成功
         // 提示
         this.$message({
-          type: "success",
-          message: "添加软件信息成功!",
-        });
+          type: 'success',
+          message: '添加软件信息成功!'
+        })
         // 跳转到第二步，response接口返回的数据
-        this.$router.push({ path: "/soft/upload/" + response.data.id });
-      });
+        this.$router.push({ path: '/soft/upload/' + response.data.id })
+      })
     },
     // 修改软件信息
     updateSoftInfo() {
       soft.updateSoft(this.softId, this.softInfo).then((response) => {
         // 提示
         this.$message({
-          type: "success",
-          message: "修改软件信息成功!",
-        });
+          type: 'success',
+          message: '修改软件信息成功!'
+        })
         // 跳转到第二步
-        this.$router.push({ path: "/soft/upload/" + this.softId });
-      });
+        this.$router.push({ path: '/soft/upload/' + this.softId })
+      })
     },
     // 跳转
     storeInfo() {
-      console.log("storeInfo " + this.softInfo.proName);
-      this.actionMethod(this.softInfo);
+      console.log('storeInfo ' + this.softInfo.proName)
+      this.actionMethod(this.softInfo)
       // this.$router.push({ path: '/soft/info/' + this.pid })
 
       this.$router.replace({
-        name: "SoftInfoEdit",
-        params: { id: this.pid },
-      });
+        name: 'SoftInfoEdit',
+        params: { id: this.pid }
+      })
     },
     submitInfo(data) {
       softVerify.submitSoftInfo(data).then((res) => {
-        console.log(res.data.flag);
+        console.log(res.data.flag)
         if (res.data.flag) {
           this.$router.push({
+<<<<<<< HEAD
             name: "SoftInfoBack",
             params: { id: this.pid },
           });
@@ -845,12 +1004,19 @@ export default {
             break;
           default:
             break; // 如果没有与表达式相同的值，则执行该代码
+=======
+            name: 'SoftInfoBack',
+            params: { id: this.pid }
+          })
+        } else {
+          alert('文件不匹配')
+>>>>>>> 4ce1ab9cfb2cb6960cd34d1b7071fb20b2ee55f8
         }
-      });
+      })
     },
     next() {
-      this.actionMethod(this.softInfo);
-      this.submitInfo(this.softInfo);
+      this.actionMethod(this.softInfo)
+      this.submitInfo(this.softInfo)
       // this.$router.push({
       //   name: "SoftInfoBack",
       //   params: { id: this.pid },
@@ -859,16 +1025,16 @@ export default {
     actionMethod(data) {
       if (this.$route.params && this.$route.params.id) {
         softVerify.update(data).then((res) => {
-          console.log(res.data);
-        });
+          console.log(res.data)
+        })
       } else {
         softVerify.insert(data).then((res) => {
-          console.log(res.data);
-        });
+          console.log(res.data)
+        })
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style scoped>
