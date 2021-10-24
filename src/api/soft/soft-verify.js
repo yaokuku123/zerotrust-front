@@ -2,11 +2,11 @@ import request from '@/utils/request'
 
 export default {
   // 获取当前系统中存在的软件交易信息
-  insert(data) {
+  insert(softInfoVo) {
     return request({
       url: '/soft/insertInfo',
       method: 'post',
-      data: data
+      data: softInfoVo
     })
   },
   update(softInfoVo) {
@@ -24,5 +24,13 @@ export default {
         pid: pid
       }
     })
+  },
+  submitSoftInfo(softInfo){
+    return request({
+      url: '/soft/submit',
+      method: 'post',
+      data: softInfo
+    })
   }
+
 }
