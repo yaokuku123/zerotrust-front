@@ -17,6 +17,7 @@
       <el-table-column prop="pid" label="编号" width="480" />
       <el-table-column prop="comName" label="单位名称" width="380" />
       <el-table-column prop="proName" label="项目名称" width="380" />
+      <el-table-column prop="verificationCode" label="核验码" width="380" />
       <el-table-column fixed="right" label="操作" >
         <template slot-scope="scope">
           <el-button

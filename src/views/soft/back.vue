@@ -154,7 +154,7 @@
               <el-form-item label="核验码" :rules="rules">
                 <el-row :gutter="20">
                   <el-col :span="8">
-                    <el-input v-model="ruleForm.uploadFile"  disabled />
+                    <el-input v-model="softInfo.verificationCode"  disabled />
                   </el-col>
                   <el-col :span="11">
                     <div class="right-items" style="float: left">
@@ -216,6 +216,7 @@ export default {
         comName: '',
         pid: '',
         proName: '',
+        verificationCode: '',
         uploadPassword: '',
         checkPass: '',
         fileUploadVoList: ''
