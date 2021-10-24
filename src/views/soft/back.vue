@@ -190,7 +190,7 @@
                         icon="el-icon-edit"
                         @click="downloadInfo(4)"
                       >下 载</el-button>
-                      <el-button style="" type="primary">下载软件证书</el-button>
+                      <el-button style="" type="primary" @click="downloadCert">下载软件证书</el-button>
                     </div>
                   </el-col>
                 </el-row>
@@ -335,6 +335,9 @@ export default {
         // this.dialogValue.innerVisible = res.data.result
         if (res.data.result == true) window.open(this.baseCertDownloadUrl + '/zipSoftDownload?pid=' + this.pid)
       })
+    },
+    downloadCert() {
+      window.open(this.baseCertDownloadUrl + '/generatePDF?pid=' + this.pid)
     }
   }
 }
