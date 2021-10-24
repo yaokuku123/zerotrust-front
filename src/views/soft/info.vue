@@ -135,6 +135,7 @@
                         '/soft/upload?pid=' +
                         this.pid +
                         '&fileType=0'
+<<<<<<< HEAD
                     "
                     :show-file-list="false"
                     :on-preview="handlePreview0"
@@ -150,6 +151,25 @@
                     >上传</el-button>
                   </el-upload>
                 </div></el-col>
+=======
+                      "
+                      :show-file-list="false"
+                      :on-preview="handlePreview0"
+                      :before-upload="onBeforeUpload1"
+                      :on-success="handSuccess"
+                      :file-list="fileList"
+                    >
+                      <el-button
+                        class="filter-item"
+                        style="margin-left: 10px"
+                        type="primary"
+                        icon="el-icon-upload"
+                        >上传</el-button
+                      >
+                    </el-upload>
+                  </div></el-col
+                >
+>>>>>>> df2cd46 (new function)
                 <el-col :span="11">
                   <div class="right-items" style="float: left">
                     <el-button
@@ -158,14 +178,24 @@
                       type="primary"
                       icon="el-icon-edit"
                       @click="downloadInfo(0)"
+<<<<<<< HEAD
                     >下 载</el-button>
+=======
+                      >下 载</el-button
+                    >
+>>>>>>> df2cd46 (new function)
                     <el-button
                       class="filter-item"
                       style="margin-left: 17px"
                       type="primary"
                       icon="el-icon-delete"
                       @click="deleteInfo(0)"
+<<<<<<< HEAD
                     >删 除</el-button>
+=======
+                      >删 除</el-button
+                    >
+>>>>>>> df2cd46 (new function)
                   </div>
                 </el-col>
               </el-row>
@@ -199,6 +229,7 @@
                           '/soft/upload?pid=' +
                           this.pid +
                           '&fileType=1'
+<<<<<<< HEAD
                       "
                       :show-file-list="false"
                       :on-preview="handlePreview1"
@@ -214,6 +245,25 @@
                       >上传</el-button>
                     </el-upload>
                   </div></el-col>
+=======
+                        "
+                        :show-file-list="false"
+                        :on-preview="handlePreview1"
+                        :before-upload="onBeforeUpload2"
+                        :on-success="handSucess2"
+                        :file-list="fileList"
+                      >
+                        <el-button
+                          class="filter-item"
+                          style="margin-left: 10px"
+                          type="primary"
+                          icon="el-icon-upload"
+                          >上传</el-button
+                        >
+                      </el-upload>
+                    </div></el-col
+                  >
+>>>>>>> df2cd46 (new function)
                   <el-col :span="11">
                     <div class="right-items" style="float: left">
                       <el-button
@@ -222,14 +272,24 @@
                         type="primary"
                         icon="el-icon-edit"
                         @click="downloadInfo(1)"
+<<<<<<< HEAD
                       >下 载</el-button>
+=======
+                        >下 载</el-button
+                      >
+>>>>>>> df2cd46 (new function)
                       <el-button
                         class="filter-item"
                         style="margin-left: 17px"
                         type="primary"
                         icon="el-icon-delete"
                         @click="deleteInfo(1)"
+<<<<<<< HEAD
                       >删 除</el-button>
+=======
+                        >删 除</el-button
+                      >
+>>>>>>> df2cd46 (new function)
                     </div>
                   </el-col>
                 </el-row>
@@ -250,6 +310,7 @@
                           '/soft/upload?pid=' +
                           this.pid +
                           '&fileType=2'
+<<<<<<< HEAD
                       "
                       :show-file-list="false"
                       :before-upload="onBeforeUpload3"
@@ -265,6 +326,25 @@
                       >上传</el-button>
                     </el-upload>
                   </div></el-col>
+=======
+                        "
+                        :show-file-list="false"
+                        :before-upload="onBeforeUpload3"
+                        :on-preview="handlePreview2"
+                        :on-success="handSucess3"
+                        :file-list="fileList"
+                      >
+                        <el-button
+                          class="filter-item"
+                          style="margin-left: 10px"
+                          type="primary"
+                          icon="el-icon-upload"
+                          >上传</el-button
+                        >
+                      </el-upload>
+                    </div></el-col
+                  >
+>>>>>>> df2cd46 (new function)
                   <el-col :span="11">
                     <div class="right-items" style="float: left">
                       <el-button
@@ -273,14 +353,24 @@
                         type="primary"
                         icon="el-icon-edit"
                         @click="downloadInfo(2)"
+<<<<<<< HEAD
                       >下 载</el-button>
+=======
+                        >下 载</el-button
+                      >
+>>>>>>> df2cd46 (new function)
                       <el-button
                         class="filter-item"
                         style="margin-left: 17px"
                         type="primary"
                         icon="el-icon-delete"
                         @click="deleteInfo(2)"
+<<<<<<< HEAD
                       >删 除</el-button>
+=======
+                        >删 除</el-button
+                      >
+>>>>>>> df2cd46 (new function)
                     </div>
                   </el-col>
                 </el-row>
@@ -301,6 +391,7 @@
                           '/soft/upload?pid=' +
                           this.pid +
                           '&fileType=3'
+<<<<<<< HEAD
                       "
                       :before-upload="onBeforeUpload4"
                       :show-file-list="false"
@@ -316,6 +407,25 @@
                       >上传</el-button>
                     </el-upload>
                   </div></el-col>
+=======
+                        "
+                        :before-upload="onBeforeUpload4"
+                        :show-file-list="false"
+                        :on-preview="handlePreview3"
+                        :on-success="handSucess4"
+                        :file-list="fileList"
+                      >
+                        <el-button
+                          class="filter-item"
+                          style="margin-left: 10px"
+                          type="primary"
+                          icon="el-icon-upload"
+                          >上传</el-button
+                        >
+                      </el-upload>
+                    </div></el-col
+                  >
+>>>>>>> df2cd46 (new function)
                   <el-col :span="11">
                     <div class="right-items" style="float: left">
                       <el-button
@@ -324,14 +434,24 @@
                         type="primary"
                         icon="el-icon-edit"
                         @click="downloadInfo(3)"
+<<<<<<< HEAD
                       >下 载</el-button>
+=======
+                        >下 载</el-button
+                      >
+>>>>>>> df2cd46 (new function)
                       <el-button
                         class="filter-item"
                         style="margin-left: 17px"
                         type="primary"
                         icon="el-icon-delete"
                         @click="deleteInfo(3)"
+<<<<<<< HEAD
                       >删 除</el-button>
+=======
+                        >删 除</el-button
+                      >
+>>>>>>> df2cd46 (new function)
                     </div>
                   </el-col>
                 </el-row>
@@ -367,6 +487,7 @@
                         '/soft/upload?pid=' +
                         this.pid +
                         '&fileType=4'
+<<<<<<< HEAD
                     "
                     :before-upload="onBeforeUpload5"
                     :show-file-list="false"
@@ -382,6 +503,25 @@
                     >上传</el-button>
                   </el-upload>
                 </div></el-col>
+=======
+                      "
+                      :before-upload="onBeforeUpload5"
+                      :show-file-list="false"
+                      :on-preview="handlePreview4"
+                      :on-success="handSucess5"
+                      :file-list="fileList"
+                    >
+                      <el-button
+                        class="filter-item"
+                        style="margin-left: 10px"
+                        type="primary"
+                        icon="el-icon-upload"
+                        >上传</el-button
+                      >
+                    </el-upload>
+                  </div></el-col
+                >
+>>>>>>> df2cd46 (new function)
                 <el-col :span="11">
                   <div class="right-items" style="float: left">
                     <el-button
@@ -390,14 +530,24 @@
                       type="primary"
                       icon="el-icon-edit"
                       @click="downloadInfo(4)"
+<<<<<<< HEAD
                     >下 载</el-button>
+=======
+                      >下 载</el-button
+                    >
+>>>>>>> df2cd46 (new function)
                     <el-button
                       class="filter-item"
                       style="margin-left: 17px"
                       type="primary"
                       icon="el-icon-delete"
                       @click="deleteInfo(4)"
+<<<<<<< HEAD
                     >删 除</el-button>
+=======
+                      >删 除</el-button
+                    >
+>>>>>>> df2cd46 (new function)
                   </div>
                 </el-col>
               </el-row>
@@ -451,6 +601,7 @@ export default {
       }
     }
     return {
+      baseCertDownloadUrl: process.env.VUE_APP_BASE_API,
       softname: '',
       softname1: '',
       softname2: '',
@@ -708,8 +859,13 @@ export default {
     },
     getData() {
       softVerify.getSoftInfo(this.pid).then((res) => {
+<<<<<<< HEAD
         console.log('这是传回来的数据' + res)
         this.softInfo = res.data.softInfo
+=======
+        console.log("这是传回来的数据" + res);
+        this.softInfo = res.data.softInfo;
+>>>>>>> df2cd46 (new function)
         if (JSON.stringify(this.softInfo.status) == JSON.stringify(2)) {
           this.$router.push({
             name: 'SoftInfoBack',
@@ -795,18 +951,31 @@ export default {
         console.log(res.data.flag)
         if (res.data.flag) {
           this.$router.push({
+<<<<<<< HEAD
             name: 'SoftInfoBack',
             params: { id: this.pid }
           })
+=======
+            name: "SoftInfoBack",
+            params: { id: this.pid },
+          });
+>>>>>>> df2cd46 (new function)
         } else {
           alert('文件不匹配')
         }
       })
     },
     downloadInfo(id) {
+<<<<<<< HEAD
       softVerify.downloadSoftInfo(this.pid, id).then((res) => {
         console.log(res.data)
       })
+=======
+      window.open(this.baseCertDownloadUrl + "/soft/download?pid="+this.pid+"&fileType="+id)
+      // softVerify.downloadSoftInfo(this.pid,id).then((res) => {
+      //   console.log(res.data);
+      // });
+>>>>>>> df2cd46 (new function)
     },
     deleteInfo(id) {
       softVerify.deleteSoftInfo(this.pid, id).then((res) => {
@@ -833,7 +1002,11 @@ export default {
             this.softFile[4].soft = ''
             break
           default:
+<<<<<<< HEAD
             break // 如果没有与表达式相同的值，则执行该代码
+=======
+            break; // 如果没有与表达式相同的值，则执行该代码
+>>>>>>> df2cd46 (new function)
         }
       })
     },
