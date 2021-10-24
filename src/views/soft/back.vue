@@ -193,7 +193,7 @@ export default {
     return {
       fileList: [],
       tableData: [{}],
-      baseCertDownloadUrl: 'http://localhost:8080/zipSoftDownload?pid=',
+      baseCertDownloadUrl: process.env.VUE_APP_BASE_API,
       dialogVisible: false,
       saveBtnDisabled: false, // 保存按钮是否禁用
       downloadPassWord: '',
