@@ -18,7 +18,7 @@
       label-width="100px"
       class="demo-ruleForm"
     >
-      <el-divider />
+      <!-- <el-divider /> -->
       <el-card>
         <div slot="header" class="clearfix">
           <span>基本信息</span>
@@ -44,7 +44,7 @@
           <el-col :span="12"><div class="grid-content" /></el-col>
         </el-row>
       </el-card>
-      <el-divider />
+      <!-- <el-divider /> -->
 
       <el-card>
         <div slot="header">
@@ -101,8 +101,8 @@
           </el-row>
         </el-form>
       </el-card>
-      <el-divider />
-
+      <!-- <el-divider />s -->
+<div class="cardcss">
       <el-card>
         <div slot="header" class="clearfix">
           <span>上传文件信息</span>
@@ -186,7 +186,6 @@
           </el-form-item>
 
           <div>
-            <el-divider />
             <el-form-item label="文件1" :rules="rules" :required="true">
               <el-row :gutter="20">
                 <el-col :span="5">
@@ -407,7 +406,7 @@
           </el-form-item>
         </el-card>
       </el-card>
-
+</div>
       <el-divider />
       <el-button :disabled="saveBtnDisabled" type="primary" @click="storeInfo()"
         >保存</el-button
@@ -802,7 +801,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .inline-border {
   border-style: solid;
   border-width: 1px;
@@ -838,5 +837,14 @@ export default {
 }
 .el-form-item__label {
   width: 120px;
+}
+.cardcss .el-card /deep/.el-card__body{
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+/deep/.el-row[data-v-41871d6e] {
+    margin-bottom: 0px;
 }
 </style>
