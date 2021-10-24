@@ -10,12 +10,11 @@
       <el-step title="归档" />
       <el-step title="浏览" />
     </el-steps>
-
     <el-form
       ref="softInfo"
-      :model="softInfo"
       :rules="rules"
-      label-width="100px"
+      :model="softInfo"
+      label-width="80px"
       class="demo-ruleForm"
     >
       <!-- <el-divider /> -->
@@ -26,8 +25,8 @@
         <el-row>
           <el-col :span="12">
             <div class="grid-content">
-              <el-form-item label="单位名称" prop="softName">
-                <el-input v-model="softInfo.softName" />
+              <el-form-item label="单位名称" prop="comName">
+                <el-input v-model="softInfo.comName" />
               </el-form-item>
             </div>
           </el-col>
@@ -36,7 +35,7 @@
         <el-row>
           <el-col :span="12">
             <div class="grid-content">
-              <el-form-item label="项目名称" prop="softName">
+              <el-form-item label="项目名称" prop="proName">
                 <el-input v-model="softInfo.proName" />
               </el-form-item>
             </div>
@@ -132,7 +131,7 @@
                   <el-upload
                     class="upload-demo"
                     :action="
-                      BASE_API + '/soft/upload?pid=' + pid + '&fileType=0'
+                      BASE_API + '/soft/upload?pid=' + this.pid + '&fileType=0'
                     "
                     :show-file-list="false"
                     :on-preview="handlePreview0"
@@ -196,7 +195,7 @@
                     <el-upload
                       class="upload-demo"
                       :action="
-                        BASE_API + '/soft/upload?pid=' + pid + '&fileType=1'
+                        BASE_API + '/soft/upload?pid=' + this.pid + '&fileType=1'
                       "
                       :show-file-list="false"
                       :on-preview="handlePreview1"
@@ -247,7 +246,7 @@
                     <el-upload
                       class="upload-demo"
                       :action="
-                        BASE_API + '/soft/upload?pid=' + pid + '&fileType=2'
+                        BASE_API + '/soft/upload?pid=' + this.pid + '&fileType=2'
                       "
                       :show-file-list="false"
                       :before-upload="onBeforeUpload3"
@@ -298,7 +297,7 @@
                     <el-upload
                       class="upload-demo"
                       :action="
-                        BASE_API + '/soft/upload?pid=' + pid + '&fileType=3'
+                        BASE_API + '/soft/upload?pid=' + this.pid + '&fileType=3'
                       "
                       :before-upload="onBeforeUpload4"
                       :show-file-list="false"
@@ -364,7 +363,7 @@
                   <el-upload
                     class="upload-demo"
                     :action="
-                      BASE_API + '/soft/upload?pid=' + pid + '&fileType=4'
+                      BASE_API + '/soft/upload?pid=' + this.pid + '&fileType=4'
                     "
                     :before-upload="onBeforeUpload5"
                     :show-file-list="false"
@@ -463,7 +462,6 @@ export default {
       ],
       saveBtnDisabled: true, // 保存按钮是否禁用
       BASE_API: process.env.VUE_APP_BASE_API, // 接口API地址
-      tableData: [{}],
       saveBtnDisabled: false, // 保存按钮是否禁用
       softInfo: {
         comName: "",
@@ -471,6 +469,7 @@ export default {
         proName: "",
         uploadPassword: "",
         checkPass: "",
+        fileUploadVoList: ''
       },
       ruleForm: {
         pass: "",
@@ -479,10 +478,10 @@ export default {
         uploadFile: "",
       },
       rules: {
-        softName: [
+        comName: [
           { required: true, message: "请输入软件名称", trigger: "blur" },
         ],
-        softDesc: [
+        proName: [
           { required: true, message: "请输入软件描述", trigger: "blur" },
         ],
         userName: [
@@ -506,17 +505,17 @@ export default {
     };
   },
   created() {
-    console.log("info created");
-    console.log(this.$route.params.id == null);
     // 获取路由id值
     if (this.$route.params && this.$route.params.id) {
-      this.softInfo.pid = this.$route.params.id;
-      console.log("这是路由后面的id" + this.softInfo.pid);
+      this.pid = this.$route.params.id;
+      console.log("redirect : "+this.pid)
+      this.getData()
+      
+      console.log("这是路由后面的id" + this.pid);
     } else {
       this.getRandomCode();
-    }
 
-    // console.log(this.softInfo.pid)
+    }
   },
   methods: {
     onBeforeUpload1(file) {
@@ -584,50 +583,11 @@ export default {
       }
       return flag;
     },
-    // handleCreate() {
-    //   this.softFile[0].soft = file.name
-    //   console.log('error0')
-    //   if (this.fileCompare()) {
-    //     this.softname1 = file.name
-    //   } else {
-    //     this.softFile[0].soft = null
-    //   }
-    // },
-    // handleCreate1() {
-    //   this.softFile[1].soft = file.name
-    //   if (this.fileCompare()) {
-    //     this.softname2 = file.name
-    //   } else {
-    //     this.softFile[1].soft = null
-    //   }
-    // },
-    // handleCreate2() {
-    //   this.softFile[2].soft = file.name
-    //   if (this.fileCompare()) {
-    //     this.softname3 = file.name
-    //   } else {
-    //     this.softFile[2].soft = null
-    //   }
-    // },
-    // handleCreate3() {
-    //   this.softFile[3].soft = file.name
-    //   if (this.fileCompare()) {
-    //     this.softname4 = file.name
-    //   } else {
-    //     this.softFile[3].soft = null
-    //   }
-    // },
-    // handleCreate4() {
-    //   this.softFile[4].soft = file.name
-    //   if (this.fileCompare()) {
-    //     this.softname5 = file.name
-    //   } else {
-    //     this.softFile[4].soft = null
-    //   }
-    // },
+  
     getRandomCode() {
-      this.softInfo.pid = uuidv1(); // 获取随机id
-      console.log(this.softInfo.pid, " this.Id 11111");
+      this.pid = uuidv1(); // 获取随机id
+      this.softInfo.pid = this.pid;
+      console.log(this.pid, " this.Id 11111");
     },
     fileCompare() {
       var i = 0;
@@ -743,13 +703,44 @@ export default {
       this.softname5 = file.name;
       console.log(this.softname);
     },
-
-    // 根据软件信息id查询
-    getSoftInfo() {
-      soft.getSoft(this.softId).then((response) => {
-        this.softInfo = response.data.softInfo;
-      });
+    getData() {
+      
+      softVerify.getSoftInfo(this.pid).then(res => {
+        console.log("这是传回来的数据"+res)
+        this.softInfo = res.data.softInfo
+        console.log(this.softInfo)
+        console.log("这是文件的类型：  "+this.softInfo.fileUploadVoList[0].fileName)
+        for(var i=0 ; i<this.softInfo.fileUploadVoList.length ; i++) {
+          if(JSON.stringify(this.softInfo.fileUploadVoList[i].fileType) == JSON.stringify(0)){
+            this.softname1 = this.softInfo.fileUploadVoList[i].fileName;
+            this.softFile[0].soft = this.softname1;
+          }
+          if(JSON.stringify(this.softInfo.fileUploadVoList[i].fileType) == JSON.stringify(1)){
+            this.softname2 = this.softInfo.fileUploadVoList[i].fileName;
+            this.softFile[1].soft = this.softname2;
+          }
+          if(JSON.stringify(this.softInfo.fileUploadVoList[i].fileType) == JSON.stringify(2)){
+            this.softname3 = this.softInfo.fileUploadVoList[i].fileName;
+            this.softFile[2].soft = this.softname3;
+          }
+          if(JSON.stringify(this.softInfo.fileUploadVoList[i].fileType) == JSON.stringify(3)){
+            this.softname4 = this.softInfo.fileUploadVoList[i].fileName;
+            this.softFile[3].soft = this.softname4;
+          }
+          if(JSON.stringify(this.softInfo.fileUploadVoList[i].fileType) == JSON.stringify(4)){
+            this.softname5 = this.softInfo.fileUploadVoList[i].fileName;
+            this.softFile[4].soft = this.softname5;
+          }
+        }
+      })
     },
+    // // 根据软件信息id查询
+    // getSoftInfo() {
+    //   soft.getSoft(this.softId).then((response) => {
+        
+    //     this.softInfo = response.data.softInfo;
+    //   });
+    // },
     // 添加软件信息
     addSoftInfo() {
       soft.addSoft(this.softInfo).then((response) => {
@@ -777,24 +768,31 @@ export default {
     },
     // 跳转
     storeInfo() {
+      console.log("storeInfo " + this.softInfo.proName)
       this.actionMethod(this.softInfo);
+      // this.$router.push({ path: '/soft/info/' + this.pid })
+      
       this.$router.replace({
         name: "SoftInfoEdit",
-        params: { id: this.softInfo.pid },
+        params: { id: this.pid },
       });
+      
     },
     next() {
       this.actionMethod(this.softInfo);
       this.$router.push({
         name: "SoftInfoBack",
-        params: { id: this.softInfo.pid },
+        params: { id: this.pid },
       });
     },
     actionMethod(data) {
-      if (this.$route.params.id == null) {
-        softVerify.insert(data).then((res) => {});
+      if (this.$route.params && this.$route.params.id) {
+        softVerify.update(data).then((res) => {
+          console.log(res.data)});
       } else {
-        softVerify.update(data).then((res) => {});
+        softVerify.insert(data).then((res) => {
+          console.log(res.data)
+        });
       }
     },
   },

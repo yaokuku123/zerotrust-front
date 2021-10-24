@@ -4,16 +4,16 @@ export default {
   // 获取当前系统中存在的软件交易信息
   insert(data) {
     return request({
-      url: '/soft/updateInfo',
+      url: '/soft/insertInfo',
       method: 'post',
       data: data
     })
   },
-  update(data) {
+  update(softInfoVo) {
     return request({
       url: '/soft/updateInfo',
       method: 'post',
-      data: data
+      data: softInfoVo
     })
   },
   getSoftInfo(pid) {
