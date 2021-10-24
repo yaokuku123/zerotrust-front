@@ -45,8 +45,8 @@ export default {
       method: 'post',
       data: softInfo
     })
-  }
-  ,deleteSoftInfo(pid,fileType){
+  },
+  deleteSoftInfo(pid,fileType){
     return request({
       url: '/soft/deleteFile',
       method: 'get',
