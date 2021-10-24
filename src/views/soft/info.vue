@@ -140,7 +140,6 @@
                       :on-preview="handlePreview0"
                       :before-upload="onBeforeUpload1"
                       :on-success="handSuccess"
-                      
                       :file-list="fileList"
                     >
                       <el-button
@@ -160,6 +159,7 @@
                       style="margin-left: -3px"
                       type="primary"
                       icon="el-icon-edit"
+                      @click="downloadInfo(0)"
                       >下 载</el-button
                     >
                     <el-button
@@ -167,7 +167,7 @@
                       style="margin-left: 17px"
                       type="primary"
                       icon="el-icon-delete"
-                      @click="softname1 = ''"
+                      @click="deleteInfo(0)"
                       >删 除</el-button
                     >
                   </div>
@@ -207,7 +207,6 @@
                         :on-preview="handlePreview1"
                         :before-upload="onBeforeUpload2"
                         :on-success="handSucess2"
-                        
                         :file-list="fileList"
                       >
                         <el-button
@@ -227,6 +226,7 @@
                         style="margin-left: -3px"
                         type="primary"
                         icon="el-icon-edit"
+                        @click="downloadInfo(1)"
                         >下 载</el-button
                       >
                       <el-button
@@ -234,7 +234,7 @@
                         style="margin-left: 17px"
                         type="primary"
                         icon="el-icon-delete"
-                        @click="softname2 = ''"
+                        @click="deleteInfo(1)"
                         >删 除</el-button
                       >
                     </div>
@@ -261,7 +261,6 @@
                         :before-upload="onBeforeUpload3"
                         :on-preview="handlePreview2"
                         :on-success="handSucess3"
-                        
                         :file-list="fileList"
                       >
                         <el-button
@@ -281,6 +280,7 @@
                         style="margin-left: -3px"
                         type="primary"
                         icon="el-icon-edit"
+                        @click="downloadInfo(2)"
                         >下 载</el-button
                       >
                       <el-button
@@ -288,7 +288,7 @@
                         style="margin-left: 17px"
                         type="primary"
                         icon="el-icon-delete"
-                        @click="softname3 = ''"
+                        @click="deleteInfo(2)"
                         >删 除</el-button
                       >
                     </div>
@@ -315,7 +315,6 @@
                         :show-file-list="false"
                         :on-preview="handlePreview3"
                         :on-success="handSucess4"
-                        
                         :file-list="fileList"
                       >
                         <el-button
@@ -335,6 +334,7 @@
                         style="margin-left: -3px"
                         type="primary"
                         icon="el-icon-edit"
+                        @click="downloadInfo(3)"
                         >下 载</el-button
                       >
                       <el-button
@@ -342,7 +342,7 @@
                         style="margin-left: 17px"
                         type="primary"
                         icon="el-icon-delete"
-                        @click="softname4 = ''"
+                        @click="deleteInfo(3)"
                         >删 除</el-button
                       >
                     </div>
@@ -384,7 +384,6 @@
                       :show-file-list="false"
                       :on-preview="handlePreview4"
                       :on-success="handSucess5"
-                      
                       :file-list="fileList"
                     >
                       <el-button
@@ -404,6 +403,7 @@
                       style="margin-left: -3px"
                       type="primary"
                       icon="el-icon-edit"
+                      @click="downloadInfo(4)"
                       >下 载</el-button
                     >
                     <el-button
@@ -411,7 +411,7 @@
                       style="margin-left: 17px"
                       type="primary"
                       icon="el-icon-delete"
-                      @click="softname5 = ''"
+                      @click="deleteInfo(4)"
                       >删 除</el-button
                     >
                   </div>
@@ -721,10 +721,12 @@ export default {
       softVerify.getSoftInfo(this.pid).then((res) => {
         console.log("这是传回来的数据" + res);
         this.softInfo = res.data.softInfo;
-        console.log(this.softInfo);
-        console.log(
-          "这是文件的类型：  " + this.softInfo.fileUploadVoList[0].fileName
-        );
+        if (JSON.stringify(this.softInfo.status) == JSON.stringify(2)) {
+          this.$router.push({
+            name: "SoftInfoBack",
+            params: { id: this.pid },
+          });
+        }
         for (var i = 0; i < this.softInfo.fileUploadVoList.length; i++) {
           if (
             JSON.stringify(this.softInfo.fileUploadVoList[i].fileType) ==
@@ -807,8 +809,42 @@ export default {
             name: "SoftInfoBack",
             params: { id: this.pid },
           });
-        }else{
-          alert('文件不匹配')
+        } else {
+          alert("文件不匹配");
+        }
+      });
+    },
+    downloadInfo(id) {
+      softVerify.downloadSoftInfo(this.pid,id).then((res) => {
+        console.log(res.data);
+      });
+    },
+    deleteInfo(id) {
+      softVerify.deleteSoftInfo(this.pid, id).then((res) => {
+        console.log("删除成功了吗" + res.data);
+        switch (id) {
+          case 0:
+            this.softname1 = ""; // 当表达式的结果等于 value1 时，则执行该代码
+            this.softFile[0].soft = "";
+            break;
+          case 1:
+            this.softname2 = ""; // 当表达式的结果等于 value2 时，则执行该代码
+            this.softFile[1].soft = "";
+            break;
+          case 2:
+            this.softname3 = ""; // 当表达式的结果等于 valueN 时，则执行该代码
+            this.softFile[2].soft = "";
+            break;
+          case 3:
+            this.softname4 = ""; // 当表达式的结果等于 valueN 时，则执行该代码
+            this.softFile[3].soft = "";
+            break;
+          case 4:
+            this.softname5 = ""; // 当表达式的结果等于 valueN 时，则执行该代码
+            this.softFile[4].soft = "";
+            break;
+          default:
+            break; // 如果没有与表达式相同的值，则执行该代码
         }
       });
     },

@@ -32,5 +32,25 @@ export default {
       data: softInfo
     })
   }
+  ,deleteSoftInfo(pid,fileType){
+    return request({
+      url: '/soft/deleteFile',
+      method: 'get',
+      params: {
+        pid: pid,
+        fileType:fileType
+      }
+    })
+  },
+  downloadSoftInfo(pid,fileType){
+    return request({
+      url: '/soft/download',
+      method: 'get',
+      params: {
+        pid: pid,
+        fileType:fileType
+      }
+    })
+  }
 
 }
