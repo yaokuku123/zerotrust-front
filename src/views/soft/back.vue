@@ -48,7 +48,11 @@
       <el-divider />
       <el-card>
         <div slot="header" class="clearfix">
-          <span>上传文件信息</span>
+
+          <el-form-item label="上传文件信息">
+            <el-button type="text" @click="dialogVisible = true">下载软件压缩包</el-button>
+          </el-form-item>
+
         </div>
         <el-card shadow="never">
           <el-form-item
@@ -161,6 +165,22 @@
       >下一步
       </el-button>
     </el-form>
+
+    <el-dialog
+      title="提示"
+      :visible.sync="dialogVisible"
+      width="30%"
+      :before-close="handleClose"
+    >
+      <span>
+        请输入注册软件时输入的密码<el-input v-model="downloadPassWord" type="text" />
+      </span>
+
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="checkPass">验证密码</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -170,38 +190,13 @@ import softVerify from '@/api/soft/soft-verify'
 
 export default {
   data() {
-    var validatePass = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请输入密码'))
-      } else {
-        if (this.ruleForm.checkPass !== '') {
-          this.$refs.ruleForm.validateField('checkPass')
-        }
-        callback()
-      }
-    }
-    var validatePass2 = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请再次输入密码'))
-      } else if (value !== this.ruleForm.pass) {
-        callback(new Error('两次输入密码不一致!'))
-      } else {
-        callback()
-      }
-    }
     return {
-      fileList: [
-        {
-          name: 'food.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-        },
-        {
-          name: 'food2.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-        }
-      ],
+      fileList: [],
       tableData: [{}],
+      baseCertDownloadUrl: 'http://localhost:8080/zipSoftDownload?pid=',
+      dialogVisible: false,
       saveBtnDisabled: false, // 保存按钮是否禁用
+      downloadPassWord: '',
       softInfo: {
         comName: '',
         pid: '',
@@ -216,6 +211,11 @@ export default {
         file2: '',
         file3: '',
         file4: ''
+      },
+      passCheckRes: '',
+      check: {
+        pid: '',
+        password: ''
       },
       ruleForm: {
         pass: '',
@@ -235,14 +235,6 @@ export default {
         ],
         phoneNum: [
           { required: true, message: '请输入手机号', trigger: 'blur' }
-        ],
-        pass: [
-          { validator: validatePass, trigger: 'blur' },
-          { required: true, message: '请输入密码', trigger: 'blur' }
-        ],
-        checkPass: [
-          { validator: validatePass2, trigger: 'blur' },
-          { required: true, trigger: 'blur' }
         ]
       },
       Id: ''
@@ -251,47 +243,27 @@ export default {
   created() {
     console.log('info created')
     this.pid = this.$route.params.id
-    console.log(this.softInfo.pid)
     // 获取路由id值
-    this.getData(this.pid)
+    this.getData()
   },
   methods: {
     getData() {
-      console.log('hello')
       softVerify.getSoftInfo(this.pid).then(res => {
         this.softInfo = res.data.softInfo
         this.tableData = this.softInfo.fileUploadVoList
-        console.log(res)
         this.fileUploadVoList.file0 = this.tableData[0].fileName
         this.fileUploadVoList.file1 = this.tableData[1].fileName
         this.fileUploadVoList.file2 = this.tableData[2].fileName
         this.fileUploadVoList.file3 = this.tableData[3].fileName
         this.fileUploadVoList.file4 = this.tableData[4].fileName
-
-        console.log(this.fileUploadVoList)
       })
     },
     getRandomCode() {
       this.Id = uuidv1() // 获取随机id
-      console.log(this.Id, ' this.Id 11111')
-    },
-    handleRemove(file, fileList) {
-      console.log(file, fileList)
-    },
-    handlePreview(file) {
-      console.log(file)
-    },
-    handleExceed(files, fileList) {
-      this.$message.warning(
-        `当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${
-          files.length + fileList.length
-        } 个文件`
-      )
     },
     beforeRemove(file, fileList) {
       return this.$confirm(`确定移除 ${file.name}？`)
     },
-
     // 根据软件信息id查询
     getSoftInfo() {
       soft.getSoft(this.softId).then((response) => {
@@ -299,35 +271,24 @@ export default {
         this.fileUploadVoList = this.softInfo.fileUploadVoList
       })
     },
-    // 添加软件信息
-    addSoftInfo() {
-      soft.addSoft(this.softInfo).then((response) => {
-        // 请求成功
-        // 提示
-        this.$message({
-          type: 'success',
-          message: '添加软件信息成功!'
-        })
-        // 跳转到第二步，response接口返回的数据
-        this.$router.push({ path: '/soft/upload/' + response.data.id })
-      })
-    },
-    // 修改软件信息
-    updateSoftInfo() {
-      soft.updateSoft(this.softId, this.softInfo).then((response) => {
-        // 提示
-        this.$message({
-          type: 'success',
-          message: '修改软件信息成功!'
-        })
-        // 跳转到第二步
-        this.$router.push({ path: '/soft/upload/' + this.softId })
-      })
-    },
     // 跳转
     next() {
-        this.$router.push({ path: '/soft/list/' })
-      console.log('next')
+      this.$router.push({ path: '/soft/list/' })
+    },
+    handleClose(done) {
+      this.$confirm('确认关闭？')
+        .then(_ => {
+          done()
+        })
+        .catch(_ => {})
+    },
+    checkPass() {
+      this.check.pid = this.softInfo.pid
+      this.check.password = this.downloadPassWord
+      softVerify.fetchCheckPass(this.check).then(res => {
+        // this.dialogValue.innerVisible = res.data.result
+        if (res.data.result == true) window.open(this.baseCertDownloadUrl + this.pid)
+      })
     }
   }
 }

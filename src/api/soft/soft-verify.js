@@ -24,5 +24,19 @@ export default {
         pid: pid
       }
     })
+  },
+  fetchZipWithPass(data) {
+    return request({
+      url: '/soft/getInfo',
+      method: 'post',
+      data: data
+    })
+  },
+  fetchCheckPass(data) {
+    return request({
+      url: '/check',
+      method: 'post',
+      data: data
+    })
   }
 }
