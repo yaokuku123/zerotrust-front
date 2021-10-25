@@ -285,11 +285,48 @@ export default {
       softVerify.getSoftInfo(this.pid).then(res => {
         this.softInfo = res.data.softInfo
         this.tableData = this.softInfo.fileUploadVoList
-        this.fileUploadVoList.file0 = this.tableData[0].fileName
-        this.fileUploadVoList.file1 = this.tableData[1].fileName
-        this.fileUploadVoList.file2 = this.tableData[2].fileName
-        this.fileUploadVoList.file3 = this.tableData[3].fileName
-        this.fileUploadVoList.file4 = this.tableData[4].fileName
+        for (var i = 0; i < this.softInfo.fileUploadVoList.length; i++) {
+          if (
+            JSON.stringify(this.softInfo.fileUploadVoList[i].fileType) ==
+            JSON.stringify(0)
+          ) {
+            this.fileUploadVoList.file0 = this.softInfo.fileUploadVoList[i].fileName;
+        
+          }
+          if (
+            JSON.stringify(this.softInfo.fileUploadVoList[i].fileType) ==
+            JSON.stringify(1)
+          ) {
+            this.fileUploadVoList.file1 = this.softInfo.fileUploadVoList[i].fileName;
+           
+          }
+          if (
+            JSON.stringify(this.softInfo.fileUploadVoList[i].fileType) ==
+            JSON.stringify(2)
+          ) {
+            this.fileUploadVoList.file2 = this.softInfo.fileUploadVoList[i].fileName;
+            
+          }
+          if (
+            JSON.stringify(this.softInfo.fileUploadVoList[i].fileType) ==
+            JSON.stringify(3)
+          ) {
+            this.fileUploadVoList.file3 = this.softInfo.fileUploadVoList[i].fileName;
+            
+          }
+          if (
+            JSON.stringify(this.softInfo.fileUploadVoList[i].fileType) ==
+            JSON.stringify(4)
+          ) {
+            this.fileUploadVoList.file4 = this.softInfo.fileUploadVoList[i].fileName;
+            
+          }
+        }
+        // this.fileUploadVoList.file0 = this.tableData[0].fileName
+        // this.fileUploadVoList.file1 = this.tableData[1].fileName
+        // this.fileUploadVoList.file2 = this.tableData[2].fileName
+        // this.fileUploadVoList.file3 = this.tableData[3].fileName
+        // this.fileUploadVoList.file4 = this.tableData[4].fileName
       })
     },
     getRandomCode() {
