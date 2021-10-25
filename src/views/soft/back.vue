@@ -28,7 +28,9 @@
           <el-col :span="12">
             <div class="grid-content" style="margin-bottom: -20px">
               <el-form-item label="单位名称" prop="softName">
+                <div class="inputDeep">
                 <el-input v-model="softInfo.comName" disabled />
+                </div>
               </el-form-item>
             </div>
           </el-col>
@@ -38,7 +40,9 @@
           <el-col :span="12">
             <div class="grid-content" style="margin-bottom: -60px">
               <el-form-item label="项目名称" prop="softName">
+                <div class="inputDeep">
                 <el-input v-model="softInfo.proName" disabled />
+                </div>
               </el-form-item>
             </div>
           </el-col>
@@ -73,7 +77,9 @@
               >
                 <el-row :gutter="20">
                   <el-col :span="8">
+                    <div class="inputDeep">
                     <el-input v-model="fileUploadVoList.file0"  disabled />
+                    </div>
                   </el-col>
                 </el-row>
               </el-form-item>
@@ -86,28 +92,36 @@
                 :required="true"
                 label-width="135px"
               >
+              <div class="inputDeep">
                 <el-input v-show="false" v-model="ruleForm.uploadFile.fileName" disabled />
+              </div>
               </el-form-item>
 
               <div>
                 <el-form-item label="文件1" :rules="rules" :required="true">
                   <el-row :gutter="20">
                     <el-col :span="8">
+                      <div class="inputDeep">
                       <el-input v-model="fileUploadVoList.file1"  disabled />
+                      </div>
                     </el-col>
                   </el-row>
                 </el-form-item>
                 <el-form-item label="文件2" :rules="rules">
                   <el-row :gutter="20">
                     <el-col :span="8">
+                      <div class="inputDeep">
                       <el-input v-model="fileUploadVoList.file2"  disabled />
+                      </div>
                     </el-col>
                   </el-row>
                 </el-form-item>
                 <el-form-item label="文件3" :rules="rules">
                   <el-row :gutter="20">
                     <el-col :span="8">
+                      <div class="inputDeep">
                       <el-input v-model="fileUploadVoList.file3"  disabled />
+                      </div>
                     </el-col>
                   </el-row>
                 </el-form-item>
@@ -128,7 +142,9 @@
               <el-form-item label="配置文件" :rules="rules">
                 <el-row :gutter="20">
                   <el-col :span="8">
+                    <div class="inputDeep">
                     <el-input v-model="fileUploadVoList.file4"  disabled />
+                    </div>
                   </el-col>
                 </el-row>
               </el-form-item>
@@ -154,7 +170,9 @@
               <el-form-item label="核验码" :rules="rules">
                 <el-row :gutter="20">
                   <el-col :span="8">
+                    <div class="inputDeep">
                     <el-input v-model="softInfo.verificationCode"  disabled />
+                    </div>
                   </el-col>
                   <el-col :span="11">
                     <div class="right-items" style="float: left">
@@ -362,5 +380,9 @@ export default {
 
 .inputcss .el-form-item /deep/ .el-form-item__content{
   height: 20px;
+}
+.inputDeep >>> .el-input__inner {
+  background-color: #ffffff;
+  color: black;
 }
 </style>
