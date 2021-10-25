@@ -366,7 +366,6 @@
             <el-form-item
               label="系统配置文件"
               :rules="rules"
-              :required="true"
               label-width="135px"
             >
               <el-input v-show="false" v-model="ruleForm.uploadFile" />
