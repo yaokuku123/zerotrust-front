@@ -69,15 +69,79 @@ export const constantRoutes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard',
+    redirect: '/soft',
     children: [
       {
-        path: 'dashboard',
-        component: () => import('@/views/dashboard/index'),
-        name: 'Dashboard',
-        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+        path: 'list',
+        component: () => import('@/views/soft/list'),
+        name: 'SoftList',
+        meta: { title: '软件列表', affix: true }
+      },
+      {
+        path: 'info',
+        name: 'SoftInfo',
+        component: () => import('@/views/soft/info'),
+        meta: { title: '注册软件' }
+      },
+      {
+        path: 'info/:id',
+        name: 'SoftInfoEdit',
+        component: () => import('@/views/soft/info'),
+        meta: { title: '编辑软件' },
+        hidden: true // 不在侧边栏显示
+      },
+      {
+        path: 'back/:id',
+        name: 'SoftInfoBack',
+        component: () => import('@/views/soft/back'),
+        meta: { title: '归档' },
+        hidden: true
+
+      },
+      {
+        path: 'upload/:id',
+        name: 'SoftUpload',
+        component: () => import('@/views/soft/upload'),
+        meta: { title: '软件上传', noCache: true },
+        hidden: true
+      },
+      {
+        path: 'publish/:id',
+        name: 'SoftPublish',
+        component: () => import('@/views/soft/publish'),
+        meta: { title: '发布软件', noCache: true },
+        hidden: true
+      },
+      {
+        path: 'detail/:id',
+        name: 'SoftDetail',
+        component: () => import('@/views/soft/detail'),
+        meta: { title: '软件详情', noCache: true },
+        hidden: true
+      },
+      {
+        path: 'verify',
+        name: 'VerifyPge',
+        component: () => import('@/views/soft/verify'),
+        meta: { title: '审核软件', noCache: true },
+        hidden: true
+      },
+      {
+        path: 'verifyList/:status',
+        name: 'SpecificAppPage',
+        component: () => import('@/views/soft/verifyList'),
+        meta: { title: '软件审核界面', noCache: true },
+        hidden: true
       }
     ]
+    // children: [
+    //   {
+    //     path: 'dashboard',
+    //     component: () => import('@/views/dashboard/index'),
+    //     name: 'Dashboard',
+    //     meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+    //   }
+    // ]
   },
   {
     path: '/soft',
