@@ -720,34 +720,54 @@ export default {
     },
     // 提交文件成功
     handSuccess(res, file) {
-      alert("上传成功");
+      // alert("上传成功");
+      this.$message({
+        message: "上传成功",
+        type: "success",
+      });
       console.log(res);
       this.saveBtnDisabled = false;
       this.softname1 = file.name;
     },
     handSucess2(res, file) {
-      alert("上传成功");
+      // alert("上传成功");
+      this.$message({
+        message: "上传成功",
+        type: "success",
+      });
       console.log(res);
       this.saveBtnDisabled = false;
       this.softname2 = file.name;
       console.log(this.softname);
     },
     handSucess3(res, file) {
-      alert("上传成功");
+      // alert("上传成功");
+      this.$message({
+        message: "上传成功",
+        type: "success",
+      });
       console.log(res);
       this.saveBtnDisabled = false;
       this.softname3 = file.name;
       console.log(this.softname);
     },
     handSucess4(res, file) {
-      alert("上传成功");
+      // alert("上传成功");
+      this.$message({
+        message: "上传成功",
+        type: "success",
+      });
       console.log(res);
       this.saveBtnDisabled = false;
       this.softname4 = file.name;
       console.log(this.softname);
     },
     handSucess5(res, file) {
-      alert("上传成功");
+      // alert("上传成功");
+      this.$message({
+        message: "上传成功",
+        type: "success",
+      });
       console.log(res);
       this.saveBtnDisabled = false;
       this.softname5 = file.name;
@@ -831,6 +851,10 @@ export default {
       if (this.softInfo.checkPass == "") {
         alert("请输入密码再上传或者保存");
       } else {
+        this.$message({
+          message: "保存成功",
+          type: "success",
+        });
         console.log("storeInfo " + this.softInfo.proName);
         this.actionMethod(this.softInfo);
         // this.$router.push({ path: '/soft/info/' + this.pid })
