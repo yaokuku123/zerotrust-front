@@ -20,8 +20,10 @@
     <!-- 表格 -->
     <el-table :data="softList" stripe style="width: 100%">
       <el-table-column label="编号" type="index" width="80" /> 
-      <el-table-column prop="proName" label="项目名称" width="300" />
-      <el-table-column prop="comName" label="单位名称" width="300" />
+      <el-table-column prop="project" label="项目信息" width="150" />
+      <el-table-column prop="sysId" label="业务id" width="150" />
+      <el-table-column prop="appliedinst" label="申报单位" width="150" />
+      <el-table-column prop="developinst" label="建设单位" width="150" />
       <el-table-column prop="verificationCode" label="核验码" width="380" />
       <el-table-column prop="pid" label="证书编号" width="480" />
       <el-table-column fixed="right" label="操作" >
@@ -93,13 +95,11 @@ export default {
     }
   },
   created() {
-    console.log('info created')
     this.getListData()
   },
   methods: {
     getListData(){
       softVerify.getfileList().then(res => {
-        console.log(res)
         this.softList = res.data.softInfo
       })
     },
@@ -112,13 +112,6 @@ export default {
         this.baseCertDownloadUrl + "/excel" 
       );
     }
-    // getSoft() {
-    //   soft.getSoftList().then((response) => {
-    //     // 请求成功
-    //     // response接口返回的数据
-    //     this.softList = response.data.softInfo
-    //   })
-    // }
   }
 }
 </script>

@@ -509,14 +509,7 @@ export default {
       saveBtnDisabled: true, // 保存按钮是否禁用
       BASE_API: process.env.VUE_APP_BASE_API, // 接口API地址
       saveBtnDisabled: false, // 保存按钮是否禁用
-      softInfo: {
-        comName: "",
-        pid: "",
-        proName: "",
-        uploadPassword: "",
-        checkPass: "",
-        fileUploadVoList: "",
-      },
+      softInfo: {},
       ruleForm: {
         pass: "",
         checkPass: "",
@@ -554,13 +547,8 @@ export default {
     // 获取路由id值
     if (this.$route.params && this.$route.params.id) {
       this.pid = this.$route.params.id;
-      console.log("redirect : " + this.pid);
       this.getData();
-
-      console.log("这是路由后面的id" + this.pid);
-    } else {
-      this.getRandomCode();
-    }
+    } 
   },
   methods: {
     onBeforeUpload1(file) {
@@ -629,18 +617,6 @@ export default {
     },
     onBeforeUpload5(file) {
       console.log(file);
-
-      // const fileSuffix = file.name.substring(file.name.lastIndexOf('.') + 1)
-
-      // const whiteList = ['cnf', 'conf', 'cfg', 'cg', 'ini', 'xml', 'project', 'classpath', 'make', 'config']
-      // console.log('BAKA')
-      // if (whiteList.indexOf(fileSuffix) == -1) {
-      //   console.log(fileSuffix)
-      //   alert('上传文件只能是 cnf、conf、cfg、cg、ini、xml、project、classpath、make、config格式')
-      //   flag = false
-      //   return flag
-      // }
-
       this.softFile[4].soft = file.name;
       console.log("error0");
       var flag = this.fileCompare();
@@ -793,9 +769,9 @@ export default {
       this.softname5 = file.name;
       console.log(this.softname);
     },
+    //根据pid获取状态为1的数据回显
     getData() {
       softVerify.getSoftInfo(this.pid).then((res) => {
-        console.log("这是传回来的数据" + res);
         this.softInfo = res.data.softInfo;
         if (JSON.stringify(this.softInfo.status) == JSON.stringify(2)) {
           this.$router.push({
@@ -842,60 +818,27 @@ export default {
         }
       });
     },
-    addSoftInfo() {
-      soft.addSoft(this.softInfo).then((response) => {
-        // 请求成功
-        // 提示
-        this.$message({
-          type: "success",
-          message: "添加软件信息成功!",
-        });
-        // 跳转到第二步，response接口返回的数据
-        this.$router.push({ path: "/soft/upload/" + response.data.id });
-      });
-    },
-    // 修改软件信息
-    updateSoftInfo() {
-      soft.updateSoft(this.softId, this.softInfo).then((response) => {
-        // 提示
-        this.$message({
-          type: "success",
-          message: "修改软件信息成功!",
-        });
-        // 跳转到第二步
-        this.$router.push({ path: "/soft/upload/" + this.softId });
-      });
-    },
     // 跳转
     storeInfo() {
       if (this.softInfo.checkPass == "") {
         alert("请输入密码再上传或者保存");
       } else {
-        this.$message({
-          message: "保存成功",
-          type: "success",
+        softVerify.update(this.softInfo).then((res) => {
+          this.$message({
+            message: "保存成功",
+            type: "success",
+          });
         });
-        console.log("storeInfo " + this.softInfo.proName);
-        this.actionMethod(this.softInfo);
-        // this.$router.push({ path: '/soft/info/' + this.pid })
         this.$router.replace({
           name: "SoftInfoEdit",
           params: { id: this.pid },
         });
       }
-      // console.log("storeInfo " + this.softInfo.proName);
-      // this.actionMethod(this.softInfo);
-      // // this.$router.push({ path: '/soft/info/' + this.pid })
-      // this.$router.replace({
-      //   name: "SoftInfoEdit",
-      //   params: { id: this.pid },
-      // });
     },
     submitInfo(data) {
       var that = this;
       softVerify.submitSoftInfo(data).then((res) => {
         if (res.data.flag) {
-          console.log(that.pid);
           softVerify.getcheck(that.pid).then((subRes) => {
             this.$router.push({
               name: "SoftInfoBack",
@@ -953,24 +896,8 @@ export default {
       } else {
         this.submitInfo(this.softInfo);
       }
-      // this.submitInfo(this.softInfo);
-      // this.$router.push({
-      //   name: "SoftInfoBack",
-      //   params: { id: this.pid },
-      // });
-    },
-    actionMethod(data) {
-      if (this.$route.params && this.$route.params.id) {
-        softVerify.update(data).then((res) => {
-          console.log(res.data);
-        });
-      } else {
-        softVerify.insert(data).then((res) => {
-          console.log(res.data);
-        });
-      }
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -26,11 +26,9 @@
         </div>
         <el-row>
           <el-col :span="12">
-            <div class="grid-content" style="margin-bottom: -20px">
-              <el-form-item label="单位名称" prop="softName">
-                <div class="inputDeep">
-                <el-input v-model="softInfo.comName" disabled />
-                </div>
+            <div class="grid-content">
+              <el-form-item label="项目信息" prop="project">
+                <el-input v-model="softInfo.project" />
               </el-form-item>
             </div>
           </el-col>
@@ -38,11 +36,29 @@
         </el-row>
         <el-row>
           <el-col :span="12">
-            <div class="grid-content" style="margin-bottom: -60px">
-              <el-form-item label="项目名称" prop="softName">
-                <div class="inputDeep">
-                <el-input v-model="softInfo.proName" disabled />
-                </div>
+            <div class="grid-content">
+              <el-form-item label="业务id" prop="sysId">
+                <el-input v-model="softInfo.sysId" />
+              </el-form-item>
+            </div>
+          </el-col>
+          <el-col :span="12"><div class="grid-content" /></el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="12">
+            <div class="grid-content">
+              <el-form-item label="申报单位" prop="appliedinst">
+                <el-input v-model="softInfo.appliedinst" />
+              </el-form-item>
+            </div>
+          </el-col>
+          <el-col :span="12"><div class="grid-content" /></el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="12">
+            <div class="grid-content">
+              <el-form-item label="建设单位" prop="developinst">
+                <el-input v-model="softInfo.developinst" />
               </el-form-item>
             </div>
           </el-col>
@@ -230,15 +246,7 @@ export default {
       dialogVisible: false,
       saveBtnDisabled: false, // 保存按钮是否禁用
       downloadPassWord: '',
-      softInfo: {
-        comName: '',
-        pid: '',
-        proName: '',
-        verificationCode: '',
-        uploadPassword: '',
-        checkPass: '',
-        fileUploadVoList: ''
-      },
+      softInfo: {},
       fileUploadVoList: {
         file0: '',
         file1: '',
@@ -275,7 +283,6 @@ export default {
     }
   },
   created() {
-    console.log('info created')
     this.pid = this.$route.params.id
     // 获取路由id值
     this.getData()
@@ -322,25 +329,10 @@ export default {
             
           }
         }
-        // this.fileUploadVoList.file0 = this.tableData[0].fileName
-        // this.fileUploadVoList.file1 = this.tableData[1].fileName
-        // this.fileUploadVoList.file2 = this.tableData[2].fileName
-        // this.fileUploadVoList.file3 = this.tableData[3].fileName
-        // this.fileUploadVoList.file4 = this.tableData[4].fileName
       })
-    },
-    getRandomCode() {
-      this.Id = uuidv1() // 获取随机id
     },
     beforeRemove(file, fileList) {
       return this.$confirm(`确定移除 ${file.name}？`)
-    },
-    // 根据软件信息id查询
-    getSoftInfo() {
-      soft.getSoft(this.softId).then((response) => {
-        this.softInfo = response.data.softInfo
-        this.fileUploadVoList = this.softInfo.fileUploadVoList
-      })
     },
     // 跳转
     next() {
@@ -357,7 +349,6 @@ export default {
       this.check.pid = this.softInfo.pid
       this.check.password = this.downloadPassWord
       softVerify.fetchCheckPass(this.check).then(res => {
-        // this.dialogValue.innerVisible = res.data.result
         if (res.data.result == true) window.open(this.baseCertDownloadUrl + '/zipSoftDownload?pid=' + this.pid)
       })
     },
