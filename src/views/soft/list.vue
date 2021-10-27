@@ -39,7 +39,6 @@
   </div>
 </template>
 <script>
-import soft from '@/api/soft/soft-info'
 import softVerify from '@/api/soft/soft-verify'
 
 export default {
@@ -95,11 +94,20 @@ export default {
     }
   },
   created() {
-    this.getListData()
+    if (this.$route.params && this.$route.params.id) {
+        this.getListDataByDevelopinst(this.$route.params.id)
+    } else {
+        this.getListData()
+    }
   },
   methods: {
     getListData(){
       softVerify.getfileList().then(res => {
+        this.softList = res.data.softInfo
+      })
+    },
+    getListDataByDevelopinst(developinst){
+      softVerify.getFileListByDevelopinst(developinst).then(res => {
         this.softList = res.data.softInfo
       })
     },

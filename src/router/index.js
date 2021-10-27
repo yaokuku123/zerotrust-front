@@ -86,18 +86,29 @@ export const constantRoutes = [
     redirect: '/soft/info',
     name: 'Soft',
     meta: { title: '软件注册模块', icon: 'form' },
+
     children: [
       {
         path: 'list',
         component: () => import('@/views/soft/list'),
         name: 'SoftList',
-        meta: { title: '软件列表', affix: true }
+        meta: { title: '软件列表', affix: true },
+
+      },
+      {
+        path: 'list/:id',
+        name: 'listByDevelopinst',
+        component: () => import('@/views/soft/list'),
+        name: 'SoftListByDevelopinst',
+        meta: { title: '软件列表根据建设单位获取', affix: true },
+        hidden: true // 不在侧边栏显示
       },
       {
         path: 'info',
         name: 'SoftInfo',
         component: () => import('@/views/soft/info'),
-        meta: { title: '注册软件' }
+        meta: { title: '注册软件' },
+  
       },
       {
         path: 'info/:id',

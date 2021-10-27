@@ -80,6 +80,15 @@ export default {
       url: '/fileInfos',
       method: 'get',
     })
+  },
+  getFileListByDevelopinst(developinst){
+    return request({
+      url: '/uploadInfo',
+      method: 'get',
+      params: {
+        developinst: developinst
+      }
+    })
   }
 
 }
