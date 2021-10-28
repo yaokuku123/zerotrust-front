@@ -206,7 +206,7 @@
               label-width="135px"
             >
               <el-input v-show="false" v-model="ruleForm.uploadFile" />
-              (上传个数至少1个，至多3个，且文件必须在清单文件中。）
+              (上传个数至少1个，至多3个，每个文件不超过200MB且文件必须在清单文件中。）
             </el-form-item>
 
             <div>
@@ -563,6 +563,11 @@ export default {
         flag = false;
         return flag;
       }
+   
+      if (file.size / 1024 / 1024 > 200) {
+        this.$message.error("上传软件大小超过200MB!");
+        return flase;
+      }
 
       this.softFile[0].soft = file.name;
       var flag = false;
@@ -577,10 +582,16 @@ export default {
       return flag;
     },
     onBeforeUpload2(file) {
+      if (file.size / 1024 / 1024 > 200) {
+        this.$message.error("上传软件大小超过200MB!");
+        return flase;
+      }
       console.log(file);
       this.softFile[1].soft = file.name;
       console.log("error0");
       var flag = this.fileCompare();
+
+      
       console.log(flag);
       if (flag) {
         this.softname2 = file.name;
@@ -590,6 +601,10 @@ export default {
       return flag;
     },
     onBeforeUpload3(file) {
+      if (file.size / 1024 / 1024 > 200) {
+        this.$message.error("上传软件大小超过200MB!");
+        return flase;
+      }
       console.log(file);
       this.softFile[2].soft = file.name;
       console.log("error0");
@@ -603,6 +618,10 @@ export default {
       return flag;
     },
     onBeforeUpload4(file) {
+      if (file.size / 1024 / 1024 > 200) {
+        this.$message.error("上传软件大小超过200MB!");
+        return flase;
+      }
       console.log(file);
       this.softFile[3].soft = file.name;
       console.log("error0");
@@ -616,6 +635,10 @@ export default {
       return flag;
     },
     onBeforeUpload5(file) {
+      if (file.size / 1024 / 1024 > 200) {
+        this.$message.error("上传软件大小超过200MB!");
+        return flase;
+      }
       console.log(file);
       this.softFile[4].soft = file.name;
       console.log("error0");
