@@ -354,7 +354,7 @@ export default {
         this.$router.push({ path: '/soft/list/' })
       }else{
         console.log('这是back页面的id'+this.$route.params.id)
-              this.$router.push({ path: '/soft/list/'+this.$route.params.id})
+        this.$router.push({ path: '/soft/list/'+this.softInfo.developinst})
       }
     },
     handleClose(done) {
