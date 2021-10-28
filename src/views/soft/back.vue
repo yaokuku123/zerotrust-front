@@ -350,7 +350,12 @@ export default {
     },
     // 跳转
     next() {
-      this.$router.push({ path: '/soft/list/' })
+      if(this.$route.query&&this.$route.query.uid ==2){
+        this.$router.push({ path: '/soft/list/' })
+      }else{
+        console.log('这是back页面的id'+this.$route.params.id)
+              this.$router.push({ path: '/soft/list/'+this.$route.params.id})
+      }
     },
     handleClose(done) {
       this.$confirm('确认关闭？')
