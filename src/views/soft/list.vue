@@ -127,7 +127,11 @@ export default {
       }
     },
     exportExcel() {
-      window.open(this.baseCertDownloadUrl + "/excel");
+      if(this.$route.params && this.$route.params.id) {
+        window.open(this.baseCertDownloadUrl + "/excel/"+this.$route.params.id);
+      } else {
+        window.open(this.baseCertDownloadUrl + "/excel");
+      }
     },
   },
 };
