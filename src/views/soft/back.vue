@@ -28,7 +28,9 @@
           <el-col :span="12">
             <div class="grid-content">
               <el-form-item label="项目信息" prop="project">
-                <el-input v-model="softInfo.project" />
+                <div class="inputDeep">
+                <el-input disabled v-model="softInfo.project" />
+                </div>
               </el-form-item>
             </div>
           </el-col>
@@ -38,7 +40,9 @@
           <el-col :span="12">
             <div class="grid-content">
               <el-form-item label="业务id" prop="sysId">
-                <el-input v-model="softInfo.sysId" />
+                <div class="inputDeep">
+                <el-input disabled v-model="softInfo.sysId" />
+                </div>
               </el-form-item>
             </div>
           </el-col>
@@ -48,7 +52,9 @@
           <el-col :span="12">
             <div class="grid-content">
               <el-form-item label="申报单位" prop="appliedinst">
-                <el-input v-model="softInfo.appliedinst" />
+                <div class="inputDeep">
+                <el-input disabled v-model="softInfo.appliedinst" />
+                </div>
               </el-form-item>
             </div>
           </el-col>
@@ -58,7 +64,9 @@
           <el-col :span="12">
             <div class="grid-content">
               <el-form-item label="建设单位" prop="developinst">
-                <el-input v-model="softInfo.developinst" />
+                <div class="inputDeep">
+                <el-input disabled v-model="softInfo.developinst" />
+                </div>
               </el-form-item>
             </div>
           </el-col>
