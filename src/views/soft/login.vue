@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import { validUsername } from "@/utils/validate";
+import softVerify from "@/api/soft/soft-verify";
 import SocialSign from "@/views/login/components/SocialSignin.vue";
 
 export default {
@@ -104,10 +104,7 @@ export default {
       //   }
     };
     return {
-      loginForm: {
-        username: "admin",
-        password: "111111",
-      },
+      loginForm: {},
       loginRules: {
         username: [
           { required: true, trigger: "blur", validator: validateUsername },
@@ -152,16 +149,19 @@ export default {
       });
     },
     handleLogin() {
-      if (1 == 1) {
-        this.loading = true;
-        this.$router.push({
-          name: "SoftList",
-          query: { uid: 2 },
-        });
-      } else {
-        console.log("error submit!!");
-        return false;
-      }
+      this.loginForm.role = this.$route.params.id
+      softVerify.login(this.loginForm).then(res => {
+        if (res.data.flag == true) {
+          this.loading = true;
+          this.$router.push({
+            name: "SoftList"
+          });
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      })
+      
     },
   },
 };
