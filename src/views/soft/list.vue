@@ -94,6 +94,8 @@ export default {
     }
   },
   created() {
+    let uid = this.$route.query.uid;
+    console.log("zheshiuid"+uid)
     if (this.$route.params && this.$route.params.id) {
         this.getListDataByDevelopinst(this.$route.params.id)
     } else {

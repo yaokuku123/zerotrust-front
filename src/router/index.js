@@ -104,6 +104,13 @@ export const constantRoutes = [
         hidden: true // 不在侧边栏显示
       },
       {
+        path:'userlogin/:id',
+        component:() => import('@/views/soft/login'),
+        name:'Userlogin',
+        meta: { title: '登陆界面', affix: true },
+        hidden: true // 不在侧边栏显示
+      },
+      {
         path: 'info',
         name: 'SoftInfo',
         component: () => import('@/views/soft/info'),
