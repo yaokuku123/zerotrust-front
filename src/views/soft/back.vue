@@ -218,7 +218,7 @@
         :disabled="saveBtnDisabled"
         type="primary"
         @click="next()"
-      >下一步
+      >{{buttonMessage}}
       </el-button>
     </el-form>
 
@@ -247,6 +247,7 @@ import softVerify from '@/api/soft/soft-verify'
 export default {
   data() {
     return {
+      buttonMessage:'下一步',
       pid:'',
       fileList: [],
       tableData: [{}],
@@ -291,6 +292,11 @@ export default {
     }
   },
   created() {
+    let uid = this.$route.query.uid;
+    console.log("zheshiuid"+uid)
+    if(uid ==2){
+      this.buttonMessage='返回'
+    }
     this.pid = this.$route.params.id
     // 获取路由id值
     this.getData()
