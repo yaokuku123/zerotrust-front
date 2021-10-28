@@ -89,6 +89,13 @@ export default {
         developinst: developinst
       }
     })
+  },
+  login(userVo){
+    return request({
+      url: '/user/login',
+      method: 'post',
+      data: userVo
+    })
   }
 
 }
