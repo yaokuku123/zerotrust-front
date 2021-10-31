@@ -72,6 +72,7 @@
               <password-strength
                 v-model="softInfo.uploadPassword"
                 style="padding-top: 10px; width: 200px"
+                ref='mode'
               />
             </el-form-item>
           </el-row>
@@ -87,6 +88,7 @@
                   v-model="softInfo.checkPass"
                   placeholder="请输入密码"
                   show-password
+                  @change="onPassChange"
                 />
               </el-form-item>
             </el-col>
@@ -432,6 +434,7 @@
         </el-card>
       </div>
       <el-divider />
+
       <el-button :disabled="saveBtnDisabled" type="primary" @click="storeInfo()"
         >保存</el-button
       >
@@ -528,6 +531,7 @@ export default {
       },
       pid: "",
       fileList: [],
+      mode: ""
     };
   },
   created() {
@@ -544,93 +548,121 @@ export default {
   },
   methods: {
     onBeforeUpload1(file) {
-      console.log(file);
+      if (this.preView(file)) {
 
-      const fileSuffix = file.name.substring(file.name.lastIndexOf(".") + 1);
+        console.log(file);
+        const fileSuffix = file.name.substring(file.name.lastIndexOf(".") + 1);
+        const whiteList = ["txt"];
+        console.log("BAKA");
+        if (whiteList.indexOf(fileSuffix) == -1) {
+          alert("上传文件只能是 txt 格式");
+          flag = false;
+          return flag;
+        }
 
-      const whiteList = ["txt"];
-      console.log("BAKA");
-      if (whiteList.indexOf(fileSuffix) == -1) {
-        alert("上传文件只能是 txt 格式");
-        flag = false;
-        return flag;
-      }
-
-      this.softFile[0].soft = file.name;
-      var flag = false;
-      flag = this.fileCompare();
-      console.log("this.compare" + flag);
-      if (flag) {
-        this.softname1 = file.name;
+        this.softFile[0].soft = file.name;
+        var flag = false;
+        flag = this.fileCompare();
+        console.log("this.compare" + flag);
+        if (flag) {
+          this.softname1 = file.name;
+        } else {
+          this.softFile[0].soft = "";
+        }
       } else {
-        this.softFile[0].soft = "";
+        alert("上传文件不能为空且上传文件需小于200M")
+        flag = false
       }
+
+      console.log(flag)
 
       return flag;
     },
     onBeforeUpload2(file) {
-      console.log(file);
-      this.softFile[1].soft = file.name;
-      console.log("error0");
-      var flag = this.fileCompare();
-      console.log(flag);
-      if (flag) {
-        this.softname2 = file.name;
+      if (this.preView(file)) {
+        console.log(file);
+        this.softFile[1].soft = file.name;
+        console.log("error0");
+        var flag = this.fileCompare();
+        console.log(flag);
+        if (flag) {
+          this.softname2 = file.name;
+        } else {
+          this.softFile[1].soft = "";
+        }
       } else {
-        this.softFile[1].soft = "";
+        alert("上传文件不能为空且上传文件需小于200M")
+        flag = false
       }
+
       return flag;
     },
     onBeforeUpload3(file) {
-      console.log(file);
-      this.softFile[2].soft = file.name;
-      console.log("error0");
-      var flag = this.fileCompare();
-      console.log(flag);
-      if (flag) {
-        this.softname3 = file.name;
+
+      if (this.preView(file)) {
+        console.log(file);
+        this.softFile[2].soft = file.name;
+        console.log("error0");
+        var flag = this.fileCompare();
+        console.log(flag);
+        if (flag) {
+          this.softname3 = file.name;
+        } else {
+          this.softFile[2].soft = "";
+        }
       } else {
-        this.softFile[2].soft = "";
+        alert("上传文件不能为空且上传文件需小于200M")
+        flag = false
       }
+
       return flag;
     },
     onBeforeUpload4(file) {
-      console.log(file);
-      this.softFile[3].soft = file.name;
-      console.log("error0");
-      var flag = this.fileCompare();
-      console.log(flag);
-      if (flag) {
-        this.softname4 = file.name;
+
+      if (this.preView(file)) {
+        console.log(file);
+        this.softFile[3].soft = file.name;
+        console.log("error0");
+        var flag = this.fileCompare();
+        console.log(flag);
+        if (flag) {
+          this.softname4 = file.name;
+        } else {
+          this.softFile[3].soft = "";
+        }
       } else {
-        this.softFile[3].soft = "";
+        alert("上传文件不能为空且上传文件需小于200M")
+        flag = false
       }
+
       return flag;
     },
     onBeforeUpload5(file) {
       console.log(file);
 
-      // const fileSuffix = file.name.substring(file.name.lastIndexOf('.') + 1)
-
-      // const whiteList = ['cnf', 'conf', 'cfg', 'cg', 'ini', 'xml', 'project', 'classpath', 'make', 'config']
-      // console.log('BAKA')
-      // if (whiteList.indexOf(fileSuffix) == -1) {
-      //   console.log(fileSuffix)
-      //   alert('上传文件只能是 cnf、conf、cfg、cg、ini、xml、project、classpath、make、config格式')
-      //   flag = false
-      //   return flag
-      // }
-
-      this.softFile[4].soft = file.name;
-      console.log("error0");
-      var flag = this.fileCompare();
-      console.log(flag);
-      if (flag) {
-        this.softname5 = file.name;
+      if (this.preView(file)) {
+        this.softFile[4].soft = file.name;
+        console.log("error0");
+        var flag = this.fileCompare();
+        console.log(flag);
+        if (flag) {
+          this.softname5 = file.name;
+        } else {
+          this.softFile[4].soft = "";
+        }
       } else {
-        this.softFile[4].soft = "";
+        alert("上传文件不能为空且上传文件需小于200M")
+        flag = false
       }
 
+      return flag;
+    },
+
+    preView(file) {
+      const flag = file.size / 1024 / 1024 < 200 && file.size / 1024 > 0;
+      if (!flag) {
+        this.$message.error("上传软件大小范围 0K～200MB!");
+      }
       return flag;
     },
 
@@ -925,12 +957,29 @@ export default {
         }
       });
     },
+    onPassChange() {
+      this.mode = this.$refs.mode.mode
+      console.log(this.$refs.mode.mode)
+    },
     next() {
+      let flag = true
+      if (this.softInfo.comName == "" || this.softInfo.proName == "") {
+        flag = false
+        alert("请输入项目名称或者单位名称");
+      }
       if (this.softInfo.checkPass == "") {
+        flag = false
         alert("请输入密码再上传或者保存");
-      } else if (this.softname2 == "") {
+      }
+      if (this.mode <= 3) {
+        flag = false
+        alert("请增强密码强度");
+      }
+      if (this.softname2 == "") {
+        flag = false
         alert("缺少必须上传的核心文件1");
-      } else {
+      }
+      if (flag == true) {
         this.submitInfo(this.softInfo);
       }
       // this.submitInfo(this.softInfo);

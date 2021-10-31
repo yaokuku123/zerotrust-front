@@ -38,6 +38,7 @@ export default {
       onePercentage: 0,
       twoPercentage: 0,
       ThreePercentage: 0,
+      mode: '',
       oneCustomColors: [
         { color: '#f56c6c', percentage: 100 }
       ],
@@ -51,9 +52,9 @@ export default {
   },
   watch: {
     password(newValue) {
-      const mode = this.checkPasswordStrength(newValue)
+      this.mode = this.checkPasswordStrength(newValue)
       // 逻辑处理
-      switch (mode) {
+      switch (this.mode) {
         // 初始化状态
         case 0:
           this.content = ''
