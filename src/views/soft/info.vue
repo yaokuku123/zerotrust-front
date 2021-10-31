@@ -1,136 +1,137 @@
 <template>
-  <div class="app-container">
-    <el-steps
-      :active="1"
-      process-status="wait"
-      align-center
-      style="margin-bottom: 40px"
-    >
-      <el-step title="上传" />
-      <el-step title="归档" />
-      <el-step title="浏览" />
-    </el-steps>
-    <el-form
-      ref="softInfo"
-      :rules="rules"
-      :model="softInfo"
-      label-width="80px"
-      class="demo-ruleForm"
-    >
-      <!-- <el-divider /> -->
-      <el-card>
-        <div slot="header" class="clearfix">
-          <span>基本信息</span>
-        </div>
-        <el-row>
-          <el-col :span="12">
-            <div class="grid-content">
-              <el-form-item label="单位名称" prop="comName">
-                <el-input v-model="softInfo.comName" />
-              </el-form-item>
-            </div>
-          </el-col>
-          <el-col :span="12"><div class="grid-content" /></el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="12">
-            <div class="grid-content">
-              <el-form-item label="项目名称" prop="proName">
-                <el-input v-model="softInfo.proName" />
-              </el-form-item>
-            </div>
-          </el-col>
-          <el-col :span="12"><div class="grid-content" /></el-col>
-        </el-row>
-      </el-card>
-      <!-- <el-divider /> -->
-
-      <el-card>
-        <div slot="header">
-          <span>填写密码</span>
-        </div>
-
-        <el-form ref="ruleForm" :model="softInfo" :rules="rules" :inline="true">
-          <el-row>
-            <el-col :span="5">
-              <el-form-item
-                label="输入密码"
-                label-width="80px"
-                prop="uploadPassword"
-              >
-                <el-input
-                  v-model="softInfo.uploadPassword"
-                  placeholder="请输入密码"
-                  show-password
-                />
-              </el-form-item>
-            </el-col>
-
-            <el-form-item
-              style="display: inline-block; width: 300px; margin-bottom: -200px"
-            >
-              <password-strength
-                v-model="softInfo.uploadPassword"
-                style="padding-top: 10px; width: 200px"
-                ref='mode'
-              />
-            </el-form-item>
-          </el-row>
-
-          <el-row>
-            <el-col :span="4">
-              <el-form-item
-                label="确认密码"
-                label-width="80px"
-                prop="checkPass"
-              >
-                <el-input
-                  v-model="softInfo.checkPass"
-                  placeholder="请输入密码"
-                  show-password
-                  @change="onPassChange"
-                />
-              </el-form-item>
-            </el-col>
-            <el-form-item style="padding-top: -20px">
-              <el-alert
-                title="密码需要包含数字、小写字母、大写字母以及特殊字符"
-                type="warning"
-                :closable="false"
-              />
-            </el-form-item>
-          </el-row>
-        </el-form>
-      </el-card>
-      <!-- <el-divider />s -->
-      <div class="cardcss">
+  <el-form v-loading="this.loading">
+    <div class="app-container">
+      <el-steps
+        :active="1"
+        process-status="wait"
+        align-center
+        style="margin-bottom: 40px"
+      >
+        <el-step title="上传" />
+        <el-step title="归档" />
+        <el-step title="浏览" />
+      </el-steps>
+      <el-form
+        ref="softInfo"
+        :rules="rules"
+        :model="softInfo"
+        label-width="80px"
+        class="demo-ruleForm"
+      >
+        <!-- <el-divider /> -->
         <el-card>
           <div slot="header" class="clearfix">
-            <span>上传文件信息</span>
+            <span>基本信息</span>
           </div>
-          <el-card shadow="never">
-            <el-form-item
-              label="核心文件清单（仅限txt）"
-              :rules="rules"
-              :required="true"
-              label-width="200px"
-            >
-              <a
-                href="static/核心文件目录生成方法.pdf"
-                style="color: #1890ff"
-                download="核心文件目录生成方法.pdf"
-                >下载说明书</a
-              >
-            </el-form-item>
+          <el-row>
+            <el-col :span="12">
+              <div class="grid-content">
+                <el-form-item label="单位名称" prop="comName">
+                  <el-input v-model="softInfo.comName" />
+                </el-form-item>
+              </div>
+            </el-col>
+            <el-col :span="12"><div class="grid-content" /></el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="12">
+              <div class="grid-content">
+                <el-form-item label="项目名称" prop="proName">
+                  <el-input v-model="softInfo.proName" />
+                </el-form-item>
+              </div>
+            </el-col>
+            <el-col :span="12"><div class="grid-content" /></el-col>
+          </el-row>
+        </el-card>
+        <!-- <el-divider /> -->
 
-            <el-form-item label="文件清单" :rules="rules">
-              <el-row :gutter="20">
-                <el-col :span="5">
-                  <div class="inputDeep">
-                    <el-input v-model="softname1" disabled />
-                  </div>
-                </el-col>
-                <el-col :span="1.2"
+        <el-card>
+          <div slot="header">
+            <span>填写密码</span>
+          </div>
+
+          <el-form ref="ruleForm" :model="softInfo" :rules="rules" :inline="true">
+            <el-row>
+              <el-col :span="5">
+                <el-form-item
+                  label="输入密码"
+                  label-width="80px"
+                  prop="uploadPassword"
+                >
+                  <el-input
+                    v-model="softInfo.uploadPassword"
+                    placeholder="请输入密码"
+                    show-password
+                  />
+                </el-form-item>
+              </el-col>
+
+              <el-form-item
+                style="display: inline-block; width: 300px; margin-bottom: -200px"
+              >
+                <password-strength
+                  v-model="softInfo.uploadPassword"
+                  style="padding-top: 10px; width: 200px"
+                  ref='mode'
+                />
+              </el-form-item>
+            </el-row>
+
+            <el-row>
+              <el-col :span="4">
+                <el-form-item
+                  label="确认密码"
+                  label-width="80px"
+                  prop="checkPass"
+                >
+                  <el-input
+                    v-model="softInfo.checkPass"
+                    placeholder="请输入密码"
+                    show-password
+                    @change="onPassChange"
+                  />
+                </el-form-item>
+              </el-col>
+              <el-form-item style="padding-top: -20px">
+                <el-alert
+                  title="密码需要包含数字、小写字母、大写字母以及特殊字符"
+                  type="warning"
+                  :closable="false"
+                />
+              </el-form-item>
+            </el-row>
+          </el-form>
+        </el-card>
+        <!-- <el-divider />s -->
+        <div class="cardcss">
+          <el-card>
+            <div slot="header" class="clearfix">
+              <span>上传文件信息</span>
+            </div>
+            <el-card shadow="never">
+              <el-form-item
+                label="核心文件清单（仅限txt）"
+                :rules="rules"
+                :required="true"
+                label-width="200px"
+              >
+                <a
+                  href="static/核心文件目录生成方法.pdf"
+                  style="color: #1890ff"
+                  download="核心文件目录生成方法.pdf"
+                >下载说明书</a
+                >
+              </el-form-item>
+
+              <el-form-item label="文件清单" :rules="rules">
+                <el-row :gutter="20">
+                  <el-col :span="5">
+                    <div class="inputDeep">
+                      <el-input v-model="softname1" disabled />
+                    </div>
+                  </el-col>
+                  <el-col :span="1.2"
                   ><div class="grid-content">
                     <el-upload
                       class="upload-demo"
@@ -151,56 +152,56 @@
                         style="margin-left: 10px"
                         type="primary"
                         icon="el-icon-upload"
-                        >上传</el-button
+                      >上传</el-button
                       >
                     </el-upload>
                   </div></el-col
-                >
-                <el-col :span="11">
-                  <div class="right-items" style="float: left">
-                    <el-button
-                      class="filter-item"
-                      style="margin-left: -3px"
-                      type="primary"
-                      icon="el-icon-edit"
-                      @click="downloadInfo(0)"
+                  >
+                  <el-col :span="11">
+                    <div class="right-items" style="float: left">
+                      <el-button
+                        class="filter-item"
+                        style="margin-left: -3px"
+                        type="primary"
+                        icon="el-icon-edit"
+                        @click="downloadInfo(0)"
                       >下 载</el-button
-                    >
-                    <el-button
-                      class="filter-item"
-                      style="margin-left: 17px"
-                      type="primary"
-                      icon="el-icon-delete"
-                      @click="deleteInfo(0)"
+                      >
+                      <el-button
+                        class="filter-item"
+                        style="margin-left: 17px"
+                        type="primary"
+                        icon="el-icon-delete"
+                        @click="deleteInfo(0)"
                       >删 除</el-button
-                    >
-                  </div>
-                </el-col>
-              </el-row>
-            </el-form-item>
-          </el-card>
-          <!-- 核心文件。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。-->
-          <el-card shadow="never">
-            <el-form-item
-              label="上传核心文件"
-              :rules="rules"
-              :required="true"
-              label-width="135px"
-            >
-              <el-input v-show="false" v-model="ruleForm.uploadFile" />
-              (上传个数至少1个，至多3个，且文件必须在清单文件中。）
-            </el-form-item>
-
-            <div>
-              <el-form-item label="文件1" :rules="rules" :required="true">
-                <el-row :gutter="20">
-                  <el-col :span="5">
-                    <div class="inputDeep">
-                      <el-input v-model="this.softname2" disabled />
+                      >
                     </div>
-                    <!-- <el-input v-model="this.softname2" disabled /> -->
                   </el-col>
-                  <el-col :span="1.2"
+                </el-row>
+              </el-form-item>
+            </el-card>
+            <!-- 核心文件。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。-->
+            <el-card shadow="never">
+              <el-form-item
+                label="上传核心文件"
+                :rules="rules"
+                :required="true"
+                label-width="135px"
+              >
+                <el-input v-show="false" v-model="ruleForm.uploadFile" />
+                (上传个数至少1个，至多3个，且文件必须在清单文件中。）
+              </el-form-item>
+
+              <div>
+                <el-form-item label="文件1" :rules="rules" :required="true">
+                  <el-row :gutter="20">
+                    <el-col :span="5">
+                      <div class="inputDeep">
+                        <el-input v-model="this.softname2" disabled />
+                      </div>
+                      <!-- <el-input v-model="this.softname2" disabled /> -->
+                    </el-col>
+                    <el-col :span="1.2"
                     ><div class="grid-content">
                       <el-upload
                         class="upload-demo"
@@ -221,42 +222,42 @@
                           style="margin-left: 10px"
                           type="primary"
                           icon="el-icon-upload"
-                          >上传</el-button
+                        >上传</el-button
                         >
                       </el-upload>
                     </div></el-col
-                  >
-                  <el-col :span="11">
-                    <div class="right-items" style="float: left">
-                      <el-button
-                        class="filter-item"
-                        style="margin-left: -3px"
-                        type="primary"
-                        icon="el-icon-edit"
-                        @click="downloadInfo(1)"
+                    >
+                    <el-col :span="11">
+                      <div class="right-items" style="float: left">
+                        <el-button
+                          class="filter-item"
+                          style="margin-left: -3px"
+                          type="primary"
+                          icon="el-icon-edit"
+                          @click="downloadInfo(1)"
                         >下 载</el-button
-                      >
-                      <el-button
-                        class="filter-item"
-                        style="margin-left: 17px"
-                        type="primary"
-                        icon="el-icon-delete"
-                        @click="deleteInfo(1)"
+                        >
+                        <el-button
+                          class="filter-item"
+                          style="margin-left: 17px"
+                          type="primary"
+                          icon="el-icon-delete"
+                          @click="deleteInfo(1)"
                         >删 除</el-button
-                      >
-                    </div>
-                  </el-col>
-                </el-row>
-              </el-form-item>
-              <el-divider />
-              <el-form-item label="文件2" :rules="rules">
-                <el-row :gutter="20">
-                  <el-col :span="5">
-                    <div class="inputDeep">
-                      <el-input v-model="this.softname3" disabled />
-                    </div>
-                  </el-col>
-                  <el-col :span="1.2"
+                        >
+                      </div>
+                    </el-col>
+                  </el-row>
+                </el-form-item>
+                <el-divider />
+                <el-form-item label="文件2" :rules="rules">
+                  <el-row :gutter="20">
+                    <el-col :span="5">
+                      <div class="inputDeep">
+                        <el-input v-model="this.softname3" disabled />
+                      </div>
+                    </el-col>
+                    <el-col :span="1.2"
                     ><div class="grid-content">
                       <el-upload
                         class="upload-demo"
@@ -277,42 +278,42 @@
                           style="margin-left: 10px"
                           type="primary"
                           icon="el-icon-upload"
-                          >上传</el-button
+                        >上传</el-button
                         >
                       </el-upload>
                     </div></el-col
-                  >
-                  <el-col :span="11">
-                    <div class="right-items" style="float: left">
-                      <el-button
-                        class="filter-item"
-                        style="margin-left: -3px"
-                        type="primary"
-                        icon="el-icon-edit"
-                        @click="downloadInfo(2)"
+                    >
+                    <el-col :span="11">
+                      <div class="right-items" style="float: left">
+                        <el-button
+                          class="filter-item"
+                          style="margin-left: -3px"
+                          type="primary"
+                          icon="el-icon-edit"
+                          @click="downloadInfo(2)"
                         >下 载</el-button
-                      >
-                      <el-button
-                        class="filter-item"
-                        style="margin-left: 17px"
-                        type="primary"
-                        icon="el-icon-delete"
-                        @click="deleteInfo(2)"
+                        >
+                        <el-button
+                          class="filter-item"
+                          style="margin-left: 17px"
+                          type="primary"
+                          icon="el-icon-delete"
+                          @click="deleteInfo(2)"
                         >删 除</el-button
-                      >
-                    </div>
-                  </el-col>
-                </el-row>
-              </el-form-item>
-              <el-divider />
-              <el-form-item label="文件3" :rules="rules">
-                <el-row :gutter="20">
-                  <el-col :span="5">
-                    <div class="inputDeep">
-                      <el-input v-model="softname4" disabled />
-                    </div>
-                  </el-col>
-                  <el-col :span="1.2"
+                        >
+                      </div>
+                    </el-col>
+                  </el-row>
+                </el-form-item>
+                <el-divider />
+                <el-form-item label="文件3" :rules="rules">
+                  <el-row :gutter="20">
+                    <el-col :span="5">
+                      <div class="inputDeep">
+                        <el-input v-model="softname4" disabled />
+                      </div>
+                    </el-col>
+                    <el-col :span="1.2"
                     ><div class="grid-content">
                       <el-upload
                         class="upload-demo"
@@ -333,56 +334,56 @@
                           style="margin-left: 10px"
                           type="primary"
                           icon="el-icon-upload"
-                          >上传</el-button
+                        >上传</el-button
                         >
                       </el-upload>
                     </div></el-col
-                  >
-                  <el-col :span="11">
-                    <div class="right-items" style="float: left">
-                      <el-button
-                        class="filter-item"
-                        style="margin-left: -3px"
-                        type="primary"
-                        icon="el-icon-edit"
-                        @click="downloadInfo(3)"
+                    >
+                    <el-col :span="11">
+                      <div class="right-items" style="float: left">
+                        <el-button
+                          class="filter-item"
+                          style="margin-left: -3px"
+                          type="primary"
+                          icon="el-icon-edit"
+                          @click="downloadInfo(3)"
                         >下 载</el-button
-                      >
-                      <el-button
-                        class="filter-item"
-                        style="margin-left: 17px"
-                        type="primary"
-                        icon="el-icon-delete"
-                        @click="deleteInfo(3)"
+                        >
+                        <el-button
+                          class="filter-item"
+                          style="margin-left: 17px"
+                          type="primary"
+                          icon="el-icon-delete"
+                          @click="deleteInfo(3)"
                         >删 除</el-button
-                      >
+                        >
+                      </div>
+                    </el-col>
+                  </el-row>
+                </el-form-item>
+              </div>
+            </el-card>
+            <!-- 核心文件。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。-->
+
+            <el-card shadow="never">
+              <el-form-item
+                label="系统配置文件"
+                :rules="rules"
+                label-width="135px"
+              >
+                <el-input v-show="false" v-model="ruleForm.uploadFile" />
+                （配置文件是指一种可为计算机程序配置参数和初始设置以及系统资源设定的格式化文档。)<br />
+                (常见配位文件具有.cnf、.conf、.cfg、.cg、.ini、.xml等文件扩展名，开发时使用的配置文件扩展名包括.project、.classpath、.make、.config等。）
+              </el-form-item>
+
+              <el-form-item label="配置文件" :rules="rules">
+                <el-row :gutter="20">
+                  <el-col :span="5">
+                    <div class="inputDeep">
+                      <el-input v-model="this.softname5" disabled />
                     </div>
                   </el-col>
-                </el-row>
-              </el-form-item>
-            </div>
-          </el-card>
-          <!-- 核心文件。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。-->
-
-          <el-card shadow="never">
-            <el-form-item
-              label="系统配置文件"
-              :rules="rules"
-              label-width="135px"
-            >
-              <el-input v-show="false" v-model="ruleForm.uploadFile" />
-              （配置文件是指一种可为计算机程序配置参数和初始设置以及系统资源设定的格式化文档。)<br />
-              (常见配位文件具有.cnf、.conf、.cfg、.cg、.ini、.xml等文件扩展名，开发时使用的配置文件扩展名包括.project、.classpath、.make、.config等。）
-            </el-form-item>
-
-            <el-form-item label="配置文件" :rules="rules">
-              <el-row :gutter="20">
-                <el-col :span="5">
-                  <div class="inputDeep">
-                    <el-input v-model="this.softname5" disabled />
-                  </div>
-                </el-col>
-                <el-col :span="1.2"
+                  <el-col :span="1.2"
                   ><div class="grid-content">
                     <el-upload
                       class="upload-demo"
@@ -403,46 +404,48 @@
                         style="margin-left: 10px"
                         type="primary"
                         icon="el-icon-upload"
-                        >上传</el-button
+                      >上传</el-button
                       >
                     </el-upload>
                   </div></el-col
-                >
-                <el-col :span="11">
-                  <div class="right-items" style="float: left">
-                    <el-button
-                      class="filter-item"
-                      style="margin-left: -3px"
-                      type="primary"
-                      icon="el-icon-edit"
-                      @click="downloadInfo(4)"
+                  >
+                  <el-col :span="11">
+                    <div class="right-items" style="float: left">
+                      <el-button
+                        class="filter-item"
+                        style="margin-left: -3px"
+                        type="primary"
+                        icon="el-icon-edit"
+                        @click="downloadInfo(4)"
                       >下 载</el-button
-                    >
-                    <el-button
-                      class="filter-item"
-                      style="margin-left: 17px"
-                      type="primary"
-                      icon="el-icon-delete"
-                      @click="deleteInfo(4)"
+                      >
+                      <el-button
+                        class="filter-item"
+                        style="margin-left: 17px"
+                        type="primary"
+                        icon="el-icon-delete"
+                        @click="deleteInfo(4)"
                       >删 除</el-button
-                    >
-                  </div>
-                </el-col>
-              </el-row>
-            </el-form-item>
+                      >
+                    </div>
+                  </el-col>
+                </el-row>
+              </el-form-item>
+            </el-card>
           </el-card>
-        </el-card>
-      </div>
-      <el-divider />
+        </div>
+        <el-divider />
 
-      <el-button :disabled="saveBtnDisabled" type="primary" @click="storeInfo()"
+        <el-button :disabled="saveBtnDisabled" type="primary" @click="storeInfo()"
         >保存</el-button
-      >
-      <el-button :disabled="saveBtnDisabled" type="primary" @click="next()"
+        >
+        <el-button :disabled="saveBtnDisabled" type="primary" @click="next()"
         >提交
-      </el-button>
-    </el-form>
-  </div>
+        </el-button>
+      </el-form>
+    </div>
+  </el-form>
+
 </template>
 <script>
 import soft from "@/api/soft/soft-info";
@@ -476,6 +479,7 @@ export default {
     };
     return {
       baseCertDownloadUrl: process.env.VUE_APP_BASE_API,
+      loading: false,
       softname: "",
       softname1: "",
       softname2: "",
@@ -904,11 +908,13 @@ export default {
       // });
     },
     submitInfo(data) {
+      this.loading = true
       var that = this;
       softVerify.submitSoftInfo(data).then((res) => {
         if (res.data.flag) {
           console.log(that.pid);
           softVerify.getcheck(that.pid).then((subRes) => {
+            this.loading = false
             this.$router.push({
               name: "SoftInfoBack",
               params: { id: that.pid },
@@ -962,6 +968,7 @@ export default {
       console.log(this.$refs.mode.mode)
     },
     next() {
+
       let flag = true
       if (this.softInfo.comName == "" || this.softInfo.proName == "") {
         flag = false
