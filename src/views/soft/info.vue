@@ -559,7 +559,8 @@ export default {
         const whiteList = ["txt"];
         console.log("BAKA");
         if (whiteList.indexOf(fileSuffix) == -1) {
-          alert("上传文件只能是 txt 格式");
+          // alert("上传文件只能是 txt 格式");
+          this.$message.error("上传文件只能是 txt 格式");
           flag = false;
           return flag;
         }
@@ -574,7 +575,7 @@ export default {
           this.softFile[0].soft = "";
         }
       } else {
-        alert("上传文件不能为空且上传文件需小于200M")
+        // alert("上传文件不能为空且上传文件需小于200M")
         flag = false
       }
 
@@ -595,7 +596,7 @@ export default {
           this.softFile[1].soft = "";
         }
       } else {
-        alert("上传文件不能为空且上传文件需小于200M")
+        // alert("上传文件不能为空且上传文件需小于200M")
         flag = false
       }
 
@@ -615,7 +616,7 @@ export default {
           this.softFile[2].soft = "";
         }
       } else {
-        alert("上传文件不能为空且上传文件需小于200M")
+        // alert("上传文件不能为空且上传文件需小于200M")
         flag = false
       }
 
@@ -635,7 +636,7 @@ export default {
           this.softFile[3].soft = "";
         }
       } else {
-        alert("上传文件不能为空且上传文件需小于200M")
+        // alert("上传文件不能为空且上传文件需小于200M")
         flag = false
       }
 
@@ -655,7 +656,7 @@ export default {
           this.softFile[4].soft = "";
         }
       } else {
-        alert("上传文件不能为空且上传文件需小于200M")
+        // alert("上传文件不能为空且上传文件需小于200M")
         flag = false
       }
 
@@ -685,7 +686,8 @@ export default {
         for (j; j < 5; j++) {
           if (this.softFile[j].soft == this.softFile[i].soft) {
             console.log("文件名j" + this.softFile[j].soft);
-            alert("文件重名！");
+            // alert("文件重名！");
+            this.$message.error("文件重名！");
             console.log("error1");
             return false;
           }
@@ -756,7 +758,6 @@ export default {
     },
     // 提交文件成功
     handSuccess(res, file) {
-      // alert("上传成功");
       this.$message({
         message: "上传成功",
         type: "success",
@@ -766,7 +767,6 @@ export default {
       this.softname1 = file.name;
     },
     handSucess2(res, file) {
-      // alert("上传成功");
       this.$message({
         message: "上传成功",
         type: "success",
@@ -777,7 +777,6 @@ export default {
       console.log(this.softname);
     },
     handSucess3(res, file) {
-      // alert("上传成功");
       this.$message({
         message: "上传成功",
         type: "success",
@@ -788,7 +787,6 @@ export default {
       console.log(this.softname);
     },
     handSucess4(res, file) {
-      // alert("上传成功");
       this.$message({
         message: "上传成功",
         type: "success",
@@ -799,7 +797,6 @@ export default {
       console.log(this.softname);
     },
     handSucess5(res, file) {
-      // alert("上传成功");
       this.$message({
         message: "上传成功",
         type: "success",
@@ -885,7 +882,8 @@ export default {
     // 跳转
     storeInfo() {
       if (this.softInfo.checkPass == "") {
-        alert("请输入密码再上传或者保存");
+        // alert("请输入密码再上传或者保存");
+        this.$message.error("请输入密码再上传或者保存");
       } else {
         this.$message({
           message: "保存成功",
@@ -893,19 +891,11 @@ export default {
         });
         console.log("storeInfo " + this.softInfo.proName);
         this.actionMethod(this.softInfo);
-        // this.$router.push({ path: '/soft/info/' + this.pid })
         this.$router.replace({
           name: "SoftInfoEdit",
           params: { id: this.pid },
         });
       }
-      // console.log("storeInfo " + this.softInfo.proName);
-      // this.actionMethod(this.softInfo);
-      // // this.$router.push({ path: '/soft/info/' + this.pid })
-      // this.$router.replace({
-      //   name: "SoftInfoEdit",
-      //   params: { id: this.pid },
-      // });
     },
     submitInfo(data) {
       this.loading = true
@@ -921,47 +911,89 @@ export default {
             });
           });
         } else {
-          alert("文件不匹配");
+          this.loading = false
+          // alert("文件不匹配");
+          this.$message.error("文件不匹配");
         }
       });
     },
     downloadInfo(id) {
-      window.open(
+      var flag = true
+      if(id == 0 && this.softname1 == "") {
+        flag = false;
+        this.$message.error("文件清单不存在");
+      } else if(id == 1 && this.softname2 == "") {
+        flag = false;
+        this.$message.error("核心文件1不存在");
+      } else if(id == 2 && this.softname3 == "") {
+        flag = false;
+        this.$message.error("核心文件2不存在");
+      } else if(id == 3 && this.softname4 == "") {
+        flag = false;
+        this.$message.error("核心文件3不存在");
+      } else if(id == 4 && this.softname5 == "") {
+        flag = false;
+        this.$message.error("配置文件不存在");
+      }
+
+      if(flag) {
+        window.open(
         this.baseCertDownloadUrl +
-          "/soft/download?pid=" +
-          this.pid +
-          "&fileType=" +
-          id
-      );
+            "/soft/download?pid=" +
+            this.pid +
+            "&fileType=" +
+            id
+        );
+      }
     },
     deleteInfo(id) {
-      softVerify.deleteSoftInfo(this.pid, id).then((res) => {
-        console.log("删除成功了吗" + res.data);
-        switch (id) {
-          case 0:
-            this.softname1 = ""; // 当表达式的结果等于 value1 时，则执行该代码
-            this.softFile[0].soft = "";
-            break;
-          case 1:
-            this.softname2 = ""; // 当表达式的结果等于 value2 时，则执行该代码
-            this.softFile[1].soft = "";
-            break;
-          case 2:
-            this.softname3 = ""; // 当表达式的结果等于 valueN 时，则执行该代码
-            this.softFile[2].soft = "";
-            break;
-          case 3:
-            this.softname4 = ""; // 当表达式的结果等于 valueN 时，则执行该代码
-            this.softFile[3].soft = "";
-            break;
-          case 4:
-            this.softname5 = ""; // 当表达式的结果等于 valueN 时，则执行该代码
-            this.softFile[4].soft = "";
-            break;
-          default:
-            break; // 如果没有与表达式相同的值，则执行该代码
-        }
-      });
+      var flag = true
+      if(id == 0 && this.softname1 == "") {
+        flag = false;
+        this.$message.error("文件清单不存在");
+      } else if(id == 1 && this.softname2 == "") {
+        flag = false;
+        this.$message.error("核心文件1不存在");
+      } else if(id == 2 && this.softname3 == "") {
+        flag = false;
+        this.$message.error("核心文件2不存在");
+      } else if(id == 3 && this.softname4 == "") {
+        flag = false;
+        this.$message.error("核心文件3不存在");
+      } else if(id == 4 && this.softname5 == "") {
+        flag = false;
+        this.$message.error("配置文件不存在");
+      }
+
+      if(flag) {
+          softVerify.deleteSoftInfo(this.pid, id).then((res) => {
+          console.log("删除成功了吗" + res.data);
+          switch (id) {
+            case 0:
+              this.softname1 = ""; // 当表达式的结果等于 value1 时，则执行该代码
+              this.softFile[0].soft = "";
+              break;
+            case 1:
+              this.softname2 = ""; // 当表达式的结果等于 value2 时，则执行该代码
+              this.softFile[1].soft = "";
+              break;
+            case 2:
+              this.softname3 = ""; // 当表达式的结果等于 valueN 时，则执行该代码
+              this.softFile[2].soft = "";
+              break;
+            case 3:
+              this.softname4 = ""; // 当表达式的结果等于 valueN 时，则执行该代码
+              this.softFile[3].soft = "";
+              break;
+            case 4:
+              this.softname5 = ""; // 当表达式的结果等于 valueN 时，则执行该代码
+              this.softFile[4].soft = "";
+              break;
+            default:
+              break; // 如果没有与表达式相同的值，则执行该代码
+          }
+        });
+      }
     },
     onPassChange() {
       this.mode = this.$refs.mode.mode
@@ -972,28 +1004,20 @@ export default {
       let flag = true
       if (this.softInfo.comName == "" || this.softInfo.proName == "") {
         flag = false
-        alert("请输入项目名称或者单位名称");
-      }
-      if (this.softInfo.checkPass == "") {
+        this.$message.error("请输入项目名称或者单位名称");
+      } else if (this.softInfo.checkPass == "") {
         flag = false
-        alert("请输入密码再上传或者保存");
-      }
-      if (this.mode <= 3) {
+        this.$message.error("请输入密码再上传或者保存");
+      } else if (this.mode <= 3) {
         flag = false
-        alert("请增强密码强度");
-      }
-      if (this.softname2 == "") {
+        this.$message.error("请增强密码强度");
+      } else if (this.softname2 == "") {
         flag = false
-        alert("缺少必须上传的核心文件1");
+        this.$message.error("缺少必须上传的核心文件1");
       }
       if (flag == true) {
         this.submitInfo(this.softInfo);
       }
-      // this.submitInfo(this.softInfo);
-      // this.$router.push({
-      //   name: "SoftInfoBack",
-      //   params: { id: this.pid },
-      // });
     },
     actionMethod(data) {
       if (this.$route.params && this.$route.params.id) {
