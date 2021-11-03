@@ -81,5 +81,5 @@ export default {
       method: 'get',
     })
   }
-
+  
 }

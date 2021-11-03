@@ -452,6 +452,7 @@ import soft from "@/api/soft/soft-info";
 import softVerify from "@/api/soft/soft-verify";
 import PasswordStrength from "@/views/soft/password/PasswordStrength";
 import uuidv1 from "uuid/v1";
+import $ from 'jquery'
 
 export default {
   components: {
@@ -564,7 +565,6 @@ export default {
           flag = false;
           return flag;
         }
-
         this.softFile[0].soft = file.name;
         var flag = false;
         flag = this.fileCompare();
@@ -579,9 +579,26 @@ export default {
         flag = false
       }
 
-      console.log(flag)
+      
+      if(flag) {
+        var suffix = file.name.substring(file.name.lastIndexOf(".") + 1);
+        file = new File([file],file.name.substring(0,file.name.lastIndexOf(".")))
+        var form = new FormData();
+        form.append("file", file);   
+        //1.创建ajax对象
+        var xhr = new XMLHttpRequest();
+        //2.初始化ajax对象
+        xhr.open("post",this.BASE_API + '/soft/upload?pid=' + this.pid + '&fileType=0' + "&suffix="+ suffix);
+        //3.发送请求
+        xhr.send(form);
+        //4.获取响应数据
+        xhr.onload =function(){
+            console.log(xhr.responseText);
+            console.log("success xhr");
+        }   
+      }
 
-      return flag;
+      return false;
     },
     onBeforeUpload2(file) {
       if (this.preView(file)) {
@@ -600,7 +617,25 @@ export default {
         flag = false
       }
 
-      return flag;
+      if(flag) {
+        var suffix = file.name.substring(file.name.lastIndexOf(".") + 1);
+        file = new File([file],file.name.substring(0,file.name.lastIndexOf(".")))
+        var form = new FormData();
+        form.append("file", file);   
+        //1.创建ajax对象
+        var xhr = new XMLHttpRequest();
+        //2.初始化ajax对象
+        xhr.open("post",this.BASE_API + '/soft/upload?pid=' + this.pid + '&fileType=1' + "&suffix=" + suffix);
+        //3.发送请求
+        xhr.send(form);
+        //4.获取响应数据
+        xhr.onload =function(){
+            console.log(xhr.responseText);
+            console.log("success xhr");
+        }   
+      }
+
+      return false;
     },
     onBeforeUpload3(file) {
 
@@ -620,7 +655,25 @@ export default {
         flag = false
       }
 
-      return flag;
+      if(flag) {
+        var suffix = file.name.substring(file.name.lastIndexOf(".") + 1);
+        file = new File([file],file.name.substring(0,file.name.lastIndexOf(".")))
+        var form = new FormData();
+        form.append("file", file);   
+        //1.创建ajax对象
+        var xhr = new XMLHttpRequest();
+        //2.初始化ajax对象
+        xhr.open("post",this.BASE_API + '/soft/upload?pid=' + this.pid + '&fileType=2' + "&suffix=" + suffix);
+        //3.发送请求
+        xhr.send(form);
+        //4.获取响应数据
+        xhr.onload =function(){
+            console.log(xhr.responseText);
+            console.log("success xhr");
+        }   
+      }
+
+      return false;
     },
     onBeforeUpload4(file) {
 
@@ -640,7 +693,25 @@ export default {
         flag = false
       }
 
-      return flag;
+      if(flag) {
+        var suffix = file.name.substring(file.name.lastIndexOf(".") + 1);
+        file = new File([file],file.name.substring(0,file.name.lastIndexOf(".")))
+        var form = new FormData();
+        form.append("file", file);   
+        //1.创建ajax对象
+        var xhr = new XMLHttpRequest();
+        //2.初始化ajax对象
+        xhr.open("post",this.BASE_API + '/soft/upload?pid=' + this.pid + '&fileType=3' + "&suffix=" + suffix);
+        //3.发送请求
+        xhr.send(form);
+        //4.获取响应数据
+        xhr.onload =function(){
+            console.log(xhr.responseText);
+            console.log("success xhr");
+        }   
+      }
+
+      return false;
     },
     onBeforeUpload5(file) {
       console.log(file);
@@ -660,7 +731,25 @@ export default {
         flag = false
       }
 
-      return flag;
+      if(flag) {
+        var suffix = file.name.substring(file.name.lastIndexOf(".") + 1);
+        file = new File([file],file.name.substring(0,file.name.lastIndexOf(".")))
+        var form = new FormData();
+        form.append("file", file);   
+        //1.创建ajax对象
+        var xhr = new XMLHttpRequest();
+        //2.初始化ajax对象
+        xhr.open("post",this.BASE_API + '/soft/upload?pid=' + this.pid + '&fileType=4' + "&suffix=" + suffix);
+        //3.发送请求
+        xhr.send(form);
+        //4.获取响应数据
+        xhr.onload =function(){
+            console.log(xhr.responseText);
+            console.log("success xhr");
+        }   
+      }
+
+      return false;
     },
 
     preView(file) {
@@ -758,6 +847,7 @@ export default {
     },
     // 提交文件成功
     handSuccess(res, file) {
+      console.log("handSuccess file name: " + file.name)
       this.$message({
         message: "上传成功",
         type: "success",
